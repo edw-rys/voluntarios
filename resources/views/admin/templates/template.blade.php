@@ -8,6 +8,7 @@
 
     {{-- @yield('styles_cdn') --}}
     @yield('styles')
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/template.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/adminlte.css') }}">
     <!--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css"> -->
 
@@ -16,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ekko Lightbox -->
     <link rel="stylesheet" href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/iconkit.min.css') }}"> --}}
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
@@ -70,7 +72,7 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 1.0.0
+                <b>Version</b> 2.0.0
             </div>
             <strong>Copyright &copy; 2020 <a href="http://github.com/edw-rys">Edw</a>.</strong> All rights
             reserved.
@@ -104,10 +106,12 @@
     --}}
     <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
 
-    @include('components.notify.messages')
     @yield('scripts_cdn')
+    {{-- <script src="{{ asset('js/core/material.dashboard.js') }}" type="text/javascript"></script> --}}
+    {{-- <script src="{{ asset('js/core/notify.js') }}" type="text/javascript"></script> --}}
     <script src="{{ asset('js/adminlte.js') }}" type="text/javascript"></script>
     @yield('scripts')
+    @include('components.notify.messages')
     {{-- <script src="{{ asset('js/functions.js') }}"></script>
     --}}
     {{-- <script src="{{ asset('js/main.js') }}"></script>

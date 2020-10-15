@@ -48,7 +48,7 @@ class VoluntariosDataTable extends DataTable
         // dd();
         return [
             Column::make('id')->title(trans('global.voluntario.number'))->className('text-center'),
-            Column::make('Nombre')->title(trans('global.voluntario.names'))->className('text-center'),
+            Column::make('Nombres')->title(trans('global.voluntario.names'))->className('text-center'),
             Column::make('Apellidos')->title(trans('global.voluntario.last_names'))->className('text-center'),
             Column::make('Pasaporte')->title(trans('global.voluntario.identification_number'))->className('text-center'),
             Column::make('Universidad')->title(trans('global.voluntario.university'))->className('text-center'),
@@ -57,8 +57,6 @@ class VoluntariosDataTable extends DataTable
             Column::make('TutorBspi')->title(trans('global.voluntario.tutor_bspi'))->className('text-center'),
             Column::make('FechaInicio')->title(trans('global.voluntario.start_date'))->className('text-center'),
             Column::make('FechaFin')->title(trans('global.voluntario.end_date'))->className('text-center'),
-            //Column::make('Unidad')->title(trans('global.voluntario'))->className('text-center'),
-            //Column::make('Unidad')->title(trans('global.voluntario'))->className('text-center'),
         ];
     }
 
@@ -98,8 +96,8 @@ class VoluntariosDataTable extends DataTable
                 return $query->id;
             })
 
-            ->editColumn('Nombre', static function ($query) {
-                return $query->Nombre;
+            ->editColumn('Nombres', static function ($query) {
+                return $query->Nombres;
             })
             ->editColumn('Apellidos', static function ($query) {
                 return $query->Apellidos;

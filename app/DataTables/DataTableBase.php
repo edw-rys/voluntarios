@@ -118,7 +118,6 @@ trait DataTableBase
             'initComplete'      => 'function(settings, json) {
                 select2();
                 tooltip();
-
                 let api = this.api();
                 let search_filters = $("#search-filters");
                 if (search_filters.length > 0) {
@@ -135,7 +134,6 @@ trait DataTableBase
                         api.draw(true);
                     });
                 }
-
                 //
                 $(".dataTables_filter input").unbind().bind("input", function (e) {
                     // If the length is 3 or more characters, or the user pressed ENTER then search

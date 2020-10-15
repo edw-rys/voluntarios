@@ -31236,3 +31236,17 @@ a.text-muted:hover {
 .border-t-menu{
   border-top: 1px solid #4f5962;
 }
+
+.table-card .card-block { padding-left: 0; padding-right: 0; padding-top: 0; }
+.table-card .card-block .table > thead > tr > th { border-top: 0; }
+.table-card .card-block .table tr td:first-child, .table-card .card-block .table tr th:first-child { padding-left: 20px; }
+.table-card .card-block .table tr td:last-child, .table-card .card-block .table tr th:last-child { padding-right: 20px; }
+.table-card .card-block .table.without-header tr:first-child td { border-top: none; }
+.table-card .p-status { width: 10px; height: 10px; border-radius: 50%; }
+
+.table thead { background-color: #f6f8fb; }
+.table thead th { font-weight: 600; color: #879099; font-size: 14px; }
+.table tbody td { vertical-align: middle; }
+.table tbody td .table-user-thumb { width: 30px; height: 30px; border-radius: 50%; }
+.table tbody td .table-actions { text-align: right; }
+.table tbody td .table-actions a { color: #bcc1c6; display: inline-block; margin-left: 8px; font-size: 16px; }

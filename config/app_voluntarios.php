@@ -60,5 +60,7 @@ return [
         'meta_robots'           => '',
 
     ],
-    'meta_title'                => 'Voluntarios'
+    'meta_title'                => 'Voluntarios',
+    'key_maps'                  => env('KEY_MAPS', '')
+
 ];
