@@ -1,0 +1,3 @@
+<link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ekko Lightbox -->
+  <link rel="stylesheet" href="../plugins/ekko-lightbox/ekko-lightbox.css">

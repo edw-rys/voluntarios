@@ -1,0 +1,3 @@
+DB: GestionVoluntarios
+Tabla: Usuarios-> Password (nvarchar(100))
+-> ALTER TABLE [GestionVoluntarios].[dbo].[tbwbUsuarios] ALTER COLUMN Password nVarchar(100);
