@@ -1948,9 +1948,9 @@ md = {
     color = Math.floor((Math.random() * 6) + 1);
 
     $.notify({
-      icon: "add_alert" ,
+      // icon: "add_alert" ,
+      // icon: 'glyphicon glyphicon-warning-sign',
       message: message
-
     }, {
       type: type,
       timer: 3000,

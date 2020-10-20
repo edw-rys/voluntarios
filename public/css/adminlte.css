@@ -10465,7 +10465,7 @@ body:not(.layout-fixed).layout-navbar-fixed.text-sm .wrapper .main-sidebar .side
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 1033;
+  z-index: 999;
 }
 
 .layout-navbar-fixed.text-sm .wrapper .content-wrapper {
@@ -11546,7 +11546,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 .main-header {
   border-bottom: 1px solid #dee2e6;
-  z-index: 1034;
+  z-index: 998;
 }
 
 .main-header .nav-link {
@@ -31250,3 +31250,28 @@ a.text-muted:hover {
 .table tbody td .table-user-thumb { width: 30px; height: 30px; border-radius: 50%; }
 .table tbody td .table-actions { text-align: right; }
 .table tbody td .table-actions a { color: #bcc1c6; display: inline-block; margin-left: 8px; font-size: 16px; }
+.card .card-body .dataTables_wrapper .dataTable{margin:0;width:100%}
+.btn{padding:2px 10px;height:24px;font-size:12px;-moz-transition:.3s ease-in-out;-o-transition:.3s ease-in-out;-webkit-transition:.3s ease-in-out;box-shadow:0 1px 1px 0 rgba(0,0,0,0.25)}
+.card .card-body .dataTables_wrapper .dataTables_paginate .pagination .page-item .page-link:hover,.card .card-body .dataTables_wrapper .dataTables_paginate .pagination .page-item.active .page-link{background-color:#d2d2d2}
+.hover{cursor:pointer}
+.nav-tabs .nav-link{border:1px solid transparent;border-radius:.25rem}
+.nav-tabs .nav-link.active{border-color:#dee2e6}
+.nav-tabs .nav-link i{width:13px;text-align:center}
+.jconfirm.jconfirm-material .jconfirm-box .jconfirm-buttons button{text-transform:none}
+.jconfirm .jconfirm-box .jconfirm-buttons button{padding:2px 10px;font-size:inherit}
+.notify-alert{z-index:9999;top:62px}
+.profile-frame{width:180px;margin:0 auto;position:relative;text-align:center}
+#image-delete{position:absolute;right:0;top:0;width:20px;height:20px;cursor:pointer}
+.table td,.table th{padding:.2rem}
+.table:not(.dataTable) td,.table:not(.dataTable) th{padding:.4rem .6rem}
+.table td label{margin:0}
+.dataTable td,.dataTable th{padding:.55rem}
+table.dataTable{border-collapse:collapse!important}
+table.dataTable tbody>tr.selected a:not(.dropdown-item){color:#fff!important;font-weight:700!important}
+table.dataTable tbody>tr.selected a.dropdown-item{color:#212529!important}
+table.dataTable tbody td{vertical-align:top}
+.help-block{font-size:.8rem;color:#dc3545!important}
+.card .card-body .dataTables_wrapper .dataTables_paginate .pagination .page-item .page-link:hover,.card .card-body .dataTables_wrapper .dataTables_paginate .pagination .page-item.active .page-link{color:#fff;background-color:#3e5569}
+.select2-container{max-width:100%}
+
+

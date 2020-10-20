@@ -2,14 +2,13 @@
 
 namespace App\DataTables;
 
-use App\Repositories\InvoiceRepository;
 use App\Repositories\VoluntariosRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class VoluntariosDataTable extends DataTable
+class EvaluacionesDataTable extends DataTable
 {
     use DataTableBase;
 

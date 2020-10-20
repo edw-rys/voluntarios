@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Voluntarios extends Model
 {
@@ -84,4 +85,22 @@ class Voluntarios extends Model
     protected $hidden = [
         'password',
     ];
+
+    /**
+     * 
+     */
+    public function departamento() : BelongsTo
+    {
+        return $this->belongsTo(Departamento::class, 'Departamento', 'id');
+    }
+
+    public function unidad() : BelongsTo
+    {
+        return $this->belongsTo(Unidad::class, 'Unidad', 'id');
+    }
+
+    public function universidad() : BelongsTo
+    {
+        return $this->belongsTo(Universidad::class, 'Universidad', 'id');
+    }
 }

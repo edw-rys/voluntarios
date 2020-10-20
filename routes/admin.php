@@ -22,16 +22,14 @@ Route::namespace('Admin')->group( static function (){
 
 
         // Voluntarios
-        Route::get('profile/ingreso', 'ClientController@update')->name('ingreso');
-        Route::get('profile/voluntariado', 'ClientController@update')->name('voluntariado');
-        Route::get('profile/evaluaciones', 'ClientController@update')->name('evaluaciones');
-        Route::get('profile/voluntariado', 'ClientController@update')->name('voluntariado');
-        Route::get('profile/evaluaciones_depa', 'ClientController@update')->name('evaluaciones_depa');
-        
-        Route::resource('voluntarios', 'VoluntariosController');
-
+        // Route::get('profile/voluntariado', 'ClientController@update')->name('voluntariado');
+        Route::namespace('Voluntarios')->group(function(){
+            Route::get('f', 'VoluntariosController@f');
+            // Route::get('profile/ingreso', 'VoluntariosController@update')->name('ingreso');
+            Route::get('evaluaciones_depa', 'VoluntariosController@update')->name('evaluaciones_depa');
+            Route::get('voluntariado', 'VoluntariosController@update')->name('voluntariado');
+            Route::get('evaluaciones', 'VoluntariosController@update')->name('evaluaciones');
+            Route::resource('voluntarios', 'VoluntariosController');
+        });
     });
-    
-
-
 });

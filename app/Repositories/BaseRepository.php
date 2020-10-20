@@ -208,6 +208,7 @@ trait BaseRepository
     {
         if (count($filters) > 0) {
             $request = request();
+            // dd( $request->input());
 
             foreach ($filters as $filter) {
                 // Filter exists?

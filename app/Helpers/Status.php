@@ -135,8 +135,8 @@ if (! function_exists('allStatuses')) {
     {
         $status = [
             '-'                 => 'N/A',
-            1                   => trans('global.yes'),
-            0                   => trans('global.no'),
+            1                   => trans('global.status-label.active'),
+            0                   => trans('global.status-label.inactive'),
             'active'            => trans('global.status-label.active'),
             'blocked'           => trans('global.status-label.blocked'),
             'inactive'          => trans('global.status-label.inactive'),

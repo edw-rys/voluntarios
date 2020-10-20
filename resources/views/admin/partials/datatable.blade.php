@@ -41,3 +41,5 @@
         <script>{{ $dataTable->generateScripts() }}</script>
     @endisset
 @endsection
+
+{{-- @include('vendor.pagination.bootstrap-4') --}}

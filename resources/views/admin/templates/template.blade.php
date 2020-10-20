@@ -6,15 +6,17 @@
     @include('admin.partials.metas')
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-    {{-- @yield('styles_cdn') --}}
+    @yield('styles_cdn')
     @yield('styles')
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/template.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/adminlte.css') }}">
-    <!--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css"> -->
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css"> 
+    @yield('styles_after')
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('css/plugins/icons.material.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/plugins/theme.css') }}">
     <!-- Ekko Lightbox -->
     <link rel="stylesheet" href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}">
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/iconkit.min.css') }}"> --}}
@@ -22,6 +24,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="{{ asset('js/plugins/moment.js') }}"></script>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/alerts.css') }}">
     <script>
@@ -32,7 +35,7 @@
 
 <body class="{{ $page_css ?? '' }}">
     <!-- Navbar -->
-    <div class="wrapper">
+    <div class="wrapper" id="main-wrapper">
 
         <!-- Navbar -->
         @include('admin.partials.header_dash')
@@ -95,21 +98,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/i18n/es.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
 
     <script src="{{ asset('js/core/bootstrap-material-design.min.js') }}"></script>
     <script src="{{ asset('js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
     <!--  Plugin for Sweet Alert -->
     <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-    <script src="{{ asset('js/plugins/bootstrap-selectpicker.js') }}"></script>
+    <script src="{{ asset('js/plugins/bootstrap-notify.js') }}"></script>
+    <script src="{{ asset('js/plugins/theme.js') }}"></script>
     <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-    {{-- <script src="{{ asset('js/plugins/jasny-bootstrap.min.js') }}"></script>
-    --}}
     <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
 
     @yield('scripts_cdn')
     {{-- <script src="{{ asset('js/core/material.dashboard.js') }}" type="text/javascript"></script> --}}
     {{-- <script src="{{ asset('js/core/notify.js') }}" type="text/javascript"></script> --}}
+    <script src="{{ asset('js/functions.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/adminlte.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/main.js') }}" type="text/javascript"></script>
     @yield('scripts')
     @include('components.notify.messages')
     {{-- <script src="{{ asset('js/functions.js') }}"></script>

@@ -12,7 +12,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.ingreso') }}" class="nav-link {{ $route_name == 'admin.ingreso' ? 'active' :'' }}">
+            <a href="{{ route('admin.voluntarios.create') }}" class="nav-link {{ $route_name == 'admin.ingreso' ? 'active' :'' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p class="f-s-9em">
                     {{ trans('global.menu.ingreso') }}
@@ -28,7 +28,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.evaluaciones') }}" class="nav-link {{ $route_name == 'admin.evaluaciones' ? 'active' :'' }}">
+            <a href="{{ route('admin.evaluaciones.index') }}" class="nav-link {{ $route_name == 'admin.evaluaciones' ? 'active' :'' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p class="f-s-9em">
                     {{ trans('global.menu.evaluaciones') }}

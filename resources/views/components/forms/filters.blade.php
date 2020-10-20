@@ -13,22 +13,22 @@
                     </ul>
                 </div>
             </div>
-
+            
             <div class="card-body" style="display:none">
                 <form id="search-filters" class="form-inline2" autocomplete="off">
                     <div class="row">
                         @foreach ($filters as $key => $filter)
-                            <div class="col-lg-3">
-                                {!! $filter !!}
-                            </div>
+                        <div class="col-lg-3">
+                            {!! $filter !!}
+                        </div>
                         @endforeach
                     </div>
-
+                    
                     <hr>
-
+                    
                     <div class="row">
                         <div class="col-12">
-                            <button type="button" id="search-filter-submit" class="btn btn-primary"><i class="ik ik-search"></i> {{ trans('global.search') }}</button>
+                            <button type="button" id="search-filter-submit" class="btn btn-primary"><i class="ik ik-search"></i>{{ trans('global.search') }}</button>
                             <button type="button" id="search-filter-reset" class="btn btn-default" value="{{ trans('global.reset') }}">{{ trans('global.reset') }}</button>
                         </div>
                     </div>

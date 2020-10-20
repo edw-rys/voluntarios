@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Voluntarios;
 
+use App\DataTables\FormFilters\FormFilter;
 use App\DataTables\VoluntariosDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Profile\UpdateRequest;
+use App\Http\Requests\RequestTest;
+use App\Repositories\VoluntariosRepository;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -15,14 +18,16 @@ class VoluntariosController extends Controller
      */
     private $views;
     private $voluntariosService;
+    private $voluntariosRepository;
 
     /**
      * VoluntariosController constructor.
      * @param UserService $userService
      */
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, VoluntariosRepository $voluntariosRepository)
     {
         $this->userService  = $userService;
+        $this->voluntariosRepository  = $voluntariosRepository;
         $this->views        = (object) [
             'index'   => 'admin.pages.voluntarios.index',
         ];
@@ -31,7 +36,7 @@ class VoluntariosController extends Controller
         ];
 
         $this->filters      = [
-            //'status',
+            'status',
             // 'user_id',
         ];
     }
@@ -42,15 +47,18 @@ class VoluntariosController extends Controller
      */
     public function index(VoluntariosDataTable $dataTable)
     {
-        notifyMe('warning', trans('global.toasts.no_data'));
+        // notifyMe('warning', trans('global.toasts.no_data'));
         viewExist($this->views->index);
 
         $dataTable->filters = $this->filters;
-        // dd($dataTable->generateScripts());
-        // return view($this->views->index);
+
         return $dataTable->render($this->views->index, [
-            // 'filters'   => (new FormFilter())->filters($this->filters, $this->invoiceRepository),
+            'filters'   => (new FormFilter())->filters($this->filters, $this->voluntariosRepository),
         ]);
+    }
+    public function f(RequestTest $request)
+    {
+        return 'bien';
     }
 
 }

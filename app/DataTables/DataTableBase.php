@@ -1,6 +1,7 @@
 <?php
 
 namespace App\DataTables;
+// namespace App\DataTables;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
@@ -41,7 +42,7 @@ trait DataTableBase
             ->minifiedAjax()
             ->setTableId($this->getTableId())
             ->addTableClass('table table-hover table-striped table-bordered dataTable dt-responsive nowrap w-100')
-            ->dom('<"row flex flex-end"<"col-sm-12 col-md-2"B><"col-sm-12 col-md-2"f>><"row"<"col-sm-12"tr>><"row mt-2"<"col-sm-12 col-md-7"l><"col-sm-12 col-md-5"p<"text-right"i>>>')
+            ->dom('<"row"<"col-sm-12 col-md-6"B><"col-sm-12 col-md-6"f>><"row"<"col-sm-12"tr>><"row mt-2"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"p<"text-right"i>>>')
             ->select([
                 'style'         => 'os',
                 'selector'      => 'td:first-child',
@@ -54,20 +55,7 @@ trait DataTableBase
                 'type' => 'POST',
                 'data' => 'function (d) {
                     let search_filters = $("#search-filters");
-                    d.is_admin      = search_filters.find("#is_admin").val();
-                    d.menu_type     = search_filters.find("#menu_type").val();
-                    d.home          = search_filters.find("#home").val();
-                    d.published_at  = search_filters.find("#published_at").val();
-                    d.created_at    = search_filters.find("#created_at").val();
-                    d.is_protected  = search_filters.find("#is_protected").val();
-                    d.active        = search_filters.find("#active").val();
                     d.status        = search_filters.find("#status").val();
-                    d.roles         = search_filters.find("#roles").val();
-                    d.user_id       = search_filters.find("#user_id").val();
-                    d.identification_number = search_filters.find("#identification_number").val();
-                    d.client_id     = search_filters.find("#client_id").val();
-                    d.event         = search_filters.find("#event").val();
-                    d.date_range    = search_filters.find("#date_range").val();
                 }',
             ]);
         }
@@ -102,9 +90,9 @@ trait DataTableBase
     protected function getParameters(): array
     {
         $pagination = $this->getPaginationLength();
-
+        // dd($pagination);
         return [
-            'paging'            => setting('pagination', true),
+            'paging'            => true,
             'pagingType'        => 'numbers',
             'searching'         => true,
             'info'              => true,
@@ -113,8 +101,8 @@ trait DataTableBase
             'searchDelay'       => 350,
             'lengthMenu'        => $pagination,
             'iDisplayLength'    => $pagination,
-            'pageLength'        => setting('pagination_length'),
-            'lengthChange'      => setting('pagination', true),
+            'pageLength'        => 20,
+            'lengthChange'      => true,
             'initComplete'      => 'function(settings, json) {
                 select2();
                 tooltip();
@@ -160,7 +148,7 @@ trait DataTableBase
         $length1 = [5,10,25,50];
         $length2 = [5,10,25,50];
 
-        $pagination_length = setting('pagination_length');
+        $pagination_length = 20;
 
         if (! in_array($pagination_length, $length1, false)) {
             $length1 [] = (int) $pagination_length;
@@ -208,9 +196,124 @@ trait DataTableBase
     protected function getButtons(): array
     {
         $buttons = [];
+        // dd(route_exists($this->route . '.create'));
+        // Create item
+        if (route_exists($this->route . '.create')) {
+            $buttons ['addButton'] = [
+                'text'          => trans('global.datatables_icons.add') . ' ' . trans('global.datatables.add'),
+                'className'     => 'btn-success rounded mr-3',
+                'action'        => 'function(e, dt, node, config) { window.location = "' . route($this->route . '.create') . '"; }',
+                'attr'          => [
+                    'data-toggle'       => 'tooltip',
+                    'title'             => trans('global.datatables.add_new'),
+                    'aria-label'        => trans('global.datatables.add_new')
+                ]
+            ];
+        }
 
+        // Copy items
+        if (true) {
+            $buttons ['copy'] = [
+                'extend'        => 'copy',
+                'className'     => 'btn-default rounded mr-1',
+                'text'          => trans('global.datatables_icons.copy'),
+                'attr'          => [
+                    'data-toggle'       => 'tooltip',
+                    'title'             => trans('global.datatables.copy'),
+                    'aria-label'        => trans('global.datatables.copy')
+                ],
+                'exportOptions' => [
+                    'columns'           => 'thead th:not(.noExport)'
+                ]
+            ];
+        }
 
-        /*// Print items
+        // Print item
+        if (true) {
+            $buttons ['print'] = [
+                'extend'        => 'print',
+                'className'     => 'btn-default rounded mr-1',
+                'text'          => trans('global.datatables_icons.print'),
+                'attr'          => [
+                    'data-toggle'       => 'tooltip',
+                    'title'             => trans('global.datatables.print'),
+                    'aria-label'        => trans('global.datatables.print')
+                ],
+                'exportOptions' => [
+                    'columns'           => 'thead th:not(.noExport)'
+                ]
+            ];
+        }
+
+        // Delete item
+        if (Gate::allows($this->action . '_delete') && route_exists($this->route . '.massDestroy')) {
+            $buttons ['deleteButton'] = [
+                'text'          => trans('global.datatables_icons.delete'),
+                'url'           => route($this->route . '.massDestroy'),
+                'className'     => 'btn-danger btn-massdelete rounded mr-2',
+                'action'        => "function(e, dt, node, config) {
+                    let ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
+                        return $(entry).attr('id');
+                    });
+                    if (ids.length === 0) {
+                        iAlert('" . trans('global.datatables.zero_selected') . "');
+                        return;
+                    }
+                    iDeleteDataTablesAjax(config.url, ids, $('#" . $this->getTableId() . "'));
+                    return;
+                 }",
+                'attr'          => [
+                    'data-toggle'       => 'tooltip',
+                    'title'             => trans('global.datatables.delete'),
+                    'aria-label'        => trans('global.datatables.delete')
+                ]
+            ];
+        }
+
+        // Export items
+        if (true) {
+            $buttons ['postCsv'] = [
+                'extend'        => 'csv',
+                'className'     => 'btn-default rounded mx-1',
+                'text'          => trans('global.datatables.csv'),
+                'attr'          => [
+                    'data-toggle'       => 'tooltip',
+                    'title'             => trans('global.datatables.export') . ' a CSV',
+                    'aria-label'        => trans('global.datatables.export') . ' a CSV'
+                ],
+                'exportOptions' => [
+                    'columns'           => 'thead th:not(.noExport)'
+                ]
+            ];
+            $buttons ['postExcel'] = [
+                'extend'        => 'excel',
+                'className'     => 'btn-default rounded mr-1',
+                'text'          => trans('global.datatables.excel'),
+                'attr'          => [
+                    'data-toggle'       => 'tooltip',
+                    'title'             => trans('global.datatables.export') . ' a Excel',
+                    'aria-label'        => trans('global.datatables.export') . ' a Excel'
+                ],
+                'exportOptions' => [
+                    'columns'           => 'thead th:not(.noExport)'
+                ]
+            ];
+            $buttons ['postPdf'] = [
+                'extend'        => 'pdf',
+                'className'     => 'btn-default rounded mr-1',
+                'text'          => trans('global.datatables.pdf'),
+                'attr'          => [
+                    'data-toggle'       => 'tooltip',
+                    'title'             => trans('global.datatables.export') . ' a PDF',
+                    'aria-label'        => trans('global.datatables.export') . ' a PDF'
+                ],
+                'exportOptions' => [
+                    'columns'           => 'thead th:not(.noExport)'
+                ]
+            ];
+        }
+
+        // Print items
         $buttons ['colvis'] = [
             'extend'        => 'colvis',
             'className'     => 'btn-default rounded mx-2',
@@ -220,12 +323,12 @@ trait DataTableBase
                 'title'             => trans('global.datatables.colvis'),
                 'aria-label'        => trans('global.datatables.colvis')
             ]
-        ];*/
+        ];
 
         // Refresh items
         $buttons ['refreshButton'] = [
             'text'          => trans('global.datatables_icons.refresh'),
-            'className'     => 'btn-sm rounded mx-1',
+            'className'     => 'btn-default rounded mx-1',
             'action'        => 'function (e, dt, node, config) { dt.ajax.reload(null, false); }',
             'attr'          => [
                 'data-toggle'       => 'tooltip',
