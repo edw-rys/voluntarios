@@ -449,7 +449,6 @@ jQuery.event.special.touchstart = {
             type: 'GET',
             dataType: 'json'
         });
-
         iMessageModal('ajax', $(this), '', ajax);
     });
 

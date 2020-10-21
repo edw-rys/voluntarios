@@ -50,13 +50,23 @@ if (! function_exists('status')) {
     }
 }
 
-if (! function_exists('')) {
+if (! function_exists('getStatusByString')) {
     function getStatusByString($code)
     {
         // ACTIVE
         if ($code === 'active' || $code === 1) {
             $color  = 'success';
-            $icon   = '<i class="ik ik-check fa-xs"></i>';
+            $icon   = '<i class="fas fa-check"></i>';
+        }
+        // EVALUATED
+        elseif ($code === 'evaluated') {
+            $color  = 'primary';
+            $icon   = '<i class="fas fa-check-circle"></i>';
+        }
+        // EVALUATED
+        elseif ($code === 'not_evaluated') {
+            $color  = 'danger';
+            $icon   = '<i class="fas fa-exclamation-triangle"></i>';
         }
         // INACTIVE
         elseif ($code === 'inactive' || $code === 0) {
@@ -153,7 +163,8 @@ if (! function_exists('allStatuses')) {
             'back'              => trans('global.status-label.back'),
             'unauthorized'      => trans('global.status-label.unauthorized'),
             'canceled_sri'      => trans('global.status-label.canceled_sri'),
-
+            'not_evaluated'     => trans('global.status-label.not_evaluated'),
+            'evaluated'         => trans('global.status-label.evaluated'),
         ];
 
         ksort($status);
@@ -300,39 +311,6 @@ if (! function_exists('auditStatuses')) {
 
         ksort($status);
 
-        return $status;
-    }
-}
-
-
-if (! function_exists('invoiceStatus')) {
-    /**
-     * Get invoice statuses
-     *
-     * @return string
-     */
-    function invoiceStatus($response): string
-    {
-        $status = 'unprocessed';
-
-        switch ($response) {
-            case 'NOPROCESADA':
-                return 'unprocessed';
-            case 'RECIBIDA':
-                return 'received';
-            case 'DEVUELTA':
-                return 'back';
-            case 'AUTORIZADA':
-                return 'processed';
-            case 'NOAUTORIZADA':
-                return 'unauthorized';
-            case 'ANULADOSRI':
-                return 'canceled_sri';
-            case 'CANCELADO':
-                return 'canceled';
-            case 'BATCH':
-                return 'unprocessed';
-        }
         return $status;
     }
 }

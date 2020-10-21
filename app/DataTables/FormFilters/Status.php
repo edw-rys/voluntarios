@@ -5,7 +5,6 @@ namespace App\DataTables\FormFilters;
 class Status extends FormFilter
 {
     /**
-     * Is Admin?
      *
      * @param $repository
      * @return string

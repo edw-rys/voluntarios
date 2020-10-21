@@ -31275,3 +31275,22 @@ table.dataTable tbody td{vertical-align:top}
 .select2-container{max-width:100%}
 
 
+.trow_bkc:nth-child(odd){
+  background: #e4e4e4;
+}
+
+.trow_bkc:nth-child(even){
+  background: #d3d3d3;
+}
+.flex-center-x{
+  justify-content: center;
+}
+.flex-center-y{
+  align-items: center;
+}
+.flex{
+  display:flex;
+}
+.bold{
+  font-weight: 700;
+}

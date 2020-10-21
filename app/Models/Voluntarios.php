@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Voluntarios extends Model
 {
@@ -102,5 +103,14 @@ class Voluntarios extends Model
     public function universidad() : BelongsTo
     {
         return $this->belongsTo(Universidad::class, 'Universidad', 'id');
+    }
+
+    public function evaluacion() : HasOne
+    {
+        return $this->hasOne(Evaluaciones::class, 'Pasaporte', 'Pasaporte');
+    }
+    public function tipo_practica() : HasOne
+    {
+        return $this->hasOne(TipoPractica::class, 'tipoPractica', 'codigo');
     }
 }

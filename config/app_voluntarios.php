@@ -61,6 +61,9 @@ return [
 
     ],
     'meta_title'                => 'Voluntarios',
-    'key_maps'                  => env('KEY_MAPS', '')
-
+    'key_maps'                  => env('KEY_MAPS', ''),
+    /**
+     * Preguntas
+     */
+    
 ];

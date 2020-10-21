@@ -16,7 +16,7 @@ class FormFilter
     public function filters(array $filters, $repository): Collection
     {
         $html_filters = [];
-
+        // dd($filters);
         if (count($filters) > 0) {
             foreach ($filters as $filter) {
                 $filterClassName = convertToCamelCase($filter);

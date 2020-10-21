@@ -7,7 +7,7 @@ namespace App\Repositories;
  */
 class VoluntariosRepository 
 {
-     /**
+    /**
      * The model being queried.
      *
      * @var Model

@@ -20,7 +20,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.voluntarios.index') }}" class="nav-link {{ $route_name == 'admin.voluntarios' ? 'active' :'' }}">
+            <a href="{{ route('admin.voluntarios.index') }}" class="nav-link {{ $route_name == 'admin.voluntarios.index' ? 'active' :'' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p class="f-s-9em">
                     {{ trans('global.menu.voluntariado') }}
@@ -28,7 +28,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.evaluaciones.index') }}" class="nav-link {{ $route_name == 'admin.evaluaciones' ? 'active' :'' }}">
+            <a href="{{ route('admin.evaluaciones.index') }}" class="nav-link {{ $route_name == 'admin.evaluaciones.index' ? 'active' :'' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p class="f-s-9em">
                     {{ trans('global.menu.evaluaciones') }}
@@ -36,21 +36,21 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.voluntariado') }}" class="nav-link {{ $route_name == 'admin.voluntariado' ? 'active' :'' }}">
+            <a href="{{ route('admin.certificados.index') }}" class="nav-link {{ $route_name == 'admin.certificados.index' ? 'active' :'' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p class="f-s-9em">
-                    {{ trans('global.menu.voluntariado') }}
+                    {{ trans('global.menu.certificates') }}
                 </p>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="{{ route('admin.evaluaciones_depa') }}" class="nav-link {{ $route_name == 'admin.evaluaciones_depa' ? 'active' :'' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p class="f-s-9em">
                     {{ trans('global.menu.evaluaciones_depa') }}
                 </p>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-header border-t-menu">
             <button class="btn btn-warning" onclick="logout()">
                 <i class="fas fa-sign-out-alt"></i>

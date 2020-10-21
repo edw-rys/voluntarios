@@ -12,11 +12,13 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/adminlte.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css"> 
     @yield('styles_after')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('css/plugins/icons.material.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/plugins/theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/multistep.css') }}">
     <!-- Ekko Lightbox -->
     <link rel="stylesheet" href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}">
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/iconkit.min.css') }}"> --}}
@@ -99,6 +101,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/i18n/es.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
 
     <script src="{{ asset('js/core/bootstrap-material-design.min.js') }}"></script>
     <script src="{{ asset('js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
@@ -116,6 +119,9 @@
     <script src="{{ asset('js/functions.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/adminlte.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/main.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/validates/evaluaciones.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/multistepform.js') }}" type="text/javascript"></script>
+    
     @yield('scripts')
     @include('components.notify.messages')
     {{-- <script src="{{ asset('js/functions.js') }}"></script>

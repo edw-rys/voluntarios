@@ -12,8 +12,8 @@ class EvaluacionesDataTable extends DataTable
 {
     use DataTableBase;
 
-    private $action = 'voluntarios';
-    private $route  = 'admin.voluntarios';
+    private $action = 'evaluaciones';
+    private $route  = 'admin.evaluaciones';
     private $repository;
     public $filters;
 
@@ -46,17 +46,17 @@ class EvaluacionesDataTable extends DataTable
     {
         // dd();
         return [
-            Column::make('id')->title(trans('global.voluntario.number'))->className('text-center'),
+            // Column::make('id')->title(trans('global.voluntario.number'))->className('text-center'),
+            Column::make('actions')->title(trans('global.actions'))->className('text-center'),
             Column::make('status')->title(trans('global.status'))->className('text-center'),
             Column::make('Nombres')->title(trans('global.voluntario.names'))->className('text-center'),
             Column::make('Apellidos')->title(trans('global.voluntario.last_names'))->className('text-center'),
             Column::make('Pasaporte')->title(trans('global.voluntario.identification_number'))->className('text-center'),
             Column::make('Universidad')->title(trans('global.voluntario.university'))->className('text-center'),
+            Column::make('Carrera')->title(trans('global.voluntario.carrera'))->className('text-center'),
             Column::make('Unidad')->title(trans('global.voluntario.unity'))->className('text-center'),
             Column::make('Departamento')->title(trans('global.voluntario.department'))->className('text-center'),
             Column::make('TutorBspi')->title(trans('global.voluntario.tutor_bspi'))->className('text-center'),
-            Column::make('FechaInicio')->title(trans('global.voluntario.start_date'))->className('text-center'),
-            Column::make('FechaFin')->title(trans('global.voluntario.end_date'))->className('text-center'),
         ];
     }
 
@@ -67,7 +67,7 @@ class EvaluacionesDataTable extends DataTable
      */
     public function html(): \Yajra\DataTables\Html\Builder
     {
-        return $this->getHtml(9, 'desc');
+        return $this->getHtml(8, 'desc');
         // return null;
     }
 
@@ -102,6 +102,9 @@ class EvaluacionesDataTable extends DataTable
             ->editColumn('Apellidos', static function ($query) {
                 return $query->Apellidos;
             })
+            ->editColumn('Carrera', static function ($query) {
+                return $query->carrera !== null ? $query->carrera->Nombre : $query->Carrera;
+            })
             ->editColumn('Pasaporte', static function ($query) {
                 return $query->Pasaporte;
             })
@@ -124,7 +127,12 @@ class EvaluacionesDataTable extends DataTable
                 return $query->FechaFin;
             })
             ->editColumn('status', static function ($query) {
-                return status($query->status);
+                return status($query->evaluacion === null ? 'not_evaluated' : 'evaluated');
+            })
+            ->addColumn('actions', static function ($query) {
+                if($query->evaluacion !== null)
+                    return '';
+                return evaluate_show( 'admin.evaluaciones.evaluate', optimus()->encode($query->id), 'Evaluar');
             })
             ->escapeColumns([]);
     }

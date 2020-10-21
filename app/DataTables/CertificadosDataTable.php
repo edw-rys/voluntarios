@@ -2,28 +2,28 @@
 
 namespace App\DataTables;
 
-use App\Repositories\InvoiceRepository;
+use App\Repositories\VoluntariosCertificadosRepository;
 use App\Repositories\VoluntariosRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class VoluntariosDataTable extends DataTable
+class CertificadosDataTable extends DataTable
 {
     use DataTableBase;
 
     private $action = 'voluntarios';
-    private $route  = 'admin.voluntarios';
+    private $route  = 'admin.certificados';
     private $repository;
     public $filters;
 
     /**
-     * VoluntariosDataTable constructor.
+     * CertificadosDataTable constructor.
      *
      * @param VoluntariosRepository $repository
      */
-    public function __construct(VoluntariosRepository $repository)
+    public function __construct(VoluntariosCertificadosRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -48,6 +48,7 @@ class VoluntariosDataTable extends DataTable
         // dd();
         return [
             Column::make('id')->title(trans('global.voluntario.number'))->className('text-center'),
+            Column::make('certificate')->title('Certificcado')->className('text-center'),
             Column::make('status')->title(trans('global.status'))->className('text-center'),
             Column::make('Nombres')->title(trans('global.voluntario.names'))->className('text-center'),
             Column::make('Apellidos')->title(trans('global.voluntario.last_names'))->className('text-center'),
@@ -70,7 +71,7 @@ class VoluntariosDataTable extends DataTable
      */
     public function html(): \Yajra\DataTables\Html\Builder
     {
-        return $this->getHtml(11, 'desc');
+        return $this->getHtml(12, 'desc');
         // return null;
     }
 
@@ -133,6 +134,9 @@ class VoluntariosDataTable extends DataTable
                 return $query->tipo_practica ? $query->tipo_practica->Nombre : $query->tipoPractica ;
             })
             ->editColumn('status', static function ($query) {
+                return status($query->status);
+            })
+            ->addColumn('certificate', static function ($query) {
                 return status($query->status);
             })
             ->escapeColumns([]);

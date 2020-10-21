@@ -24,12 +24,29 @@ Route::namespace('Admin')->group( static function (){
         // Voluntarios
         // Route::get('profile/voluntariado', 'ClientController@update')->name('voluntariado');
         Route::namespace('Voluntarios')->group(function(){
-            Route::get('f', 'VoluntariosController@f');
-            // Route::get('profile/ingreso', 'VoluntariosController@update')->name('ingreso');
+
             Route::get('evaluaciones_depa', 'VoluntariosController@update')->name('evaluaciones_depa');
             Route::get('voluntariado', 'VoluntariosController@update')->name('voluntariado');
-            Route::get('evaluaciones', 'VoluntariosController@update')->name('evaluaciones');
-            Route::resource('voluntarios', 'VoluntariosController');
+            
+            Route::group(['prefix' => 'evaluaciones'], function(){
+                Route::get('', 'EvaluacionesController@index')->name('evaluaciones.index');
+                // Route::get('create', 'EvaluacionesController@index')->name('evaluaciones.create');
+                Route::get('evaluar/{id}', 'EvaluacionesController@evaluateView')->name('evaluaciones.evaluate');
+                Route::post('evaluar/evalua/{id}', 'EvaluacionesController@evaluate')->name('evaluaciones.evaluate.post');
+            });
+
+            Route::group(['prefix' => 'voluntarios'], function(){
+                Route::get('', 'VoluntariosController@index')->name('voluntarios.index');
+                Route::get('create', 'VoluntariosController@create')->name('voluntarios.create');
+                // Route::get('create', 'VoluntariosController@index')->name('voluntarios.create');
+                // Route::resource('voluntarios', 'VoluntariosController');
+            });
+
+            Route::group(['prefix' => 'certificados'], function(){
+                Route::get('', 'CertificadosController@index')->name('certificados.index');
+                // Route::get('create', 'VoluntariosController@create')->name('certificados.create');
+            });
+            
         });
     });
 });

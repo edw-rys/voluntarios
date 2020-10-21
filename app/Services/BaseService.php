@@ -164,7 +164,7 @@ class BaseService
      * @param $routeTo
      * @return JsonResponse|RedirectResponse
      */
-    public function ajax(Model $item, $view, $routeTo)
+    public function ajax($item, $view, $routeTo)
     {
         if ($item === null) {
             notifyMe('warning', trans('global.toasts.no_data'));

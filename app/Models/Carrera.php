@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Universidad extends Model
+class Carrera extends Model
 {
     use HasFactory;
-    protected $table = 'tbwbUniversidad'; 
+    protected $table = 'tbwbCarrera'; 
 
     public $timestamps = false;
     /**
@@ -18,11 +18,12 @@ class Universidad extends Model
      */
     protected $fillable = [
         "id",
-        "Siglas",
-        "Nombre",
-        "Pais",
-        "Tipo",
-        "Convenio",
-        "status",
+        'idCarrera',
+        'NombreCarrera',
+        'idFacultad',
+        'idUniversidad',
+        'idPais',
+        'status',
     ];    
+
 }

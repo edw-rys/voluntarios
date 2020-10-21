@@ -3,3 +3,9 @@ Tabla: Usuarios-> Password (nvarchar(100))
 -> ALTER TABLE [GestionVoluntarios].[dbo].[tbwbUsuarios] ALTER COLUMN Password nVarchar(100);
 
 
+-- ADD 
+CREATE TABLE [GestionVoluntarios].[dbo].[tbwbTipoVoluntario] (
+    id int IDENTITY(1,1) PRIMARY KEY,
+    Nombre varchar(255),
+    status int
+);

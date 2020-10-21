@@ -56,6 +56,8 @@ trait DataTableBase
                 'data' => 'function (d) {
                     let search_filters = $("#search-filters");
                     d.status        = search_filters.find("#status").val();
+                    d.departamento  = search_filters.find("#departamento").val();
+                    d.tipo_practica  = search_filters.find("#tipo_practica").val();
                 }',
             ]);
         }
@@ -101,7 +103,7 @@ trait DataTableBase
             'searchDelay'       => 350,
             'lengthMenu'        => $pagination,
             'iDisplayLength'    => $pagination,
-            'pageLength'        => 20,
+            'pageLength'        => 10,
             'lengthChange'      => true,
             'initComplete'      => 'function(settings, json) {
                 select2();
@@ -148,7 +150,7 @@ trait DataTableBase
         $length1 = [5,10,25,50];
         $length2 = [5,10,25,50];
 
-        $pagination_length = 20;
+        $pagination_length = 10;
 
         if (! in_array($pagination_length, $length1, false)) {
             $length1 [] = (int) $pagination_length;

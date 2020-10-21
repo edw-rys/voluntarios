@@ -2,52 +2,49 @@
 
 namespace App\Http\Controllers\Admin\Voluntarios;
 
+use App\DataTables\CertificadosDataTable;
 use App\DataTables\FormFilters\FormFilter;
-use App\DataTables\VoluntariosDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Client\Profile\UpdateRequest;
-use App\Http\Requests\RequestTest;
 use App\Repositories\VoluntariosRepository;
-use App\Services\UserService;
 use Illuminate\Http\Request;
 
-class VoluntariosController extends Controller
+class CertificadosController extends Controller
 {
     /**
      * @vars
      */
     private $views;
-    private $voluntariosService;
     private $voluntariosRepository;
 
     /**
      * VoluntariosController constructor.
-     * @param UserService $userService
+     * @param EvaluacionesRepository $evaluacionesRepository
      */
-    public function __construct(UserService $userService, VoluntariosRepository $voluntariosRepository)
+    public function __construct( VoluntariosRepository $voluntariosRepository)
     {
-        $this->userService  = $userService;
         $this->voluntariosRepository  = $voluntariosRepository;
+
         $this->views        = (object) [
-            'index'   => 'admin.pages.voluntarios.index',
-            'create'  => 'admin.pages.voluntarios.create',
+            'index'    => 'admin.pages.evaluaciones.index',
+            'evaluate' => 'admin.pages.evaluaciones.evaluate'
         ];
         $this->routes       = (object) [
-            'index'   => 'admin.voluntarios.index'
+            'index'         => 'admin.evaluaciones.index',
+            'evaluate'      => 'admin.evaluaciones.evaluate'
         ];
 
         $this->filters      = [
             'status',
-            'departamento',
-            'tipo_practica'
+            'departemento',
+            'user_id',
         ];
     }
-
+    
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index(VoluntariosDataTable $dataTable)
+    public function index(CertificadosDataTable $dataTable)
     {
         // notifyMe('warning', trans('global.toasts.no_data'));
         viewExist($this->views->index);
@@ -58,17 +55,5 @@ class VoluntariosController extends Controller
             'filters'   => (new FormFilter())->filters($this->filters, $this->voluntariosRepository),
         ]);
     }
-    /**
-     * Create new item
-     *
-     * @return Factory|View
-     */
-    public function create()
-    {
-        viewExist($this->views->create);
-
-        return view($this->views->create)->with([
-            'cancel'     => route($this->routes->index),
-        ]);
-    }
+    
 }

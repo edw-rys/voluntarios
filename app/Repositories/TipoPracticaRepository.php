@@ -3,9 +3,10 @@
 namespace App\Repositories;
 
 /**
- * Class EvaluacionesRepository.
+ * Class TipoPractica.
  */
-class EvaluacionesRepository{
+class TipoPracticaRepository
+{
     /**
      * The model being queried.
      *
@@ -20,6 +21,6 @@ class EvaluacionesRepository{
      */
     public function __construct()
     {
-        $this->model = app(\App\Models\Evaluaciones::class);
+        $this->model = app(\App\Models\TipoPractica::class);
     }
 }

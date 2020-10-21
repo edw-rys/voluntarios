@@ -232,32 +232,20 @@ trait BaseRepository
                     continue;
                 }
 
-                // Roles
-                if ($filter === 'roles') {
-                    $query = $query->whereHas('roles', static function ($q) use ($input_filter) {
-                        $q->where('id', 'LIKE', "%{$input_filter}%");
-                    });
+                // Departamento
+                if ($filter === 'departemento') {
+                    $input_filter = $input_filter === 'null' ? null : $input_filter;
+                    $query = $query->where('Departamento', '=', $input_filter);
                     continue;
                 }
 
-                // Protected
-                if ($filter === 'is_protected') {
-                    $query = $query->where('protected', '=', $input_filter);
+                // Departamento
+                if ($filter === 'tipo_practica') {
+                    $input_filter = $input_filter === 'null' ? null : $input_filter;
+                    $query = $query->where('tipoPractica', '=', $input_filter);
                     continue;
                 }
-
-                // Event
-                if ($filter === 'event') {
-                    $query = $query->where('event', '=', $input_filter);
-                    continue;
-                }
-
-                // Date
-                if (strtotime($input_filter) && Carbon::createFromFormat('Y-m-d', $input_filter) !== false) {
-                    $query = $query->whereDate($filter, '=', $input_filter);
-                    continue;
-                }
-
+                
                 // Date Range
                 if ($filter === 'date_range') {
                     $dates = explode(' - ', $input_filter);
@@ -332,8 +320,7 @@ trait BaseRepository
     {
         return $this
             ->with($with)
-            ->where('status', '=', 'active')
-            ->orderBy('created_at', 'asc')
+            ->where('status', '=', 1)
             ->get();
     }
 

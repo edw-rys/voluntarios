@@ -6,14 +6,14 @@ use App\Repositories\UserRepository;
 use App\Repositories\VoluntariosRepository;
 use Illuminate\Http\RedirectResponse;
 
-class VoluntariosController extends BaseService{
+class VoluntariosService extends BaseService{
     /**
      * @vars
      */
     private $voluntariosRepository;
 
     /**
-     * SettingService constructor.
+     * VoluntariosService constructor.
      *
      * @param VoluntariosRepository $voluntariosRepository
      */

@@ -56,6 +56,11 @@ return [
         'error'                        => 'Error',
         'denied'                       => 'Permiso denegado',
         'approved'                     => 'La información fue aprobada correctamente.',
+        'info'                      => 'Info',
+        'saved'                     => 'La información fue guardada correctamente.',
+        'created'                   => 'La información fue creada correctamente.',
+        'updated'                   => 'La información fue actualizada correctamente.',
+        'deleted'                   => 'La información fue eliminada correctamente.',
     ],
     'login_correctly'                      => 'Inicio de sesión correcto!',
 
@@ -70,7 +75,10 @@ return [
         'tutor_bspi'        => 'Tutor BSPI',
         'start_date'        => 'Fecha de inicio',
         'end_date'          => 'Fecha de fin', 
+        'carrera'           => 'Carrera',
+        'tipo_practica'     => 'Tipo de práctica',
     ],
+    'actions'               => 'Acciones',
     'datatables_icons'                     => [
         'add'               => '<i class="ik ik-plus mr-0"></i>',
         'copy'              => '<i class="ik ik-copy mr-0"></i>',
@@ -120,10 +128,26 @@ return [
         'paid'              => 'Pagado',
         'finished'          => 'Finalizado',
         'finish'            => 'Finalizado',
+        'not_evaluated'     => 'No evaluado',
+        'evaluated'         => 'Evaluado',
         'process_error'     => 'No se ha podido completar la compra.',
     ],
     'search'                => 'Buscar',
     'status'                => 'Estado',
     'reset'                 => 'Resetear',
     'pleaseSelect'          => 'Seleccione una opción',
+    'evaluation'            => 'Evaluación',
+    'evaluate'              => [
+        'show'              => [
+            'period'        => 'Periodo',
+            'code'          => 'Código',
+            'email'         => 'Correo',
+            'university'    => 'Universidad',
+            'passport'      => 'Pasaporte',
+            'name'          => 'Voluntario',
+        ]
+        ],
+    'buttons'               => [
+        'save'              => 'Guardar'
+    ]
 ];
