@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Voluntarios;
 use App\DataTables\CertificadosDataTable;
 use App\DataTables\FormFilters\FormFilter;
 use App\Http\Controllers\Controller;
+use App\Repositories\VoluntariosCertificadosRepository;
 use App\Repositories\VoluntariosRepository;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class CertificadosController extends Controller
      * VoluntariosController constructor.
      * @param EvaluacionesRepository $evaluacionesRepository
      */
-    public function __construct( VoluntariosRepository $voluntariosRepository)
+    public function __construct( VoluntariosCertificadosRepository $voluntariosRepository)
     {
         $this->voluntariosRepository  = $voluntariosRepository;
 
