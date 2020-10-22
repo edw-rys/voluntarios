@@ -23,23 +23,29 @@ $(document).ready(function() {
             $(element).next('span').hide();
         }
     });
-    $(".next").click(function() {
-        $(".steps").validate({
-            errorClass: 'invalid',
-            errorElement: 'span',
-            errorPlacement: function(error, element) {
-                error.insertAfter(element.next('span').children());
-            },
-            highlight: function(element) {
-                $(element).next('span').show();
-            },
-            unhighlight: function(element) {
-                $(element).next('span').hide();
-            }
-        });
-        if ((!$('.steps').valid())) {
+    $(".next").click(async function() {
+        // debugger
+        // $(".steps").validate({
+        //     errorClass: 'invalid',
+        //     errorElement: 'span',
+        //     errorPlacement: function(error, element) {
+        //         error.insertAfter(element.next('span').children());
+        //     },
+        //     highlight: function(element) {
+        //         $(element).next('span').show();
+        //     },
+        //     unhighlight: function(element) {
+        //         $(element).next('span').hide();
+        //     }
+        // });
+        // debugger
+        var validateWindow = await  validaVentana();
+        console.log(validateWindow);
+        if (!validateWindow) {
             return true;
         }
+        console.log('paso');
+        // debugger
         if (animating) return false;
         animating = true;
         current_fs = $(this).parent();
@@ -148,10 +154,10 @@ $(document).ready(function() {
 });
 jQuery(document).ready(function() {
     jQuery("#edit-submitted-acquisition-amount-1,#edit-submitted-acquisition-amount-2,#edit-submitted-cultivation-amount-1,#edit-submitted-cultivation-amount-2,#edit-submitted-cultivation-amount-3,#edit-submitted-cultivation-amount-4,#edit-submitted-retention-amount-1,#edit-submitted-retention-amount-2,#edit-submitted-constituent-base-total-constituents").keyup(function() {
-        calcTotal();
+        // calcTotal();
     });
 });
-
+/*
 function calcTotal() {
     var grade = 0;
     var donorTotal = Number(jQuery("#edit-submitted-constituent-base-total-constituents").val().replace(/,/g, ""));
@@ -350,7 +356,7 @@ function getBonusDonorPoints(val) {
     } else if (val >= 50000) {
         return 20;
     }
-}
+}*/
 var modules = {
     $window: $(window),
     $html: $('html'),

@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 /**
- * Class UniversidadRepository.
+ * Class PaisRepository.
  */
-class UniversidadRepository 
+class PaisRepository
 {
     /**
     * The model being queried.
@@ -20,6 +20,6 @@ class UniversidadRepository
     */
    public function __construct()
    {
-       $this->model = app(\App\Models\Universidad::class);
+       $this->model = app(\App\Models\Pais::class);
    }
 }

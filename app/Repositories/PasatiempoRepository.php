@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Repositories;
+
 /**
- * Class UniversidadRepository.
+ * Class PasatiempoRepository.
  */
-class UniversidadRepository 
+class PasatiempoRepository 
 {
-    /**
+     /**
     * The model being queried.
     *
     * @var Model
@@ -20,6 +21,6 @@ class UniversidadRepository
     */
    public function __construct()
    {
-       $this->model = app(\App\Models\Universidad::class);
+       $this->model = app(\App\Models\Pasatiempo::class);
    }
 }

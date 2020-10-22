@@ -24,7 +24,11 @@ class Voluntarios extends Model
         'CodigoReferencia',
         'Nombres',
         'Apellidos',
+        'apellidoMaterno',
+        'nombreSegundo',
+
         'Pasaporte',
+
         'FechaNacimiento',
         'EstadoCivil',
         'Edad',
@@ -59,8 +63,7 @@ class Voluntarios extends Model
         'horasDiarias',
         'genero',
         'celular',
-        'apellidoMaterno',
-        'nombreSegundo',
+        
         'tutorevaluado',
         'idtutor',
         'fecha_extension',
@@ -108,6 +111,10 @@ class Voluntarios extends Model
     public function evaluacion() : HasOne
     {
         return $this->hasOne(Evaluaciones::class, 'Pasaporte', 'Pasaporte');
+    }
+    public function pasatiempo() : HasOne
+    {
+        return $this->hasOne(Pasatiempo::class, 'CodigoReferencia', 'id');
     }
     public function tipo_practica() : HasOne
     {

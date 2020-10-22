@@ -27,11 +27,11 @@ body {
   padding: 20px 30px;
   border-top: 9px solid #7B1FA2;
   box-sizing: border-box;
-  width: 80%;
-  margin: 0 10%;
+  /* width: 80%; */
+  /* margin: 0 10%; */
   
   /*stacking fieldsets above each other*/
-  position: absolute;
+  /* position: absolute; */
 }
 /*Hide all except first fieldset*/
 .steps fieldset:not(:first-of-type) {
@@ -55,7 +55,7 @@ body {
   width: 100%;
   margin: 0 0 20px;
   padding: 10px 15px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #bebebe;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -88,7 +88,7 @@ body {
   -webkit-box-shadow: 0 0 0 transparent;
   box-shadow: 0 0 0 transparent;
   position: absolute;
-  left: 525px;
+  right: 0;
   margin-top: -58px;
   padding: 0 10px;
   height: 39px;
@@ -139,6 +139,7 @@ body {
   cursor: pointer;
   padding: 10px 5px;
   margin: 10px auto;
+  margin-top: 50px;
   -webkit-transition: all 0.3s linear 0s;
   -moz-transition: all 0.3s linear 0s;
   -ms-transition: all 0.3s linear 0s;
@@ -374,7 +375,7 @@ display: block;
 
   /*brings errors in */
   .error1 {
-  left: 345px;
+  /* left: 345px; */
   margin-top: -58px;
 }
 
@@ -450,7 +451,7 @@ display: block;
 /* Info */
 .info {
   width: 300px;
-  margin: 35px auto;
+  /* margin: 35px auto; */
   text-align: center;
   font-family: 'roboto', sans-serif;
 }

@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'voluntarios'], function(){
+    Route::get('pasaporte/existe','Voluntarios\VoluntariosApiController@existPasaporte')->name('admin.voluntarios.existe-pasaporte');
+    Route::get('pasaporte/ciudades','Voluntarios\VoluntariosApiController@obtenerCiudades')->name('admin.voluntarios.ciudades');
+    Route::get('pasaporte/facultad','Voluntarios\VoluntariosApiController@obtenerFacultades')->name('admin.voluntarios.facultad');
+});

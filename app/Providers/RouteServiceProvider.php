@@ -82,18 +82,32 @@ class RouteServiceProvider extends ServiceProvider
 
             $this->mapWebRoutes();
             $this->mapAdminRoutes();
-
-            
+            $this->mapApiRoutes();
         });
         // $this->mapClientRoutes();
         // $this->mapAuthRoutes();
-        // $this->mapApiRoutes();
         // $this->mapAdminRoutes();
     }
 
 
     
     /**
+     * Define the "api" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapApiRoutes(): void
+    {
+        Route::prefix('api')
+            ->domain($this->domain)
+            ->namespace($this->namespace.'\Api')
+            ->name('api.')
+            ->group(base_path('routes/api.php'));
+    }
+
+      /**
      * Define the "client" routes for the application.
      *
      * These routes all receive session state, CSRF protection, etc.
@@ -109,7 +123,6 @@ class RouteServiceProvider extends ServiceProvider
             ->name('admin.')
             ->group(base_path('routes/admin.php'));
     }
-
 
 
     

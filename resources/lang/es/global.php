@@ -149,5 +149,18 @@ return [
         ],
     'buttons'               => [
         'save'              => 'Guardar'
-    ]
+    ],
+    'voluntarios'           => [
+        'create'            => [
+            'maps'          => 'Mapas',
+            'passport'      => 'Pasaporte',
+            'passport-title'=> 'Pasaporte y tipo de práctica',
+            'names'         => 'Nombres',
+            'tipo_practica'     => 'Tipo práctica',
+            'errors'        => [
+                'passport'          => 'Número de cédula no es válido.',
+                'passport-exist'    => 'El pasaporte ya está registrado',
+            ]
+        ],
+    ],
 ];
