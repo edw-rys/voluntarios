@@ -169,7 +169,7 @@ md = {
 
     }, {
       type: type,
-      timer: 3000,
+      timer: 2000,
       placement: {
         from: from,
         align: align

@@ -1,19 +1,19 @@
-$CodigoReferencia = $('#CodigoReferencia');
-$apellidoMaterno = $('#apellidoMaterno');
-$nombreSegundo = $('#nombreSegundo');
-$tipo_practica = $('#tipoPractica');
-$pasaporte_item = $('#Pasaporte');
-$EstadoCivil = $('#EstadoCivil');
-$Direccion = $('#Direccion');
-$Apellidos = $('#Apellidos');
-$Telefono = $('#Telefono');
-$Nombres = $('#Nombres');
-$celular = $('#celular');
-$genero = $('#genero');
-$Correo = $('#Correo');
-$Cuidad = $('#Cuidad');
-$Pais = $('#Pais');
-
+var $CodigoReferencia = $('#CodigoReferencia');
+var $apellidoMaterno = $('#apellidoMaterno');
+var $pasaporte_item = $('#Pasaporte');
+var $nombreSegundo = $('#nombreSegundo');
+var $tipo_practica = $('#tipoPractica');
+var $pasatiempo = $('#CodigoReferencia');
+var $EstadoCivil = $('#EstadoCivil');
+var $Direccion = $('#Direccion');
+var $Apellidos = $('#Apellidos');
+var $Telefono = $('#Telefono');
+var $Nombres = $('#Nombres');
+var $celular = $('#celular');
+var $genero = $('#genero');
+var $Correo = $('#Correo');
+var $Cuidad = $('#Cuidad');
+var $Pais = $('#Pais');
 async function pasaporte_existe(valor) {
     let result={};
 
@@ -41,12 +41,13 @@ async function validaVentana(){
         // Ventana 1
         case 1:
             return true
-            break;
-            // Ventana 3
+        // Ventana 2
         case 2:
-           
+            // Retorna falso es inválido, true es válido
             return validarVentana2();
-            break;
+        // Ventana 3
+        case 3:
+            return validarVentana3();
         default:
             break;
     }
@@ -58,11 +59,22 @@ async function validaVentana(){
  */
 
 function removeWarnings() {
-    $pasaporte_item.parent().children('.error1').css({display:'none'})
-    $tipo_practica.parent().children('.error1').css({display:'none'})
-    $tipo_practica.parent().children('.error1').css({display:'none'})
-    $tipo_practica.parent().children('.error1').css({display:'none'})
-    $tipo_practica.parent().children('.error1').css({display:'none'})
+    $CodigoReferencia.parent().children('.error1').css({display:'none'});
+    $apellidoMaterno.parent().children('.error1').css({display:'none'});
+    $pasaporte_item.parent().children('.error1').css({display:'none'});
+    $nombreSegundo.parent().children('.error1').css({display:'none'});
+    $tipo_practica.parent().children('.error1').css({display:'none'});
+    $pasatiempo.parent().children('.error1').css({display:'none'});
+    $EstadoCivil.parent().children('.error1').css({display:'none'});
+    $Direccion.parent().children('.error1').css({display:'none'});
+    $Apellidos.parent().children('.error1').css({display:'none'});
+    $Telefono.parent().children('.error1').css({display:'none'});
+    $Nombres.parent().children('.error1').css({display:'none'});
+    $celular.parent().children('.error1').css({display:'none'});
+    $genero.parent().children('.error1').css({display:'none'});
+    $Correo.parent().children('.error1').css({display:'none'});
+    $Cuidad.parent().children('.error1').css({display:'none'});
+    $Pais.parent().children('.error1').css({display:'none'});
 }
 
 function addWarningsInput(items = []){
@@ -85,7 +97,7 @@ function requerido(query) {
 
 
 // Ventana n° 2
-function validarVentana2() {
+async function validarVentana2() {
     removeWarnings();
     var existe = await pasaporte_existe($pasaporte_item.val());
     if(existe.exist){
@@ -104,5 +116,71 @@ function validarVentana2() {
 }
 
 function validarVentana3(){
-
+    var $listErr = [];
+    // Nombres
+    if(!$Nombres.val()){
+        $listErr.push($Nombres);
+        md.showNotification( 'top','right', 'Ingrese el nombre', 'warning');
+    }
+    if(!$nombreSegundo.val()){
+        $listErr.push($nombreSegundo);
+        md.showNotification( 'top','right', 'Ingrese el segundo nombre', 'warning');
+    }
+    // Apellidos
+    if(!$Apellidos.val()){
+        $listErr.push($Apellidos);
+        md.showNotification( 'top','right', 'Ingrese el primer apellido', 'warning');
+    }
+    if(!$apellidoMaterno.val()){
+        $listErr.push($apellidoMaterno);
+        md.showNotification( 'top','right', 'Ingrese el segundo apellido', 'warning');
+    }
+    // Género
+    if(!$genero.val() || $genero.val() == 0){
+        $listErr.push($genero);
+        md.showNotification( 'top','right', 'Seleccione su género', 'warning');
+    }
+    // Dirección
+    if(!$Direccion.val()){
+        $listErr.push($Direccion);
+        md.showNotification( 'top','right', 'Ingrese la dirección de su residencia actual', 'warning');
+    }
+    // Correo
+    if(!emailreg.test($Correo.val())){
+        $listErr.push($Correo);
+        md.showNotification( 'top','right', 'Ingrese un correo electrónico válido', 'warning');
+    }
+    // Estado civil
+    if(!$EstadoCivil.val() || $EstadoCivil.val() == 0){
+        $listErr.push($EstadoCivil);
+        md.showNotification( 'top','right', 'Seleccione el estado civil', 'warning');
+    }
+    // País
+    if(!$Pais.val() || $Pais.val() == 0){
+        $listErr.push($Pais);
+        md.showNotification( 'top','right', 'Seleccione el país', 'warning');
+    }
+    // Ciudad
+    if(!$Cuidad.val() || $Cuidad.val() == 0){
+        $listErr.push($Cuidad);
+        md.showNotification( 'top','right', 'Seleccione la ciudad', 'warning');
+    }
+    // Pasatiempo
+    if(!$pasatiempo.val() || $pasatiempo.val() == 0){
+        $pasatiempo.push($pasatiempo);
+        md.showNotification( 'top','right', 'Seleccione su pasatiempo', 'warning');
+    }
+    // Teléfono
+    if(!$Telefono.val() || !soloNum.test($Telefono.val()) || $Telefono.val().length < 10){
+        $listErr.push($Telefono);
+        md.showNotification( 'top','right', 'Ingrese un número de teléfono válido', 'warning');
+    }
+    // Celular
+    if(!$celular.val() || !soloNum.test($celular.val()) || $celular.val().length < 10){
+        $listErr.push($celular);
+        md.showNotification( 'top','right', 'Ingrese un número de celular válido', 'warning');
+    }
+    addWarningsInput($listErr);
+    return !(!$Nombres.val() || !$nombreSegundo.val() || !emailreg.test($Correo.val()) || !$Apellidos.val() || !$apellidoMaterno.val() || (!$genero.val() || $genero.val() == 0) || (!$Pais.val() || $Pais.val() == 0) || 
+        (!$Cuidad.val() || $Cuidad.val() == 0) || (!$pasatiempo.val() || $pasatiempo.val() == 0) || (!$Telefono.val() || !soloNum.test($Telefono.val()) || $Telefono.val().length < 10) | (!$celular.val() || !soloNum.test($celular.val()) || $celular.val().length < 10));
 }

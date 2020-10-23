@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Admin\Voluntarios;
 use App\DataTables\FormFilters\FormFilter;
 use App\DataTables\VoluntariosDataTable;
 use App\Http\Controllers\Controller;
+use App\Repositories\AlimentacionRepository;
+use App\Repositories\DepartamentoRepository;
 use App\Repositories\EstadoCivilRepository;
 use App\Repositories\GeneroRepository;
 use App\Repositories\PaisRepository;
 use App\Repositories\PasatiempoRepository;
 use App\Repositories\TipoPracticaRepository;
+use App\Repositories\UnidadRepository;
 use App\Repositories\UniversidadRepository;
 use App\Repositories\VoluntariosRepository;
 use App\Services\UserService;
@@ -29,6 +32,9 @@ class VoluntariosController extends Controller
     private $generoRepository;
     private $pasatiempoRepository;
     private $universidadRepository;
+    private $unidadRepository;
+    private $alimentacionRepository;
+    private $departamentoRepository;
 
     /**
      * VoluntariosController constructor.
@@ -42,10 +48,16 @@ class VoluntariosController extends Controller
         GeneroRepository $generoRepository,
         EstadoCivilRepository $estadoCivilRepository,
         PasatiempoRepository $pasatiempoRepository,
-        UniversidadRepository $universidadRepository
+        UniversidadRepository $universidadRepository,
+        UnidadRepository $unidadRepository,
+        DepartamentoRepository $departamentoRepository,
+        AlimentacionRepository $alimentacionRepository
     )
     {
+        $this->alimentacionRepository = $alimentacionRepository;
+        $this->departamentoRepository = $departamentoRepository;
         $this->userService            = $userService;
+        $this->unidadRepository       = $unidadRepository;
         $this->pasatiempoRepository   = $pasatiempoRepository;
         $this->tipoPracticaRepository = $tipoPracticaRepository;
         $this->voluntariosRepository  = $voluntariosRepository;
@@ -91,7 +103,7 @@ class VoluntariosController extends Controller
     public function create()
     {
         viewExist($this->views->create);
-        // dd( $this->pasatiempoRepository->where('status', 1)->get());
+        
         return view($this->views->create)->with([
             'cancel'         => route($this->routes->index),
             'tiposPractica'  => $this->tipoPracticaRepository->where('status', 1)->get(),
@@ -100,6 +112,8 @@ class VoluntariosController extends Controller
             'estadosciviles' => $this->estadoCivilRepository->where('status', 1)->get(),
             'pasatiempos'    => $this->pasatiempoRepository->where('status', 1)->get(),
             'universidades'  => $this->universidadRepository->where('status', 1)->get(),
+            'unidades_bspi'  => $this->unidadRepository->actives(),
+            'alimentaciones' => $this->alimentacionRepository->actives()
         ]);
     }
 }

@@ -19,7 +19,7 @@ return [
         'invoices'          => 'Facturas',
         'logout'            => 'Cerrar sesión',
         'evaluaciones'      => 'Evaluaciones',
-        'voluntariado'      => 'Voluntariado en la institución',
+        'voluntariado'      => 'Voluntariado',
         'evaluaciones_depa' => 'Evaluaciones en el departamento',
         'certificates'      => 'Certificado',
         'ingreso'           => 'Ingreso',

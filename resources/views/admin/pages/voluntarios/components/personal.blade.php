@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-6">
         {{-- Nombres --}}
-        <div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
+        <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
             id="webform-component-acquisition--amount-1">
 
             <label
@@ -27,7 +27,7 @@
             </div>
         </div>
         {{-- Apellidos --}}
-        <div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
+        <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
             id="webform-component-acquisition--amount-1">
             <label
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Apellidos</label>
@@ -51,7 +51,7 @@
             </div>
         </div>
         {{-- Género --}}
-        <div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
+        <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
             id="webform-component-acquisition--amount-2">
 
             <label
@@ -70,13 +70,13 @@
             </span>
         </div>
         {{-- Dirección --}}
-        <div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
+        <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
             id="webform-component-acquisition--amount-1">
 
             <label
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Dirección</label>
             <div class="form-group m-0 pl-2">
-                <input class="form-control m-0  form-control-sm hs-input" name="Direccion" id="Direccion"
+                <input class="form-control m-0  form-control-sm hs-input" name="Direccion" id="Direccion" type="text"
                     required="required" placeholder="Dirección de residencia actual" value="" placeholder=""
                     data-rule-required="true" data-msg-required="Escriba la dirección">
                 <span class="error1" style="display: none;">
@@ -85,13 +85,13 @@
             </div>
         </div>
         {{-- Correo --}}
-        <div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
+        <div class=" relativeform-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
             id="webform-component-acquisition--amount-1">
             <label
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Correo</label>
             <div class="form-group m-0 pl-2">
-                <input class="form-control m-0  form-control-sm hs-input" name="Correo" id="Correo" required="required"
-                    placeholder="Dirección de residencia actual" value="" placeholder="" data-rule-required="true"
+                <input class="form-control m-0  form-control-sm hs-input" name="Correo" id="Correo" required="required" type="email"
+                    placeholder="Dirección de correo electrónico" value="" placeholder="" data-rule-required="true"
                     data-msg-required="Escriba la dirección">
                 <span class="error1" style="display: none;">
                     <i class="error-log fa fa-exclamation-triangle"></i>
@@ -101,7 +101,7 @@
     </div>
     <div class="col-md-6">
         {{-- Estados civiles --}}
-        <div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
+        <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
             id="webform-component-acquisition--amount-2">
 
             <label
@@ -120,7 +120,7 @@
             </span>
         </div>
         {{-- Paises --}}
-        <div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
+        <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
             id="webform-component-acquisition--amount-2">
 
             <label
@@ -139,7 +139,7 @@
             </span>
         </div>
         {{-- Ciudades --}}
-        <div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
+        <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
             id="webform-component-acquisition--amount-2">
 
             <label
@@ -153,7 +153,7 @@
             </span>
         </div>
         {{-- Pasatiempo --}}
-        <div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
+        <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
             id="webform-component-acquisition--amount-2">
 
             <label
@@ -172,7 +172,7 @@
             </span>
         </div>
         {{-- Teléfono --}}
-        <div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
+        <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
             id="webform-component-acquisition--amount-1">
             <label
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Teléfono</label>

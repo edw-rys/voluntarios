@@ -9,6 +9,7 @@
         var url_facultad = "{{ route('api.admin.voluntarios.facultad') }}";
 
     </script>
+    <script type="text/javascript" src="{{ asset('js/validates/expreg.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/validates/creacion-voluntario.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/core/maps.js') }}"></script>
     <script>
@@ -20,23 +21,22 @@
                 }
             })
             .done(function(data) {
-                console.log(data);
                 try {
                     data = JSON.parse(data);
                 } catch (error) {}
                 var select = '';
                 if(data && Array.isArray(data)){
                     for (const ciudad of data) {
-                        Cuidad+='<option value="'+ciudad.id+'">'+ciudad.Nombre +'</option>';
+                        select+='<option value="'+ciudad.id+'">'+ciudad.Nombre +'</option>';
                     }
                 }
-                document.getElementById('Cuidad').innerHTML = Cuidad;
+                document.getElementById('Cuidad').innerHTML = select;
             });
         }
 
         function cargarFacultades(universidad_id) {
             $.ajax({
-                url: "{{ route('api.admin.voluntarios.facultad') }}"+ '?pais=' + universidad_id,
+                url: "{{ route('api.admin.voluntarios.facultad') }}"+ '?universidad=' + universidad_id,
                 beforeSend: function(xhr) {
                     xhr.overrideMimeType("text/plain; charset=x-user-defined");
                 }
@@ -47,11 +47,11 @@
                 } catch (error) {}
                 var select = '';
                 if(data && Array.isArray(data)){
-                    for (const ciudad of data) {
-                        Cuidad+='<option value="'+ciudad.id+'">'+ciudad.Nombre +'</option>';
+                    for (const facultad of data) {
+                        select+='<option value="'+facultad.id+'">'+facultad.NombreFacultad +'</option>';
                     }
                 }
-                document.getElementById('Cuidad').innerHTML = Cuidad;
+                document.getElementById('Cuidad').innerHTML = select;
             });
         }
     </script>
