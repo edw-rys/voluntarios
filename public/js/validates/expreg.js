@@ -12,3 +12,4 @@ const expUsername=/^[a-z0-9ü][a-z0-9ü_]{3,15}$/;
 const regexp_password = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{6,16}$/;
 const regexobj=/^[a-zA-Z0-9üáéíóú][a-zA-Z0-9ü+ _áéíóú-]{3,30}$/;
 const regexobjPrepare=/^[a-zA-Z0-9üÑÁÉÍÓÚáéíóú\r\n][a-zA-Z0-9ü+ _.,:;ÑÁÉÍÓÚáéíñóú@\r\n-]{3,1900}$/;
+const regexobjDate=new RegExp(/^\d{2,4}\-\d{1,2}\-\d{1,2}$/)

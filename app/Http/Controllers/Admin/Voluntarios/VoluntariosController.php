@@ -35,6 +35,7 @@ class VoluntariosController extends Controller
     private $unidadRepository;
     private $alimentacionRepository;
     private $departamentoRepository;
+    private $permisos ;
 
     /**
      * VoluntariosController constructor.
@@ -78,6 +79,11 @@ class VoluntariosController extends Controller
             'departamento',
             'tipo_practica'
         ];
+
+        $this->permisos = (object) [
+            'departamentos_todos'    => 'Todos los departamentos',
+            'tutores_todos'          => 'Todos los tutores'
+        ];
     }
 
     /**
@@ -104,6 +110,7 @@ class VoluntariosController extends Controller
     {
         viewExist($this->views->create);
         
+        // dd($this->departamentoRepository->activosPorPermiso($this->permisos->departamentos_todos)->get());
         return view($this->views->create)->with([
             'cancel'         => route($this->routes->index),
             'tiposPractica'  => $this->tipoPracticaRepository->where('status', 1)->get(),
@@ -113,7 +120,8 @@ class VoluntariosController extends Controller
             'pasatiempos'    => $this->pasatiempoRepository->where('status', 1)->get(),
             'universidades'  => $this->universidadRepository->where('status', 1)->get(),
             'unidades_bspi'  => $this->unidadRepository->actives(),
-            'alimentaciones' => $this->alimentacionRepository->actives()
+            'alimentaciones' => $this->alimentacionRepository->actives(),
+            'departamentos'  => $this->departamentoRepository->activosPorPermiso($this->permisos->departamentos_todos)->get(),
         ]);
     }
 }

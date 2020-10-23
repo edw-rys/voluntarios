@@ -325,6 +325,18 @@ trait BaseRepository
     }
 
     /**
+     * Facultad
+     */
+    public function activosPorPermiso($permiso)
+    {
+        $repository = $this->where('status', 1);
+        if(!allows_permission($permiso)){
+            $repository = $repository->where('id', auth()->user()->departamento);
+        }
+        return $repository;
+    }
+
+    /**
      * Update Multiple Values
      *
      * @param array $data

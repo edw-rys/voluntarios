@@ -7,6 +7,7 @@ var $pasatiempo = $('#CodigoReferencia');
 var $EstadoCivil = $('#EstadoCivil');
 var $Direccion = $('#Direccion');
 var $Apellidos = $('#Apellidos');
+var $FechaNac = $('#FechaNacimiento');
 var $Telefono = $('#Telefono');
 var $Nombres = $('#Nombres');
 var $celular = $('#celular');
@@ -14,6 +15,77 @@ var $genero = $('#genero');
 var $Correo = $('#Correo');
 var $Cuidad = $('#Cuidad');
 var $Pais = $('#Pais');
+
+// 4
+var $Universidad = $('#Universidad');
+var $Facultad = $('#Facultad');
+var $Carrera = $('#Carrera');
+var $Nivel = $('#Nivel');
+
+// 5
+var $Tutor = $('#Tutor');
+var $Departamento = $('#Departamento');
+var $observacion = $('#observacion');
+var $Proyecto = $('#Proyecto');
+var $chkActa = $('#chkActa');
+var $Unidad = $('#Unidad');
+
+
+function validarVentana4() {
+    var $listErr = [];
+    if(!$Universidad.val() || $Universidad.val() == 0){
+        $listErr.push($Universidad);
+        md.showNotification( 'top','right', 'Seleccione la universidad', 'warning');
+    }
+    if(!$Facultad.val() || $Facultad.val() == 0){
+        $listErr.push($Facultad);
+        md.showNotification( 'top','right', 'Seleccione la facultad', 'warning');
+    }
+    if(!$Nivel.val()){
+        $listErr.push($Nivel);
+        md.showNotification( 'top','right', 'Escriba el nivel', 'warning');
+    }
+    if(!$Carrera.val()){
+        $listErr.push($Carrera);
+        md.showNotification( 'top','right', 'Digite el nombre de la carrera', 'warning');
+    }
+    if(!$Tutor.val()){
+        $listErr.push($Tutor);
+        md.showNotification( 'top','right', 'Escriba el nombre del tutor', 'warning');
+    }
+    return !( !$Universidad.val() || $Universidad.val() == 0 ||  !$Facultad.val() || $Facultad.val() == 0 ||
+        !$Nivel.val() || !$Carrera.val() || !$Tutor.val()
+    );
+}
+
+function validarVentana5() {   
+    var $listErr = [];
+    if(!$Departamento.val() || $Departamento.val() == 0){
+        $listErr.push($Departamento);
+        md.showNotification( 'top','right', 'Seleccione el Departamento', 'warning');
+    }
+    if(!$Unidad.val() || $Unidad.val() == 0){
+        $listErr.push($Unidad);
+        md.showNotification( 'top','right', 'Seleccione la Unidad', 'warning');
+    }
+    if(!$Tutor.val() || $Tutor.val() == 0){
+        $listErr.push($Tutor);
+        md.showNotification( 'top','right', 'Seleccione el tutor', 'warning');
+    }
+    if(!$Proyecto.val()){
+        $listErr.push($Proyecto);
+        md.showNotification( 'top','right', 'Escriba el nombre del proyecto', 'warning');
+    }
+    if(!$chkActa.is(':checked')){
+        $listErr.push($chkActa);
+        md.showNotification( 'top','right', 'Debe marcar la opción de normativas', 'warning');
+    }
+
+    return !( !$Departamento.val() || $Departamento.val() == 0 ||  !$Unidad.val() || $Unidad.val() == 0 ||
+        !$Proyecto.val() || !$chkActa.is(':checked') || !$Tutor.val() || $Tutor.val() == 0 
+    );
+}
+
 async function pasaporte_existe(valor) {
     let result={};
 
@@ -48,6 +120,10 @@ async function validaVentana(){
         // Ventana 3
         case 3:
             return validarVentana3();
+        case 4:
+            return validarVentana4();
+        case 5:
+            return validarVentana5();
         default:
             break;
     }
@@ -69,12 +145,25 @@ function removeWarnings() {
     $Direccion.parent().children('.error1').css({display:'none'});
     $Apellidos.parent().children('.error1').css({display:'none'});
     $Telefono.parent().children('.error1').css({display:'none'});
+    $FechaNac.parent().children('.error1').css({display:'none'});
     $Nombres.parent().children('.error1').css({display:'none'});
     $celular.parent().children('.error1').css({display:'none'});
     $genero.parent().children('.error1').css({display:'none'});
     $Correo.parent().children('.error1').css({display:'none'});
     $Cuidad.parent().children('.error1').css({display:'none'});
     $Pais.parent().children('.error1').css({display:'none'});
+    $Departamento.parent().children('.error1').css({display:'none'});
+
+    $observacion.parent().children('.error1').css({display:'none'});
+    $Proyecto.parent().children('.error1').css({display:'none'});
+    $chkActa.parent().children('.error1').css({display:'none'});
+    $Unidad.parent().children('.error1').css({display:'none'});
+
+    $Universidad.parent().children('.error1').css({display:'none'});
+    $Facultad.parent().children('.error1').css({display:'none'});
+    $Carrera.parent().children('.error1').css({display:'none'});
+    $Nivel.parent().children('.error1').css({display:'none'});
+    $Tutor.parent().children('.error1').css({display:'none'});
 }
 
 function addWarningsInput(items = []){
@@ -87,7 +176,7 @@ function addWarningsInput(items = []){
     }
 }
 
-function crearVoluntario () {
+function crearVoluntario() {
     return false
 }
 
@@ -167,7 +256,7 @@ function validarVentana3(){
     }
     // Pasatiempo
     if(!$pasatiempo.val() || $pasatiempo.val() == 0){
-        $pasatiempo.push($pasatiempo);
+        $listErr.push($pasatiempo);
         md.showNotification( 'top','right', 'Seleccione su pasatiempo', 'warning');
     }
     // Teléfono
@@ -180,7 +269,16 @@ function validarVentana3(){
         $listErr.push($celular);
         md.showNotification( 'top','right', 'Ingrese un número de celular válido', 'warning');
     }
+    // Fecha nac
+    if(!regexobjDate.test($FechaNac.val())){
+        $listErr.push($FechaNac);
+        md.showNotification( 'top','right', 'Fecha de nacimiento errónea', 'warning');
+    }
     addWarningsInput($listErr);
-    return !(!$Nombres.val() || !$nombreSegundo.val() || !emailreg.test($Correo.val()) || !$Apellidos.val() || !$apellidoMaterno.val() || (!$genero.val() || $genero.val() == 0) || (!$Pais.val() || $Pais.val() == 0) || 
+    setTimeout(() => {
+        removeWarnings();
+    }, 2000);
+    return !( !regexobjDate.test($FechaNac.val()) ||  !$Nombres.val() || !$nombreSegundo.val() || !emailreg.test($Correo.val()) || !$Apellidos.val() || !$apellidoMaterno.val() || (!$genero.val() || $genero.val() == 0) || (!$Pais.val() || $Pais.val() == 0) || 
         (!$Cuidad.val() || $Cuidad.val() == 0) || (!$pasatiempo.val() || $pasatiempo.val() == 0) || (!$Telefono.val() || !soloNum.test($Telefono.val()) || $Telefono.val().length < 10) | (!$celular.val() || !soloNum.test($celular.val()) || $celular.val().length < 10));
 }
+

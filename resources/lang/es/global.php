@@ -155,6 +155,10 @@ return [
             'maps'          => 'Mapas',
             'passport'      => 'Pasaporte',
             'passport-title'=> 'Pasaporte y tipo de práctica',
+            'personal-data' => 'Pasaporte y tipo de práctica',
+            'academic'      => 'Información académica',
+            'bspi'          => 'INFORMACIÓN BSPI',
+            'schedule'      => 'Horario de Vinculación',
             'names'         => 'Nombres',
             'tipo_practica'     => 'Tipo práctica',
             'errors'        => [

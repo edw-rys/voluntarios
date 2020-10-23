@@ -19,7 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'voluntarios'], function(){
-    Route::get('pasaporte/existe','Voluntarios\VoluntariosApiController@existPasaporte')->name('admin.voluntarios.existe-pasaporte');
-    Route::get('pasaporte/ciudades','Voluntarios\VoluntariosApiController@obtenerCiudades')->name('admin.voluntarios.ciudades');
-    Route::get('pasaporte/facultad','Voluntarios\VoluntariosApiController@obtenerFacultades')->name('admin.voluntarios.facultad');
+    Route::get('existe','Voluntarios\VoluntariosApiController@existPasaporte')->name('admin.voluntarios.existe-pasaporte');
+    Route::get('ciudades','Voluntarios\VoluntariosApiController@obtenerCiudades')->name('admin.voluntarios.ciudades');
+    Route::get('facultad','Voluntarios\VoluntariosApiController@obtenerFacultades')->name('admin.voluntarios.facultad');
+    Route::get('tutores','Voluntarios\VoluntariosApiController@obtenerTutores')->name('admin.voluntarios.tutores');
 });

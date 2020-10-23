@@ -20,6 +20,7 @@ class VoluntariosApiController extends Controller
     private $generoRepository;
     private $paisRepository;
     private $userRepository;
+    private $factultadRepository;
     private $permisos ;
     /**
      * VoluntariosApiController constructor 
@@ -34,6 +35,7 @@ class VoluntariosApiController extends Controller
         FactultadRepository $factultadRepository
     ) {
         $this->userRepository        = $userRepository;
+        $this->factultadRepository   = $factultadRepository;
         $this->voluntariosRepository = $voluntariosRepository;
         $this->estadoCivilRepository = $estadoCivilRepository;
         $this->generoRepository      = $generoRepository;
@@ -117,7 +119,8 @@ class VoluntariosApiController extends Controller
                 $tutores = $tutores->where('departamento', $request->input('departamento'));
             }
         }else{
-            $tutores = $tutores->where('id', auth()->user()->is);
+            // dd(auth()->user());
+            $tutores = $tutores->where('id', auth()->user()->id);
         }
         return response()->json($tutores->get(), 200);
     }

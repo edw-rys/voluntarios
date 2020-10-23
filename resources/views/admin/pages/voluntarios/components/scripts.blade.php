@@ -34,7 +34,7 @@
             });
         }
 
-        function cargarFacultades(universidad_id) {
+        function cargarFacultades(universidad_id=0) {
             $.ajax({
                 url: "{{ route('api.admin.voluntarios.facultad') }}"+ '?universidad=' + universidad_id,
                 beforeSend: function(xhr) {
@@ -42,6 +42,7 @@
                 }
             })
             .done(function(data) {
+                console.log(data);
                 try {
                     data = JSON.parse(data);
                 } catch (error) {}
@@ -51,8 +52,40 @@
                         select+='<option value="'+facultad.id+'">'+facultad.NombreFacultad +'</option>';
                     }
                 }
-                document.getElementById('Cuidad').innerHTML = select;
+                document.getElementById('Facultad').innerHTML = select;
             });
         }
+        // cargarFacultades($('#Universidad').val());
+
+        function cargarTutores(departamento=0) {
+            $.ajax({
+                url: "{{ route('api.admin.voluntarios.tutores') }}"+ '?departamento=' + departamento,
+                beforeSend: function(xhr) {
+                    xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                }
+            })
+            .done(function(data) {
+                console.log(data);
+                try {
+                    data = JSON.parse(data);
+                } catch (error) {}
+                var select = '';
+                if(data && Array.isArray(data)){
+                    for (const facultad of data) {
+                        select+='<option value="'+facultad.id+'">'+facultad.NombreFacultad +'</option>';
+                    }
+                }
+                document.getElementById('Tutor').innerHTML = select;
+            });
+        }
+        cargarTutores($('#Departamento').val());
+        cargarFacultades($('#Universidad').val());
     </script>
+@endsection
+
+@section('end_scripts')
+    <script>
+        setInterval(()=>{$('.select2-container ').css({display:'block'})},500)
+    </script>
+    
 @endsection

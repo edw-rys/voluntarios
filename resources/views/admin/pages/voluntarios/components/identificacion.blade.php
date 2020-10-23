@@ -1,6 +1,6 @@
 <h2 class="fs-title">{{ trans('global.voluntarios.create.passport-title') }}</h2>
 
-<div class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
+<div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
     id="webform-component-acquisition--amount-1">
 
     <label
@@ -34,6 +34,6 @@
     </span>
 </div>
 
-<!-- End Calc of Total Number of Donors Fields -->
-<input type="button" data-page="2" name="previous" class="previous action-button" value="Previous" />
-<input type="button" data-page="2" name="next" class="next action-button" value="Next" />
+@include('admin.pages.voluntarios.components.buttons-next-prev',[
+    'page'  => 2
+])

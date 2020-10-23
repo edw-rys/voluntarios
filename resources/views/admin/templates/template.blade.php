@@ -216,6 +216,7 @@
         });
 
     </script>
+    @yield('end_scripts')
 
 
 </body>

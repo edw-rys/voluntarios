@@ -1,4 +1,4 @@
-<h2 class="fs-title">{{ trans('global.voluntarios.create.passport-title') }}</h2>
+<h2 class="fs-title">{{ trans('global.voluntarios.create.personal-data') }}</h2>
 <div class="row">
     <div class="col-md-6">
         {{-- Nombres --}}
@@ -77,22 +77,35 @@
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Dirección</label>
             <div class="form-group m-0 pl-2">
                 <input class="form-control m-0  form-control-sm hs-input" name="Direccion" id="Direccion" type="text"
-                    required="required" placeholder="Dirección de residencia actual" value="" placeholder=""
+                    required="required" placeholder="Dirección de residencia actual"
                     data-rule-required="true" data-msg-required="Escriba la dirección">
                 <span class="error1" style="display: none;">
                     <i class="error-log fa fa-exclamation-triangle"></i>
                 </span>
             </div>
         </div>
-        {{-- Correo --}}
-        <div class=" relativeform-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
+         {{-- Correo --}}
+        <div class=" relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
             id="webform-component-acquisition--amount-1">
             <label
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Correo</label>
             <div class="form-group m-0 pl-2">
                 <input class="form-control m-0  form-control-sm hs-input" name="Correo" id="Correo" required="required" type="email"
-                    placeholder="Dirección de correo electrónico" value="" placeholder="" data-rule-required="true"
-                    data-msg-required="Escriba la dirección">
+                    placeholder="Dirección de correo electrónico" data-rule-required="true" data-msg-required="Escriba la dirección">
+                <span class="error1" style="display: none;">
+                    <i class="error-log fa fa-exclamation-triangle"></i>
+                </span>
+            </div>
+        </div>
+        {{-- Fecha --}}
+        <div class=" relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
+            id="webform-component-acquisition--amount-1">
+            <label
+                for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">F. de nacimiento</label>
+            <div class="form-group m-0 pl-2">
+                <input class="form-control m-0  form-control-sm hs-input" name="FechaNacimiento" id="FechaNacimiento" type="date"
+                    placeholder="Fecha de nacimiento" data-rule-required="true"
+                    data-msg-required="Seleccione la fecha">
                 <span class="error1" style="display: none;">
                     <i class="error-log fa fa-exclamation-triangle"></i>
                 </span>
@@ -199,6 +212,6 @@
 
 </div>
 
-<!-- End Calc of Total Number of Donors Fields -->
-<input type="button" data-page="2" name="previous" class="previous action-button" value="Previous" />
-<input type="button" data-page="2" name="next" class="next action-button" value="Next" />
+@include('admin.pages.voluntarios.components.buttons-next-prev',[
+    'page'  => 3
+])

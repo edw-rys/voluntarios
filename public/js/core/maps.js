@@ -110,7 +110,7 @@ function geocodeResult(results, status) {
     if (status == 'OK' && results.length > 0) {
         map.fitBounds(results[0].geometry.viewport);
     } else {
-        alert("Geocode no cargó por la siguiente razón: " + status);
+        // alert("Geocode no cargó por la siguiente razón: " + status);
     }
 
 }
