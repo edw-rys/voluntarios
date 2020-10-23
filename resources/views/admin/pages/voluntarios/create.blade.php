@@ -31,9 +31,6 @@
             ])
         </fieldset> --}}
         <fieldset>
-            @include('admin.pages.voluntarios.components.horario')
-        </fieldset>
-        <fieldset>
             <h2 class="fs-title">Ubicación</h2>
             <h3 class="fs-subtitle">Busque su ubicación y de clic en siguiente.</h3>
             @include('admin.pages.voluntarios.components.maps')
