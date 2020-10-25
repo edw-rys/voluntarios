@@ -24,12 +24,70 @@ var $Nivel = $('#Nivel');
 
 // 5
 var $Tutor = $('#Tutor');
+var $TutorBSPI = $('#idtutor');
 var $Departamento = $('#Departamento');
 var $observacion = $('#observacion');
 var $Proyecto = $('#Proyecto');
 var $chkActa = $('#chkActa');
 var $Unidad = $('#Unidad');
 
+var $HorasProgramada = $('#HorasProgramada');
+var $FechaInicio = $('#FechaInicio');
+var $FechaFin = $('#FechaFin');
+
+var $horas_miercoles = $('#horas_miercoles');
+var $horas_domingo = $('#horas_domingo');
+var $horas_viernes = $('#horas_viernes');
+var $horas_sabado = $('#horas_sabado');
+var $horas_jueves = $('#horas_jueves');
+var $horas_martes = $('#horas_martes');
+var $horas_lunes = $('#horas_lunes');
+var $Horario = $('#Horario');
+
+function calculaHora() {
+    if(!$FechaInicio.val() && !$FechaFin.val())
+        return false;
+    
+    var dia_ini = moment($FechaInicio.val());
+    var dia_fin = moment($FechaFin.val());
+    if(dia_ini>dia_fin)
+        return false
+    var horas = 0;
+    while(dia_fin>=dia_ini){
+        // debugger
+        switch (dia_ini.day()) {
+            case 0:
+                try {horas += $horas_domingo.val().length;} catch (error) {}
+                break;
+            case 1:
+                try {horas += $horas_lunes.val().length;} catch (error) {}
+                break;
+            case 2:
+                try {horas += $horas_martes.val().length;} catch (error) {}
+                break;
+            case 3:
+                try {horas += $horas_miercoles.val().length;} catch (error) {}
+                break;
+            case 4:
+                try {horas += $horas_jueves.val().length;} catch (error) {}
+                break;
+            case 5:
+                try {horas += $horas_viernes.val().length;} catch (error) {}
+                break;
+            case 6:
+                try {horas += $horas_sabado.val().length;} catch (error) {}
+                break;
+            default:
+                break;
+        }
+        dia_ini.add('day', 1);
+    }
+
+    // Momments
+    // Change HOURS
+    $HorasProgramada.val(horas)
+    
+}
 
 function validarVentana4() {
     var $listErr = [];
@@ -53,6 +111,10 @@ function validarVentana4() {
         $listErr.push($Tutor);
         md.showNotification( 'top','right', 'Escriba el nombre del tutor', 'warning');
     }
+    addWarningsInput($listErr);
+    setTimeout(() => {
+        removeWarnings();
+    }, 2000);
     return !( !$Universidad.val() || $Universidad.val() == 0 ||  !$Facultad.val() || $Facultad.val() == 0 ||
         !$Nivel.val() || !$Carrera.val() || !$Tutor.val()
     );
@@ -68,9 +130,9 @@ function validarVentana5() {
         $listErr.push($Unidad);
         md.showNotification( 'top','right', 'Seleccione la Unidad', 'warning');
     }
-    if(!$Tutor.val() || $Tutor.val() == 0){
-        $listErr.push($Tutor);
-        md.showNotification( 'top','right', 'Seleccione el tutor', 'warning');
+    if(!$TutorBSPI.val() || $TutorBSPI.val() == 0){
+        $listErr.push($TutorBSPI);
+        md.showNotification( 'top','right', 'Seleccione el tutor BSPI', 'warning');
     }
     if(!$Proyecto.val()){
         $listErr.push($Proyecto);
@@ -80,12 +142,42 @@ function validarVentana5() {
         $listErr.push($chkActa);
         md.showNotification( 'top','right', 'Debe marcar la opción de normativas', 'warning');
     }
-
+    addWarningsInput($listErr);
+    setTimeout(() => {
+        removeWarnings();
+    }, 2000);
     return !( !$Departamento.val() || $Departamento.val() == 0 ||  !$Unidad.val() || $Unidad.val() == 0 ||
-        !$Proyecto.val() || !$chkActa.is(':checked') || !$Tutor.val() || $Tutor.val() == 0 
+        !$Proyecto.val() || !$chkActa.is(':checked') || !$Tutor.val() || $Tutor.val() == 0  || !$TutorBSPI.val() || $TutorBSPI.val() == 0
     );
 }
-
+function validarVentana6() {
+    var $listErr = [];
+    var dia_ini = moment($FechaInicio.val());
+    var dia_fin = moment($FechaFin.val());
+    if(!$HorasProgramada.val() || $HorasProgramada.val()<=0){
+        $listErr.push($HorasProgramada);
+        md.showNotification( 'top','right', 'Agregue horas programadas', 'warning');
+    }
+    if(!$FechaInicio.val() || !$FechaFin.val()){
+        $listErr.push($FechaInicio);
+        $listErr.push($FechaFin);
+        md.showNotification( 'top','right', 'Seleccione la fecha de inicio y fin', 'warning');
+    }
+    if(dia_ini>dia_fin){
+        $listErr.push($FechaInicio);
+        $listErr.push($FechaFin);
+        md.showNotification( 'top','right', 'Corrija las fechas', 'warning');
+    }
+    if(!$Horario.val()){
+        $listErr.push($Horario);
+        md.showNotification( 'top','right', 'Agregue un horario', 'warning');
+    }
+    addWarningsInput($listErr);
+    setTimeout(() => {
+        removeWarnings();
+    }, 2000);
+    return !(!$HorasProgramada.val() || $HorasProgramada.val()<=0 || !$FechaInicio.val() || !$FechaFin.val() || dia_ini>dia_fin || !$Horario.val());
+}
 async function pasaporte_existe(valor) {
     let result={};
 
@@ -104,6 +196,9 @@ async function pasaporte_existe(valor) {
 
     return result;
 }
+
+
+
 
 /**
  * Validar cada Ventana
@@ -124,10 +219,11 @@ async function validaVentana(){
             return validarVentana4();
         case 5:
             return validarVentana5();
+        case 6:
+            return validarVentana6();
         default:
             break;
     }
-    
 }
 
 /**
@@ -164,6 +260,23 @@ function removeWarnings() {
     $Carrera.parent().children('.error1').css({display:'none'});
     $Nivel.parent().children('.error1').css({display:'none'});
     $Tutor.parent().children('.error1').css({display:'none'});
+    $TutorBSPI = $('#idtutor');
+    $Departamento.parent().children('.error1').css({display:'none'});
+    $observacion.parent().children('.error1').css({display:'none'});
+    $Proyecto.parent().children('.error1').css({display:'none'});
+    $chkActa.parent().children('.error1').css({display:'none'});
+    $Unidad.parent().children('.error1').css({display:'none'});
+    $HorasProgramada.parent().children('.error1').css({display:'none'});
+    $FechaInicio.parent().children('.error1').css({display:'none'});
+    $FechaFin.parent().children('.error1').css({display:'none'});
+    $horas_miercoles.parent().children('.error1').css({display:'none'});
+    $horas_domingo.parent().children('.error1').css({display:'none'});
+    $horas_viernes.parent().children('.error1').css({display:'none'});
+    $horas_sabado.parent().children('.error1').css({display:'none'});
+    $horas_jueves.parent().children('.error1').css({display:'none'});
+    $horas_martes.parent().children('.error1').css({display:'none'});
+    $horas_lunes.parent().children('.error1').css({display:'none'});
+    $Horario.parent().children('.error1').css({display:'none'});
 }
 
 function addWarningsInput(items = []){
@@ -177,7 +290,7 @@ function addWarningsInput(items = []){
 }
 
 function crearVoluntario() {
-    return false
+    return validarVentana2() && validarVentana3() && validarVentana4() && validarVentana5() && validarVentana6();
 }
 
 function requerido(query) {
@@ -200,6 +313,9 @@ async function validarVentana2() {
     if(!$tipo_practica.val()){
         addWarningsInput([$tipo_practica]);
     }
+    setTimeout(() => {
+        removeWarnings();
+    }, 2000);
     // Si no existe pasa y si tiene un tipo de práctica pasa
     return !existe.exist && $tipo_practica.val() &&  $pasaporte_item.val().length >=10
 }
@@ -260,14 +376,18 @@ function validarVentana3(){
         md.showNotification( 'top','right', 'Seleccione su pasatiempo', 'warning');
     }
     // Teléfono
-    if(!$Telefono.val() || !soloNum.test($Telefono.val()) || $Telefono.val().length < 10){
-        $listErr.push($Telefono);
-        md.showNotification( 'top','right', 'Ingrese un número de teléfono válido', 'warning');
+    if($Telefono.val()){
+        if(!soloNum.test($Telefono.val())){
+            $listErr.push($Telefono);
+            md.showNotification( 'top','right', 'Ingrese un número de teléfono válido', 'warning');
+        }
     }
     // Celular
-    if(!$celular.val() || !soloNum.test($celular.val()) || $celular.val().length < 10){
-        $listErr.push($celular);
-        md.showNotification( 'top','right', 'Ingrese un número de celular válido', 'warning');
+    if($celular.val()){
+        if( !soloNum.test($celular.val()) ){
+            $listErr.push($celular);
+            md.showNotification( 'top','right', 'Ingrese un número de celular válido', 'warning');
+        }
     }
     // Fecha nac
     if(!regexobjDate.test($FechaNac.val())){
@@ -278,7 +398,16 @@ function validarVentana3(){
     setTimeout(() => {
         removeWarnings();
     }, 2000);
+    var bandTelf = false;
+    if( $Telefono.val()){
+        bandTelf = !soloNum.test($Telefono.val())
+    }
+    var bandCel = false;
+    if( $celular.val()){
+        bandCel = !soloNum.test($celular.val())
+    }
+
     return !( !regexobjDate.test($FechaNac.val()) ||  !$Nombres.val() || !$nombreSegundo.val() || !emailreg.test($Correo.val()) || !$Apellidos.val() || !$apellidoMaterno.val() || (!$genero.val() || $genero.val() == 0) || (!$Pais.val() || $Pais.val() == 0) || 
-        (!$Cuidad.val() || $Cuidad.val() == 0) || (!$pasatiempo.val() || $pasatiempo.val() == 0) || (!$Telefono.val() || !soloNum.test($Telefono.val()) || $Telefono.val().length < 10) | (!$celular.val() || !soloNum.test($celular.val()) || $celular.val().length < 10));
+        (!$Cuidad.val() || $Cuidad.val() == 0) || (!$pasatiempo.val() || $pasatiempo.val() == 0) ||  bandCel || bandTelf );
 }
 

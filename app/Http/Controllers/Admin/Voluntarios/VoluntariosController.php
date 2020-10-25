@@ -9,6 +9,7 @@ use App\Repositories\AlimentacionRepository;
 use App\Repositories\DepartamentoRepository;
 use App\Repositories\EstadoCivilRepository;
 use App\Repositories\GeneroRepository;
+use App\Repositories\HorasDiasRepository;
 use App\Repositories\PaisRepository;
 use App\Repositories\PasatiempoRepository;
 use App\Repositories\TipoPracticaRepository;
@@ -23,19 +24,20 @@ class VoluntariosController extends Controller
     /**
      * @vars
      */
-    private $views;
     private $voluntariosService;
     private $tipoPracticaRepository;
-    private $estadoCivilRepository;
-    private $voluntariosRepository;
-    private $paisRepository;
-    private $generoRepository;
-    private $pasatiempoRepository;
-    private $universidadRepository;
-    private $unidadRepository;
     private $alimentacionRepository;
     private $departamentoRepository;
-    private $permisos ;
+    private $estadoCivilRepository;
+    private $voluntariosRepository;
+    private $universidadRepository;
+    private $pasatiempoRepository;
+    private $horasDiasRepository;
+    private $generoRepository;
+    private $unidadRepository;
+    private $paisRepository;
+    private $permisos;
+    private $views;
 
     /**
      * VoluntariosController constructor.
@@ -52,9 +54,11 @@ class VoluntariosController extends Controller
         UniversidadRepository $universidadRepository,
         UnidadRepository $unidadRepository,
         DepartamentoRepository $departamentoRepository,
-        AlimentacionRepository $alimentacionRepository
+        AlimentacionRepository $alimentacionRepository,
+        HorasDiasRepository $horasDiasRepository
     )
     {
+        $this->horasDiasRepository    = $horasDiasRepository;
         $this->alimentacionRepository = $alimentacionRepository;
         $this->departamentoRepository = $departamentoRepository;
         $this->userService            = $userService;
@@ -109,15 +113,16 @@ class VoluntariosController extends Controller
     public function create()
     {
         viewExist($this->views->create);
-        
+        // dd($this->horasDiasRepository->actives());
         // dd($this->departamentoRepository->activosPorPermiso($this->permisos->departamentos_todos)->get());
         return view($this->views->create)->with([
             'cancel'         => route($this->routes->index),
             'tiposPractica'  => $this->tipoPracticaRepository->where('status', 1)->get(),
             'paises'         => $this->paisRepository->where('status', 1)->get(),
             'generos'        => $this->generoRepository->where('status', 1)->get(),
-            'estadosciviles' => $this->estadoCivilRepository->where('status', 1)->get(),
+            'horas'          => $this->horasDiasRepository->actives(),
             'pasatiempos'    => $this->pasatiempoRepository->where('status', 1)->get(),
+            'estadosciviles' => $this->estadoCivilRepository->where('status', 1)->get(),
             'universidades'  => $this->universidadRepository->where('status', 1)->get(),
             'unidades_bspi'  => $this->unidadRepository->actives(),
             'alimentaciones' => $this->alimentacionRepository->actives(),

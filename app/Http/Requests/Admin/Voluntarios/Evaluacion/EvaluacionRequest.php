@@ -16,7 +16,7 @@ class EvaluacionRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return allows_permission('evaluar_voluntario');
     }
 
     /**

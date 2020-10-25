@@ -14,7 +14,7 @@ body {
 }
 /*form styles*/
 .steps {
-    width: 675px;
+    /* width: 675px; */
   margin: 50px auto;
   position: relative;
 }

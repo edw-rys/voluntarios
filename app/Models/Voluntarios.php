@@ -26,9 +26,7 @@ class Voluntarios extends Model
         'Apellidos',
         'apellidoMaterno',
         'nombreSegundo',
-
         'Pasaporte',
-
         'FechaNacimiento',
         'EstadoCivil',
         'Edad',

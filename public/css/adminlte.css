@@ -305,12 +305,16 @@ textarea {
 }
 
 fieldset {
-  min-width: 0;
   padding: 0;
   margin: 0;
   border: 0;
+  min-width: 0;
+  margin: 0 auto;
+  width: 90%;
 }
-
+fieldset.min-fs {
+  width: 675px;
+}
 legend {
   display: block;
   width: 100%;
@@ -31295,4 +31299,12 @@ table.dataTable tbody td{vertical-align:top}
 }
 .bold{
   font-weight: 700;
+}
+
+.select2-search__field{
+  margin: 0 !important;
+}
+
+.flex-y{
+  flex-direction: column;
 }

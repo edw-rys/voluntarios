@@ -30,7 +30,9 @@
                 
             ])
         </fieldset> --}}
-        <fieldset>
+        
+        {{-- Maps --}}
+        <fieldset class="min-fs">
             <h2 class="fs-title">Ubicación</h2>
             <h3 class="fs-subtitle">Busque su ubicación y de clic en siguiente.</h3>
             @include('admin.pages.voluntarios.components.maps')
@@ -38,12 +40,12 @@
             <input type="button" data-page="1" name="next" class="next action-button" value="Next" />
         </fieldset>
         {{-- Cédula / pasaporte - Tipo de práctica --}}
-        <fieldset>
+        <fieldset class="min-fs">
             @include('admin.pages.voluntarios.components.identificacion', ['tiposPractica'=> $tiposPractica])
         </fieldset>
         {{-- Cédula / pasaporte - Tipo de práctica --}}
         
-        <fieldset>
+        <fieldset class="min-fs">
             @include('admin.pages.voluntarios.components.personal', 
             [
                 'paises'         => $paises,
@@ -57,7 +59,7 @@
 
 
         <!-- PASO 3: INFORMACIÓN ACADÉMICA -->
-        <fieldset>
+        <fieldset class="min-fs">
             @include('admin.pages.voluntarios.components.academico', 
             [
                 'universidades'  => $universidades,
@@ -68,7 +70,7 @@
         </fieldset>
 
         <!-- PASO 4: INFORMACIÓN BSPI -->
-        <fieldset>
+        <fieldset class="min-fs">
             
             @include('admin.pages.voluntarios.components.bspi', 
             [
@@ -81,19 +83,13 @@
 
 
         <!-- RETENTION FIELD SET -->
-        <fieldset>
-
-            <!-- End Final Calc -->
-            <input type="button" data-page="5" name="previous" class="previous action-button" value="Previous" />
-            <input id="submit" class="hs-button primary large action-button next" type="submit" value="Submit">
+        <fieldset class="fieldset-all">
+            @include('admin.pages.voluntarios.components.horario', [
+                'horas'  => $horas
+            ])
+        <input type="button" data-page="5" name="previous" class="previous action-button" value="Anterior" />
+        <input id="submit" class="hs-button primary large action-button next" type="submit" value="Enviar">
         </fieldset>
-
-        <fieldset>
-            <h2 class="fs-title">It's on the way!</h2>
-            <h3 class="fs-subtitle">Thank you for trying out our marketing grader, please go check your email for your
-                fundraising report card and some helpful tips to improve it!</h3>
-        </fieldset>
-
         {{-- Scripts para esta sección --}}
         @include('admin.pages.voluntarios.components.scripts')
         <script>

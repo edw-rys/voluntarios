@@ -71,11 +71,11 @@
                 } catch (error) {}
                 var select = '';
                 if(data && Array.isArray(data)){
-                    for (const facultad of data) {
-                        select+='<option value="'+facultad.id+'">'+facultad.NombreFacultad +'</option>';
+                    for (const ususario of data) {
+                        select+='<option value="'+ususario.id+'">'+ususario.Nombre +'</option>';
                     }
                 }
-                document.getElementById('Tutor').innerHTML = select;
+                document.getElementById('idtutor').innerHTML = select;
             });
         }
         cargarTutores($('#Departamento').val());
