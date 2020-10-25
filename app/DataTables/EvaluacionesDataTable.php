@@ -48,6 +48,7 @@ class EvaluacionesDataTable extends DataTable
         return [
             // Column::make('id')->title(trans('global.voluntario.number'))->className('text-center'),
             Column::make('actions')->title(trans('global.actions'))->className('text-center'),
+            Column::make('evaluacion_pdf')->title('Evaluacion Final')->className('text-center'),
             Column::make('status')->title(trans('global.status'))->className('text-center'),
             Column::make('Nombres')->title(trans('global.voluntario.names'))->className('text-center'),
             Column::make('Apellidos')->title(trans('global.voluntario.last_names'))->className('text-center'),
@@ -67,7 +68,7 @@ class EvaluacionesDataTable extends DataTable
      */
     public function html(): \Yajra\DataTables\Html\Builder
     {
-        return $this->getHtml(8, 'desc');
+        return $this->getHtml(9, 'desc');
         // return null;
     }
 
@@ -130,9 +131,16 @@ class EvaluacionesDataTable extends DataTable
                 return status($query->evaluacion === null ? 'not_evaluated' : 'evaluated');
             })
             ->addColumn('actions', static function ($query) {
-                if($query->evaluacion !== null)
+                if($query->evaluacion !== null){
                     return '';
+                }
                 return evaluate_show( 'admin.evaluaciones.evaluate', optimus()->encode($query->id), 'Evaluar');
+            })
+            ->addColumn('evaluacion_pdf', static function ($query) {
+                if($query->evaluacion !== null){
+                    return show_modal('admin.evaluaciones.certificado',$query->id, 'Evaluación PDF');
+                }
+                return '';
             })
             ->escapeColumns([]);
     }

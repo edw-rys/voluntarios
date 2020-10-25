@@ -60,6 +60,7 @@ class VoluntariosDataTable extends DataTable
             Column::make('TutorBspi')->title(trans('global.voluntario.tutor_bspi'))->className('text-center'),
             Column::make('FechaInicio')->title(trans('global.voluntario.start_date'))->className('text-center'),
             Column::make('FechaFin')->title(trans('global.voluntario.end_date'))->className('text-center'),
+            Column::make('edit')->title(trans('global.voluntario.edit'))->className('text-center'),
         ];
     }
 
@@ -70,7 +71,7 @@ class VoluntariosDataTable extends DataTable
      */
     public function html(): \Yajra\DataTables\Html\Builder
     {
-        return $this->getHtml(11, 'desc');
+        return $this->getHtml(12, 'desc');
         // return null;
     }
 
@@ -133,6 +134,9 @@ class VoluntariosDataTable extends DataTable
                 return $query->tipo_practica ? $query->tipo_practica->Nombre : $query->tipoPractica ;
             })
             ->editColumn('status', static function ($query) {
+                return status($query->status);
+            })
+            ->addColumn('edit', static function ($query) {
                 return status($query->status);
             })
             ->escapeColumns([]);

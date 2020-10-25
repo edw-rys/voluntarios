@@ -112,75 +112,35 @@ if (! function_exists('months')) {
     }
 }
 
-if (! function_exists('days')) {
-    /**
-     * Get days
-     *
-     * @return array
-     */
-    function days(): array
-    {
-        $from   = 1;
-        $to     = 31;
 
-        return range($from, $to);
-    }
-}
-
-if (! function_exists('years')) {
-    /**
-     * Get years
-     *
-     * @return array
-     */
-    function years(): array
-    {
-        $from   = Carbon::now()->subYears(18)->year;
-        $to     = Carbon::now()->subYears(100)->year;
-
-        return range($from, $to);
-    }
-}
-
-if (! function_exists('yearsOld')) {
-    /**
-     * Get years between a number
-     *
-     * @param int $yearsBetween
-     * @return array
-     */
-    function yearsOld(int $yearsBetween = 1): array
-    {
-        $initialYear    = 2019;
-        $currentYear    = Carbon::now()->year;
-        $farthestYear   = Carbon::now()->addYears($yearsBetween)->year;
-
-        $yearsUp        = range($farthestYear, $currentYear);
-        $yearsDown      = range($currentYear, $initialYear);
-
-        return array_unique(array_merge($yearsUp, $yearsDown));
-    }
-}
-
-if (! function_exists('generateDateRange')) {
+if (! function_exists('formatDateGye')) {
     /**
      * Generate Date Range
      *
-     * @param $start_date
-     * @param $end_date
-     * @return array
+     * @return string
      */
-    function generateDateRange($start_date, $end_date): array
+    function formatDateGye(): string
     {
-        $start_date = Carbon::createFromFormat('Y-m-d', $start_date);
-        $end_date   = Carbon::createFromFormat('Y-m-d', $end_date);
+        $date = Carbon::now();
+       
 
-        $dates = [];
+        return ' ' . $date->day . ' de '. months()[$date->month] . ' del '. $date->year;
+    }
+}
 
-        for ($date = $start_date->copy(); $date->lte($end_date); $date->addDay()) {
-            $dates[] = $date->format('Y-m-d');
-        }
 
-        return $dates;
+if (! function_exists('formatDateComplete')) {
+    /**
+     * Generate Date Range
+     *
+     * @param $date  => formart d/m/Y
+     * @return string
+     */
+    function formatDateComplete($date ): string
+    {
+        $date = Carbon::createFromFormat('d/m/Y', $date);
+       
+
+        return $date->day . ' de '. months()[$date->month] . ' del '. $date->year;
     }
 }

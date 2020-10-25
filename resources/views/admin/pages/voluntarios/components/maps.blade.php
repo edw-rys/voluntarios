@@ -25,10 +25,10 @@
     <div class="form">
         <ul>
             <li>
-                <input type="hidden" id="txtLongitud">
+                <input type="hidden" id="txtLongitud" name="latitud">
             </li>
             <li>
-                <input type="hidden" id="txtLatitud">
+                <input type="hidden" id="txtLatitud" name="longitud" >
             </li>
         </ul>
 

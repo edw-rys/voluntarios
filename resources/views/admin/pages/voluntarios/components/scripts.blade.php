@@ -30,7 +30,7 @@
                         select+='<option value="'+ciudad.id+'">'+ciudad.Nombre +'</option>';
                     }
                 }
-                document.getElementById('Cuidad').innerHTML = select;
+                document.getElementById('Ciudad').innerHTML = select;
             });
         }
 
@@ -72,7 +72,7 @@
                 var select = '';
                 if(data && Array.isArray(data)){
                     for (const ususario of data) {
-                        select+='<option value="'+ususario.id+'">'+ususario.Nombre +'</option>';
+                        select+='<option value="'+ususario.id+'">'+ususario.Nombres + ' '+  ususario.Apellidos +'</option>';
                     }
                 }
                 document.getElementById('idtutor').innerHTML = select;

@@ -18,7 +18,7 @@ CREATE TABLE [GestionVoluntarios].[dbo].[tbwbPeriodoVoluntario] (
     [voluntario_id] int,
 	[universidad_id] int ,
 	[facultad_id] int,
-	[carrera_id] int,
+	[carrera] varchar(70),
 	[nivel] varchar(50),
 	[tutor] varchar(50),
     [unidad_id] int,
@@ -29,10 +29,13 @@ CREATE TABLE [GestionVoluntarios].[dbo].[tbwbPeriodoVoluntario] (
     [fecha_inicio] date,
     [fecha_fin] date,
     [horas_programada] int,
-    [dlimentacion_id] int,
-    [dlimentacion_id] int,
-    status int
+    [alimentacion_id] int,
+	[horario_voluntario_id] int,
+    [tipo_practica_id] int,
+	[horario]	varchar(40),
+    status int default 1
 );
+
 
 -- Horas
 
@@ -72,7 +75,6 @@ INSERT INTO [GestionVoluntarios].[dbo].[tbwbHorasDias] (hora_inicio, hora_fin, d
 
 CREATE TABLE [GestionVoluntarios].[dbo].[tbwbHorarioVoluntario] (
     [id] int IDENTITY(1,1) PRIMARY KEY,
-    [periodo_id] int,
 	[voluntario_id] int,
 	[lunes_data] varchar(300),
 	[martes_data] varchar(300),
@@ -83,3 +85,5 @@ CREATE TABLE [GestionVoluntarios].[dbo].[tbwbHorarioVoluntario] (
 	[domingo_data] varchar(300),
     status int default 1
 );
+
+ALTER TABLE [GestionVoluntarios].[dbo].[tbwbEvaluacionAlVoluntario]  ADD periodo_id int NULL ;

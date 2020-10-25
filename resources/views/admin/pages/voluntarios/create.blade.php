@@ -8,7 +8,9 @@
     </style>
 @endsection
 @section('content')
-    <form class="steps" accept-charset="UTF-8" onsubmit="return crearVoluntario()" autocomplete="on">
+    @include('components.alerts.errorBags')
+    <form class="steps" method="POST" action="{{ route('admin.voluntarios.store') }}" accept-charset="UTF-8" onsubmit="return crearVoluntario()" autocomplete="on">
+        @csrf
         <ul id="progressbar">
             <li class="active">{{ trans('global.voluntarios.create.maps') }}</li>
             {{-- <li>{{ trans('global.voluntarios.create.maps') }}</li> --}}
@@ -65,7 +67,7 @@
                 'universidades'  => $universidades,
                 'unidades_bspi'  => $unidades_bspi,
                 // 'departamentos'  => $departamentos,
-                'alimentaciones' => $alimentaciones
+                // 'alimentaciones' => $alimentaciones
             ])
         </fieldset>
 
@@ -94,4 +96,5 @@
         @include('admin.pages.voluntarios.components.scripts')
         <script>
         </script>
+    </form>
     @endsection

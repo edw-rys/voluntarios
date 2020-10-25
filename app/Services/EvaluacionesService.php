@@ -35,11 +35,11 @@ class EvaluacionesService extends BaseService
         $request->merge([
             'txtsi'        => $request->input('txtrecomendado','no') == 'si' ? 1 : 0,
             'txtno'        => $request->input('txtrecomendado','no') == 'no' ? 1 : 0,
-            'FechaIngreso' => Carbon::now(),
+            'FechaIngreso' => Carbon::now()->format('Y-m-d') . 'T' . Carbon::now()->format('H:i:s'),
             'pc_name'      => $request->server('REMOTE_ADDR'),
             'status'       => 1,
             'Pasaporte'    =>  (new VoluntariosRepository)->find($request->input('CodigoReferencia'))->Pasaporte,
-            'fecha_modificacion'   => Carbon::now(),
+            'fecha_modificacion'   => Carbon::now()->format('Y-m-d') . 'T' . Carbon::now()->format('H:i:s'),
             'usuario_modificacion' => auth()->user()->id
         ]);
 

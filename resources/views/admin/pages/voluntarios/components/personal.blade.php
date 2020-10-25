@@ -157,7 +157,7 @@
 
             <label
                 for="edit-submitted-acquisition-amount-2 total_number_of_donors_in_year_2-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Ciudad</label>
-            <select name="Cuidad" id="Cuidad" class="form-control select2"
+            <select name="Ciudad" id="Ciudad" class="form-control select2"
                 data-placeholder="{{ trans('global.pleaseSelect') }}" required>
 
             </select>

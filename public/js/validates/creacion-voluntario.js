@@ -13,7 +13,7 @@ var $Nombres = $('#Nombres');
 var $celular = $('#celular');
 var $genero = $('#genero');
 var $Correo = $('#Correo');
-var $Cuidad = $('#Cuidad');
+var $Ciudad = $('#Ciudad');
 var $Pais = $('#Pais');
 
 // 4
@@ -246,7 +246,7 @@ function removeWarnings() {
     $celular.parent().children('.error1').css({display:'none'});
     $genero.parent().children('.error1').css({display:'none'});
     $Correo.parent().children('.error1').css({display:'none'});
-    $Cuidad.parent().children('.error1').css({display:'none'});
+    $Ciudad.parent().children('.error1').css({display:'none'});
     $Pais.parent().children('.error1').css({display:'none'});
     $Departamento.parent().children('.error1').css({display:'none'});
 
@@ -366,8 +366,8 @@ function validarVentana3(){
         md.showNotification( 'top','right', 'Seleccione el país', 'warning');
     }
     // Ciudad
-    if(!$Cuidad.val() || $Cuidad.val() == 0){
-        $listErr.push($Cuidad);
+    if(!$Ciudad.val() || $Ciudad.val() == 0){
+        $listErr.push($Ciudad);
         md.showNotification( 'top','right', 'Seleccione la ciudad', 'warning');
     }
     // Pasatiempo
@@ -408,6 +408,6 @@ function validarVentana3(){
     }
 
     return !( !regexobjDate.test($FechaNac.val()) ||  !$Nombres.val() || !$nombreSegundo.val() || !emailreg.test($Correo.val()) || !$Apellidos.val() || !$apellidoMaterno.val() || (!$genero.val() || $genero.val() == 0) || (!$Pais.val() || $Pais.val() == 0) || 
-        (!$Cuidad.val() || $Cuidad.val() == 0) || (!$pasatiempo.val() || $pasatiempo.val() == 0) ||  bandCel || bandTelf );
+        (!$Ciudad.val() || $Ciudad.val() == 0) || (!$pasatiempo.val() || $pasatiempo.val() == 0) ||  bandCel || bandTelf );
 }
 

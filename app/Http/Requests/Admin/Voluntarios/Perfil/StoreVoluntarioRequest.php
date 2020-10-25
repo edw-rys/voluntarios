@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\Admin\Voluntarios\Perfil;
 
+use App\Repositories\VoluntariosRepository;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class GuardarRequest extends FormRequest
+class StoreVoluntarioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +15,7 @@ class GuardarRequest extends FormRequest
      */
     public function authorize()
     {
-        return allows_permission('guardar_voluntario');
+        return true;//allows_permission('guardar_voluntario');
     }
 
     /**
@@ -23,23 +25,25 @@ class GuardarRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->input());
+        $voluntario = (new VoluntariosRepository())->getModel()->getTable();
         return [
             // 'CodigoReferencia'          => ,
             'Nombres'                   => ['required', 'string'],  
             'Apellidos'                 => ['required', 'string'],  
             'apellidoMaterno'           => ['required', 'string'],  
             'nombreSegundo'             => ['required', 'string'],  
-            'Pasaporte'                 => ['required', 'min:9'],
+            'Pasaporte'                 => ['required', 'min:9', Rule::unique($voluntario, 'Pasaporte')->where('status',1)],
             'FechaNacimiento'           => ['required', 'date'],
             'EstadoCivil'               => ['required', 'numeric'],
             'Pais'                      => ['required', 'numeric'],
             'Ciudad'                    => ['required', 'numeric'],
             'Direccion'                 => ['required', 'string'],
-            'Telefono'                  => ['required', 'numeric', 'min:9'],
+            'Telefono'                  => ['nullable', 'numeric', 'min:9'],
             'Correo'                    => ['required', 'email'],
             'Universidad'               => ['required', 'numeric'],
             'Facultad'                  => ['required', 'numeric'],
-            'Carrera'                   => ['required', 'numeric'],
+            'Carrera'                   => ['required'],
             'Nivel'                     => ['required'],
             'Tutor'                     => ['required', 'string'],
             'Unidad'                    => ['required', 'numeric'],
@@ -57,7 +61,7 @@ class GuardarRequest extends FormRequest
             'celular'                   => ['nullable', 'min:9'],
             'idtutor'                   => ['required', 'numeric'],
             // 'fecha_extension'
-            'chkActa'                   => ['required', 'boolean'],
+            'chkActa'                   => ['required'],
             'tipoPractica'              => ['required', 'numeric'],
         ];
     }

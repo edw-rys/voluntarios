@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin\Voluntarios;
 use App\DataTables\FormFilters\FormFilter;
 use App\DataTables\VoluntariosDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Voluntarios\Perfil\StoreVoluntarioRequest;
 use App\Repositories\AlimentacionRepository;
 use App\Repositories\DepartamentoRepository;
 use App\Repositories\EstadoCivilRepository;
+use App\Repositories\EvaluacionesRepository;
 use App\Repositories\GeneroRepository;
 use App\Repositories\HorasDiasRepository;
 use App\Repositories\PaisRepository;
@@ -17,6 +19,7 @@ use App\Repositories\UnidadRepository;
 use App\Repositories\UniversidadRepository;
 use App\Repositories\VoluntariosRepository;
 use App\Services\UserService;
+use App\Services\VoluntariosService;
 use Illuminate\Http\Request;
 
 class VoluntariosController extends Controller
@@ -24,15 +27,16 @@ class VoluntariosController extends Controller
     /**
      * @vars
      */
-    private $voluntariosService;
     private $tipoPracticaRepository;
     private $alimentacionRepository;
     private $departamentoRepository;
+    private $evaluacionesRepository;
     private $estadoCivilRepository;
     private $voluntariosRepository;
     private $universidadRepository;
     private $pasatiempoRepository;
     private $horasDiasRepository;
+    private $voluntariosService;
     private $generoRepository;
     private $unidadRepository;
     private $paisRepository;
@@ -45,21 +49,25 @@ class VoluntariosController extends Controller
      */
     public function __construct(
         UserService $userService, 
-        VoluntariosRepository $voluntariosRepository, 
-        TipoPracticaRepository $tipoPracticaRepository,
-        PaisRepository $paisRepository,
-        GeneroRepository $generoRepository,
-        EstadoCivilRepository $estadoCivilRepository,
-        PasatiempoRepository $pasatiempoRepository,
-        UniversidadRepository $universidadRepository,
-        UnidadRepository $unidadRepository,
-        DepartamentoRepository $departamentoRepository,
         AlimentacionRepository $alimentacionRepository,
-        HorasDiasRepository $horasDiasRepository
+        TipoPracticaRepository $tipoPracticaRepository,
+        DepartamentoRepository $departamentoRepository,
+        EstadoCivilRepository  $estadoCivilRepository,
+        EvaluacionesRepository $evaluacionesRepository,
+        VoluntariosRepository  $voluntariosRepository, 
+        UniversidadRepository  $universidadRepository,
+        PasatiempoRepository   $pasatiempoRepository,
+        HorasDiasRepository    $horasDiasRepository,
+        VoluntariosService     $voluntariosService,
+        UnidadRepository       $unidadRepository,
+        GeneroRepository       $generoRepository,
+        PaisRepository         $paisRepository
     )
     {
+        $this->voluntariosService     = $voluntariosService;
         $this->horasDiasRepository    = $horasDiasRepository;
         $this->alimentacionRepository = $alimentacionRepository;
+        $this->evaluacionesRepository = $evaluacionesRepository;
         $this->departamentoRepository = $departamentoRepository;
         $this->userService            = $userService;
         $this->unidadRepository       = $unidadRepository;
@@ -71,8 +79,9 @@ class VoluntariosController extends Controller
         $this->paisRepository         = $paisRepository;
         $this->universidadRepository  = $universidadRepository;
         $this->views        = (object) [
-            'index'   => 'admin.pages.voluntarios.index',
-            'create'  => 'admin.pages.voluntarios.create',
+            'index'         => 'admin.pages.voluntarios.index',
+            'create'        => 'admin.pages.voluntarios.create',
+            'certificados'  => 'admin.pages.voluntarios.certificado_periodo'
         ];
         $this->routes       = (object) [
             'index'   => 'admin.voluntarios.index'
@@ -113,8 +122,6 @@ class VoluntariosController extends Controller
     public function create()
     {
         viewExist($this->views->create);
-        // dd($this->horasDiasRepository->actives());
-        // dd($this->departamentoRepository->activosPorPermiso($this->permisos->departamentos_todos)->get());
         return view($this->views->create)->with([
             'cancel'         => route($this->routes->index),
             'tiposPractica'  => $this->tipoPracticaRepository->where('status', 1)->get(),
@@ -128,5 +135,27 @@ class VoluntariosController extends Controller
             'alimentaciones' => $this->alimentacionRepository->actives(),
             'departamentos'  => $this->departamentoRepository->activosPorPermiso($this->permisos->departamentos_todos)->get(),
         ]);
+    }
+
+    public function store(StoreVoluntarioRequest $request)
+    {
+
+        return $this->voluntariosService->store($request, $this->routes);
+    }
+
+    public function certificadosView($id)
+    {
+        viewExist($this->views->certificados);
+
+        $voluntario = $this->voluntariosRepository
+            ->find($id, ['*'], ['universidad'], true);
+        
+        $item = $this->evaluacionesRepository
+            ->where('CodigoReferencia', $voluntario->id)
+            ->with('periodo')
+            ->with('voluntario')
+            ->get();
+        // dd($item);
+        return $this->voluntariosService->ajax($item, $this->views->certificados, $this->routes->index);
     }
 }

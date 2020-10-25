@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Voluntarios extends Model
@@ -114,8 +115,13 @@ class Voluntarios extends Model
     {
         return $this->hasOne(Pasatiempo::class, 'CodigoReferencia', 'id');
     }
-    public function tipo_practica() : HasOne
+    public function tipo_practica() : BelongsTo
     {
-        return $this->hasOne(TipoPractica::class, 'tipoPractica', 'codigo');
+        return $this->belongsTo(TipoPractica::class, 'tipoPractica', 'codigo');
+    }
+
+    public function periodos() : HasMany
+    {
+        return $this->hasMany(PeriodoVoluntario::class, 'voluntario_id', 'id');
     }
 }

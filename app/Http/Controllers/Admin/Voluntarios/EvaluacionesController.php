@@ -20,6 +20,7 @@ class EvaluacionesController extends Controller
     private $voluntariosRepository;
     private $evaluacionesRepository;
     private $evaluacionesService;
+    private $options_dompdf;
 
     /**
      * VoluntariosController constructor.
@@ -34,8 +35,9 @@ class EvaluacionesController extends Controller
         $this->evaluacionesService    = $evaluacionesService;
 
         $this->views        = (object) [
-            'index'    => 'admin.pages.evaluaciones.index',
-            'evaluate' => 'admin.pages.evaluaciones.evaluate'
+            'index'         => 'admin.pages.evaluaciones.index',
+            'evaluate'      => 'admin.pages.evaluaciones.evaluate',
+            'evluacion_periodo'  => 'admin.pages.evaluaciones.evluacion_periodo'
         ];
         $this->routes       = (object) [
             'index'         => 'admin.evaluaciones.index',
@@ -47,6 +49,18 @@ class EvaluacionesController extends Controller
             'departemento',
             'user_id',
         ];
+        $this->options_dompdf = [
+            'dpi'                       => 180,
+            'defaultFont'               => 'helvetica',
+            'defaultPaperSize'          => 'A4',
+            'defaultMediaType'          => 'print',
+            'defaultPaperOrientation'   => 'portrait',
+            'isHtml5ParserEnabled'      => true,
+            'isPhpEnabled'              => true,
+            'isRemoteEnabled'           => true,
+            'enable_remote'             => true
+        ];
+
     }
 
     /**
@@ -91,4 +105,25 @@ class EvaluacionesController extends Controller
         return $this->evaluacionesService->store($request, $this->routes);
     }
     
+    /**
+     * Evaluate
+     *
+     * @param $id
+     * @return JsonResponse|RedirectResponse
+     */
+    public function reporteView($id)
+    {
+        viewExist($this->views->evluacion_periodo);
+
+        $voluntario = $this->voluntariosRepository
+            ->find($id, ['*'], ['universidad'], true);
+            
+        $item = $this->evaluacionesRepository
+            ->where('CodigoReferencia', $voluntario->id)
+            ->with('periodo')
+            ->with('voluntario')
+            ->get();
+        // dd($item);
+        return $this->evaluacionesService->ajax($item, $this->views->evluacion_periodo, $this->routes->index);
+    }
 }

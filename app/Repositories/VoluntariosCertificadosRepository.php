@@ -34,10 +34,10 @@ class VoluntariosCertificadosRepository
     {
         $query = $this->newQuery()
             ->select(['*'])
-            ->join('tbwbEvaluacionAlVoluntario', 'tbwbEvaluacionAlVoluntario.CodigoReferencia', 'tbwbVoluntario.id');
+            // ->join('tbwbEvaluacionAlVoluntario', 'tbwbEvaluacionAlVoluntario.CodigoReferencia', 'tbwbVoluntario.id');
             // ->with('departamento')
             // ->with('unidad')
-            // ->with('evaluacion')
+            ->has('evaluacion');
             // ->with('tipo_practica');
             // ->orderBy('id', 'DESC');
             // ->whereNotNull('evaluacion');

@@ -4,7 +4,7 @@
         <div class="card">
 
             <div class="card-header">
-                <h3 id="filter-header" class="hover"><i class="ik ik-filter"></i> Filtros de búsqueda</h3>
+                <h3 id="filter-header" class="hover"><i class="fas fa-filter"></i> Filtros de búsqueda</h3>
                 <div class="card-header-right">
                     <ul class="list-unstyled card-option" style="width:90px">
                         <li><i class="ik ik-chevron-left action-toggle ik-chevron-right"></i></li>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Evaluaciones extends Model
@@ -48,6 +49,7 @@ class Evaluaciones extends Model
         'FechaIngreso',
         'usuario_modificacion',
         'fecha_modificacion',
+        'periodo_id',
         'pc_name',
         'status',
     ];    
@@ -56,9 +58,18 @@ class Evaluaciones extends Model
      * Relaciones
      * @return HasOne
      */
-    public function voluntatio() : HasOne
+    public function voluntario() : HasOne
     {
         return $this->hasOne(Voluntarios::class, 'Pasaporte', 'Pasaporte');
+    }
+
+    /**
+     * Relaciones
+     * @return HasOne
+     */
+    public function periodo() : BelongsTo
+    {
+        return $this->belongsTo(PeriodoVoluntario::class, 'periodo_id', 'id');
     }
 
 }

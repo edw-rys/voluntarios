@@ -86,7 +86,7 @@ class CertificadosDataTable extends DataTable
         $action     = $this->action;
         $route      = $this->route;
         $context    = $this;
-        // dd();
+        
         return datatables()
             ->eloquent($query)
             ->setRowId('id')
@@ -137,7 +137,7 @@ class CertificadosDataTable extends DataTable
                 return status($query->status);
             })
             ->addColumn('certificate', static function ($query) {
-                return status($query->status);
+                return show_modal('admin.voluntarios.certificados',$query->id, 'Periodos');
             })
             ->escapeColumns([]);
     }

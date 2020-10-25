@@ -1,5 +1,6 @@
 <?php
 
+use App\Repositories\GeneroRepository;
 use Illuminate\Support\Collection;
 
 if (! function_exists('arrayToObject')) {
@@ -311,3 +312,31 @@ if (! function_exists('setting')) {
         //return $setting ? $setting->value : '';
     }
 }
+
+if (! function_exists('strGenderPrintstroa')) {
+    /**
+     * Get Settings
+     *
+     * @param $gender_id
+     * @return string
+     */
+    function strGenderPrintstroa($gender_id)
+    {
+        $genero = (new GeneroRepository)->where('codigo', $gender_id)->first();
+        if($genero === null){
+            return '';
+        }
+        switch ($genero->abreviatura) {
+            case 'M':
+                return 'el Señor';
+                break;
+            case 'F':
+                return 'la Señorita';
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
+}
+

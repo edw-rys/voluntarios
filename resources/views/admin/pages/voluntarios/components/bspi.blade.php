@@ -45,7 +45,8 @@
         <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
             id="webform-component-acquisition--amount-2">
             <label
-                for="edit-submitted-acquisition-amount-2 total_number_of_donors_in_year_2-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Tutor BSPI</label>
+                for="edit-submitted-acquisition-amount-2 total_number_of_donors_in_year_2-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Tutor
+                BSPI</label>
             <select name="idtutor" id="idtutor" class="form-control select2"
                 data-placeholder="{{ trans('global.pleaseSelect') }}" required>
 
@@ -70,6 +71,25 @@
                     <i class="error-log fa fa-exclamation-triangle"></i>
                 </span>
             </div>
+        </div>
+        {{-- Departamentos --}}
+        <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field">
+
+            <label
+                for="edit-submitted-acquisition-amount-2 total_number_of_donors_in_year_2-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Alimentación</label>
+            <select name="Alimentacion" id="Alimentacion" class="form-control select2"
+                data-placeholder="{{ trans('global.pleaseSelect') }}" required>
+                @foreach ($alimentaciones as $id => $alimentacion)
+                    <option value="{{ $alimentacion->id }}"
+                        {{ old('Alimentacion') === $alimentacion->id ? 'selected' : '' }}>
+                        {{ $alimentacion->NombreAlimentacion }}
+                    </option>
+                @endforeach
+
+            </select>
+            <span class="error1" style="display: none;">
+                <i class="error-log fa fa-exclamation-triangle"></i>
+            </span>
         </div>
         {{-- ¿El voluntario leyó las normativas? --}}
         <div class="relative form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
