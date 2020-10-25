@@ -138,7 +138,12 @@ if (! function_exists('formatDateComplete')) {
      */
     function formatDateComplete($date ): string
     {
-        $date = Carbon::createFromFormat('d/m/Y', $date);
+        // dd($date);}
+        try {
+            $date = Carbon::createFromFormat('d/m/Y', $date);
+        } catch (Exception $th) {
+            $date = Carbon::create( $date);
+        }
        
 
         return $date->day . ' de '. months()[$date->month] . ' del '. $date->year;

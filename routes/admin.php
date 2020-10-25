@@ -39,8 +39,11 @@ Route::namespace('Admin')->group( static function (){
             Route::group(['prefix' => 'voluntarios'], function(){
                 Route::get('', 'VoluntariosController@index')->name('voluntarios.index');
                 Route::get('create', 'VoluntariosController@create')->name('voluntarios.create');
+                Route::get('mostrar/{id}', 'VoluntariosController@show')->name('voluntarios.show');
                 Route::post('store', 'VoluntariosController@store')->name('voluntarios.store');
                 Route::get('aprueba/{id}', 'VoluntariosController@certificadosView')->name('voluntarios.certificados');
+                Route::get('cambio-periodo/{id}', 'VoluntariosController@cambiarPeriodo')->name('voluntarios.cambio_periodo');
+                Route::post('cambio-periodo/store', 'VoluntariosController@cambiarPeriodoStore')->name('voluntarios.cambio_periodo.store');
                 // Route::resource('voluntarios', 'VoluntariosController');
             });
 

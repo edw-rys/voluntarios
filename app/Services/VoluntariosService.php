@@ -132,4 +132,52 @@ class VoluntariosService extends BaseService{
         }
         return $user->titulo . ' ' . $user->Nombres . ' ' . $user->Apellidos;
     }
+
+    public function cambioPeriodo(Request $request, $routeTo)
+    {
+        $request->merge([
+            'TutorBspi'     => $this->getTitleTutor($request->input('idtutor')),
+            'pc_name'       => $request->server('REMOTE_ADDR'),
+            'status'        => 1,
+            'horasDiarias'  => 1,
+            'chkActa'       => $request->input('chkActa') === 'on' ? 1 : 0
+        ]);
+
+        
+        $horario = $this->horarioVoluntarioRepository->create([
+            'voluntario_id'     => $request->input('voluntario_id'),
+            'lunes_data'        => $request->input('horas_lunes')!==null ? json_encode($request->input('horas_lunes')) : '[]',
+            'martes_data'       => $request->input('horas_martes')!==null ? json_encode($request->input('horas_lunes')) : '[]',
+            'miercoles_data'    => $request->input('horas_miercoles')!==null ? json_encode($request->input('horas_lunes')) : '[]',
+            'jueves_data'       => $request->input('horas_jueves')!==null ? json_encode($request->input('horas_lunes')) : '[]',
+            'viernes_data'      => $request->input('horas_viernes')!==null ? json_encode($request->input('horas_lunes')) : '[]',
+            'sabado_data'       => $request->input('horas_sabado')!==null ? json_encode($request->input('horas_lunes')) : '[]',
+            'domingo_data'      => $request->input('horas_domingo')!==null ? json_encode($request->input('horas_lunes')) : '[]',
+        ]);
+
+        $periodo = $this->periodoVoluntarioRepository->create([
+            'voluntario_id'         => $request->input('voluntario_id'),
+            'universidad_id'        => $request->input('Universidad'),
+            'facultad_id'           => $request->input('Facultad'),
+            'carrera'               => $request->input('Carrera'),
+            'nivel'                 => $request->input('Nivel'),
+            'tutor'                 => $request->input('Tutor'),
+            'unidad_id'             => $request->input('Unidad'),
+            'departamento_id'       => $request->input('Departamento'),
+            'proyecto'              => $request->input('Proyecto'),
+            'tutor_bspi_id'         => $request->input('idtutor'),
+            'tutor_bspi_nombre'     => $request->input('TutorBspi'),
+            'fecha_inicio'          => Carbon::create($request->input('FechaInicio')),
+            'fecha_fin'             => Carbon::create($request->input('FechaFin')),
+            'horas_programada'      => $request->input('HorasProgramada'),
+            'alimentacion_id'       => $request->input('Alimentacion'),
+            'horario_voluntario_id' => $horario->id,
+            'horario'               => $request->input('Horario'),
+            'tipo_practica_id'      => $request->input('tipoPractica')
+        ]);
+
+        notifyMe('success', trans('global.toasts.updated'));
+
+        return $this->redirectTo($request, $routeTo);
+    }
 }

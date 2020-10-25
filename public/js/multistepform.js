@@ -7,6 +7,7 @@
 */
 
 $(document).ready(function() {
+    console.log('da');
     var current_fs, next_fs, previous_fs;
     var left, opacity, scale;
     var animating;
@@ -39,7 +40,8 @@ $(document).ready(function() {
         //     }
         // });
         // debugger
-        var validateWindow = await  validaVentana();
+        console.log('da');
+        var validateWindow = await  validaVentana__();
         console.log(validateWindow);
         if (!validateWindow) {
             return true;
@@ -157,6 +159,7 @@ jQuery(document).ready(function() {
         // calcTotal();
     });
 })
+/*
 var modules = {
     $window: $(window),
     $html: $('html'),
@@ -216,4 +219,4 @@ var modules = {
         }
     }
 }
-modules.init();
+modules.init();*/

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Voluntarios;
 use App\DataTables\FormFilters\FormFilter;
 use App\DataTables\VoluntariosDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Voluntarios\Perfil\CambioPeriodoRequest;
 use App\Http\Requests\Admin\Voluntarios\Perfil\StoreVoluntarioRequest;
 use App\Repositories\AlimentacionRepository;
 use App\Repositories\DepartamentoRepository;
@@ -81,7 +82,9 @@ class VoluntariosController extends Controller
         $this->views        = (object) [
             'index'         => 'admin.pages.voluntarios.index',
             'create'        => 'admin.pages.voluntarios.create',
-            'certificados'  => 'admin.pages.voluntarios.certificado_periodo'
+            'certificados'  => 'admin.pages.voluntarios.certificado_periodo',
+            'change_period' => 'admin.pages.voluntarios.change_period',
+            'show'          => 'admin.pages.voluntarios.show',
         ];
         $this->routes       = (object) [
             'index'   => 'admin.voluntarios.index'
@@ -157,5 +160,58 @@ class VoluntariosController extends Controller
             ->get();
         // dd($item);
         return $this->voluntariosService->ajax($item, $this->views->certificados, $this->routes->index);
+    }
+
+
+    /**
+     * cambiarPeriodo
+     *
+     * @return Factory|View
+     */
+    public function cambiarPeriodo($id)
+    {
+        // Validr si tiene un periodo activo
+        $voluntario = $this->voluntariosRepository->findDecoded($id);
+        
+        viewExist($this->views->change_period);
+        if($voluntario === null){
+            abort(404);
+        }
+        return view($this->views->change_period)->with([
+            'cancel'         => route($this->routes->index),
+            'voluntario'     => $voluntario,
+            'tiposPractica'  => $this->tipoPracticaRepository->where('status', 1)->get(),
+            // 'paises'         => $this->paisRepository->where('status', 1)->get(),
+            // 'generos'        => $this->generoRepository->where('status', 1)->get(),
+            'horas'          => $this->horasDiasRepository->actives(),
+            'pasatiempos'    => $this->pasatiempoRepository->where('status', 1)->get(),
+            // 'estadosciviles' => $this->estadoCivilRepository->where('status', 1)->get(),
+            'universidades'  => $this->universidadRepository->where('status', 1)->get(),
+            'unidades_bspi'  => $this->unidadRepository->actives(),
+            'alimentaciones' => $this->alimentacionRepository->actives(),
+            'departamentos'  => $this->departamentoRepository->activosPorPermiso($this->permisos->departamentos_todos)->get(),
+        ]);
+    }
+
+    public function cambiarPeriodoStore(CambioPeriodoRequest $request)
+    {
+        // Validr si tiene un periodo activo
+        return $this->voluntariosService->cambioPeriodo($request, $this->routes);
+    }
+
+    /**
+     * Show an item
+     *
+     * @param $id
+     * @return JsonResponse|RedirectResponse
+     */
+    public function show($id)
+    {
+
+        // viewExist($this->views->show);
+
+        $item = $this->voluntariosRepository->findDecoded($id, ['*'], [], true);
+
+        return $this->voluntariosService->ajax($item, $this->views->show, $this->routes->index);
     }
 }

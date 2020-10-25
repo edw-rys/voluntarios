@@ -69,7 +69,6 @@ class EvaluacionesController extends Controller
      */
     public function index(EvaluacionesDataTable $dataTable)
     {
-        // notifyMe('warning', trans('global.toasts.no_data'));
         viewExist($this->views->index);
 
         $dataTable->filters = $this->filters;

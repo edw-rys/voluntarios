@@ -128,19 +128,37 @@ class EvaluacionesDataTable extends DataTable
                 return $query->FechaFin;
             })
             ->editColumn('status', static function ($query) {
-                return status($query->evaluacion === null ? 'not_evaluated' : 'evaluated');
+                if($query->periodos->first() === null){
+                    if($query->evaluacion !== null){
+                        return status('not_evaluated');
+                    }
+                    return status('evaluated');
+                }
+                // SI tiene un periodo activo y no tiene evaluación, se presenta el modal
+                if($query->periodos->last()->evaluacion()->first() === null){
+                    // dd($query->periodos->last()->evaluacion()->first());
+                    return status('not_evaluated');
+                }
+                return status('evaluated');
+                // return status($query->evaluacion === null ? 'not_evaluated' : 'evaluated');
             })
             ->addColumn('actions', static function ($query) {
-                if($query->evaluacion !== null){
+                if($query->periodos->first() === null){
+                    if($query->evaluacion === null){
+                        return evaluate_show( 'admin.evaluaciones.evaluate', optimus()->encode($query->id), 'Evaluar');
+                }
                     return '';
                 }
-                return evaluate_show( 'admin.evaluaciones.evaluate', optimus()->encode($query->id), 'Evaluar');
+                // SI tiene un periodo activo y no tiene evaluación, se presenta el modal
+                if($query->periodos->last()->evaluacion()->first() === null){
+                    return evaluate_show( 'admin.evaluaciones.evaluate', optimus()->encode($query->id), 'Evaluar');
+                }
+                return  '';
             })
             ->addColumn('evaluacion_pdf', static function ($query) {
-                if($query->evaluacion !== null){
-                    return show_modal('admin.evaluaciones.certificado',$query->id, 'Evaluación PDF');
-                }
-                return '';
+                // Si no tiene periodo es dato ya existe en el sistema anterior
+                return show_modal('admin.evaluaciones.certificado',$query->id, 'Evaluación PDF');
+                
             })
             ->escapeColumns([]);
     }

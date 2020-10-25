@@ -227,6 +227,26 @@ async function validaVentana(){
 }
 
 /**
+ * Validar cada Ventana
+ */
+async function validaVentanaCambiarPeriodo(){
+    switch ($("#progressbar li.active").length) {
+        // Ventana 1
+        case 1:
+            return validarVentana2SinPasaporte();
+        // Ventana 2
+        case 2:
+            return validarVentana4();
+        case 3:
+            return validarVentana5();
+        case 4:
+            return validarVentana6();
+        default:
+            break;
+    }
+}
+
+/**
  *  Remove warnings
  */
 
@@ -290,6 +310,10 @@ function addWarningsInput(items = []){
 }
 
 function crearVoluntario() {
+    return validarVentana2SinPasaporte() && validarVentana4() && validarVentana5() && validarVentana6();
+}
+
+function cambiarPeriodoVoluntario() {
     return validarVentana2() && validarVentana3() && validarVentana4() && validarVentana5() && validarVentana6();
 }
 
@@ -297,8 +321,7 @@ function requerido(query) {
     return $(query).val();
 }
 
-
-// Ventana n° 2
+// Ventana n° 2 sin pasaporte
 async function validarVentana2() {
     removeWarnings();
     var existe = await pasaporte_existe($pasaporte_item.val());
@@ -318,6 +341,20 @@ async function validarVentana2() {
     }, 2000);
     // Si no existe pasa y si tiene un tipo de práctica pasa
     return !existe.exist && $tipo_practica.val() &&  $pasaporte_item.val().length >=10
+}
+
+// Ventana n° 2
+async function validarVentana2SinPasaporte() {
+    removeWarnings();
+
+    if(!$tipo_practica.val()){
+        addWarningsInput([$tipo_practica]);
+    }
+    setTimeout(() => {
+        removeWarnings();
+    }, 2000);
+    // Si tiene un tipo de práctica pasa
+    return $tipo_practica.val();
 }
 
 function validarVentana3(){

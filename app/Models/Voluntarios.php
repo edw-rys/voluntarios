@@ -102,6 +102,21 @@ class Voluntarios extends Model
         return $this->belongsTo(Unidad::class, 'Unidad', 'id');
     }
 
+    public function pais() : BelongsTo
+    {
+        return $this->belongsTo(Pais::class, 'pais', 'id');
+    }
+
+    public function ciudad() : BelongsTo
+    {
+        return $this->belongsTo(Ciudad::class, 'ciudad', 'id');
+    }
+
+    public function genero_detalle() : HasOne
+    {
+        return $this->hasOne(Genero::class, 'genero', 'codigo');
+    }
+
     public function universidad() : BelongsTo
     {
         return $this->belongsTo(Universidad::class, 'Universidad', 'id');
@@ -113,7 +128,7 @@ class Voluntarios extends Model
     }
     public function pasatiempo() : HasOne
     {
-        return $this->hasOne(Pasatiempo::class, 'CodigoReferencia', 'id');
+        return $this->hasOne(Pasatiempo::class, 'idPasatiempo', 'id');
     }
     public function tipo_practica() : BelongsTo
     {
@@ -121,6 +136,10 @@ class Voluntarios extends Model
     }
 
     public function periodos() : HasMany
+    {
+        return $this->hasMany(PeriodoVoluntario::class, 'voluntario_id', 'id');
+    }
+    public function ultimo_periodo() : HasMany
     {
         return $this->hasMany(PeriodoVoluntario::class, 'voluntario_id', 'id');
     }

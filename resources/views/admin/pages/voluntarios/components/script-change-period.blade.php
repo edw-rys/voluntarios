@@ -8,7 +8,7 @@
     <script type="text/javascript" src="{{ asset('js/validates/expreg.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/validates/creacion-voluntario.js') }}"></script>
     <script>
-        var validaVentana__ = validaVentana;
+        var validaVentana__ = validaVentanaCambiarPeriodo;
     </script>
     <script src="{{ asset('js/multistepform.js') }}" type="text/javascript"></script>
     <script>
@@ -21,23 +21,23 @@
     <script>
         function cargarCiudades(pais_id) {
             $.ajax({
-                    url: "{{ route('api.admin.voluntarios.ciudades') }}" + '?pais=' + pais_id,
-                    beforeSend: function(xhr) {
-                        xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                url: "{{ route('api.admin.voluntarios.ciudades') }}" + '?pais=' + pais_id,
+                beforeSend: function(xhr) {
+                    xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                }
+            })
+            .done(function(data) {
+                try {
+                    data = JSON.parse(data);
+                } catch (error) {}
+                var select = '';
+                if (data && Array.isArray(data)) {
+                    for (const ciudad of data) {
+                        select += '<option value="' + ciudad.id + '">' + ciudad.Nombre + '</option>';
                     }
-                })
-                .done(function(data) {
-                    try {
-                        data = JSON.parse(data);
-                    } catch (error) {}
-                    var select = '';
-                    if (data && Array.isArray(data)) {
-                        for (const ciudad of data) {
-                            select += '<option value="' + ciudad.id + '">' + ciudad.Nombre + '</option>';
-                        }
-                    }
-                    document.getElementById('Ciudad').innerHTML = select;
-                });
+                }
+                document.getElementById('Ciudad').innerHTML = select;
+            });
         }
 
         function cargarFacultades(universidad_id = 0) {

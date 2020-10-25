@@ -67,10 +67,10 @@ class PeriodoVoluntario extends Model
     }
     public function tipo_practica() : HasOne
     {
-        return $this->hasOne(TipoPractica::class, 'periodo_id', 'id');
+        return $this->hasOne(TipoPractica::class, 'codigo', 'tipo_practica_id');
     }
     public function alimentacion() : HasOne
     {
-        return $this->hasOne(Alimentacion::class, 'alimentacion_id', 'id');
+        return $this->hasOne(Alimentacion::class, 'id', 'alimentacion_id');
     }
 }

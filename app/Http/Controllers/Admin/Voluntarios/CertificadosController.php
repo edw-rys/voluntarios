@@ -175,7 +175,7 @@ class CertificadosController extends Controller
         }else{
             $horas_voluntario   = $evaluacion->voluntario->HorasProgramada;
             $departamento       = $evaluacion->voluntario->departamento ? $evaluacion->voluntario->departamento->Nombre : 'Desconocido';
-            $carrera            = $evaluacion->voluntario->carrera;
+            $carrera            = $evaluacion->voluntario->Carrera;
             $unidad             = $evaluacion->voluntario->unidad ? $evaluacion->voluntario->unidad->Nombre : 'Desconocido';
             $periodo_voluntario = $evaluacion->voluntario->FechaInicio . ' - ' . $evaluacion->voluntario->FechaFin;
             $tutor_info         = $evaluacion->voluntario->TutorBspi;
@@ -222,7 +222,7 @@ class CertificadosController extends Controller
         // Render the HTML as PDF
         $domPDF->render();
 
-        $domPDF->stream( $nombre. time() . '.pdf', ['Attachment' => 1, 'compress' => true]);
+        $domPDF->stream( $nombre. time() . '.pdf', ['Attachment' => 0, 'compress' => true]);
     }
     
 }

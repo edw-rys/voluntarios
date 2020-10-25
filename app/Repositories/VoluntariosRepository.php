@@ -24,5 +24,29 @@ class VoluntariosRepository
         $this->model = app(\App\Models\Voluntarios::class);
     }
 
+    /**
+     * DataTable Query
+     *
+     * @param array $filters
+     * @return mixed
+     */
+    public function dataTables(array $filters = [])
+    {
+        $query = $this->newQuery()
+            ->select(['*'])
+            ->with('unidad')
+            ->with('departamento')
+            ->with('universidad')
+            ->with('evaluacion')
+            ->with('pasatiempo')
+            ->with('tipo_practica')
+            ->with('periodos')
+            ->with('periodos.evaluacion')
+            ->with('unidad');
+
+        $query = $this->filterExists($query, $filters);
+
+        return $query;
+    }
     
 }

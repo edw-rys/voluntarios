@@ -52,14 +52,16 @@ class VoluntariosDataTable extends DataTable
             Column::make('Nombres')->title(trans('global.voluntario.names'))->className('text-center'),
             Column::make('Apellidos')->title(trans('global.voluntario.last_names'))->className('text-center'),
             Column::make('Pasaporte')->title(trans('global.voluntario.identification_number'))->className('text-center'),
-            Column::make('Universidad')->title(trans('global.voluntario.university'))->className('text-center'),
-            Column::make('Carrera')->title(trans('global.voluntario.carrera'))->className('text-center'),
-            Column::make('Unidad')->title(trans('global.voluntario.unity'))->className('text-center'),
-            Column::make('Departamento')->title(trans('global.voluntario.department'))->className('text-center'),
-            Column::make('tipoPractica')->title(trans('global.voluntario.tipo_practica'))->className('text-center'),
-            Column::make('TutorBspi')->title(trans('global.voluntario.tutor_bspi'))->className('text-center'),
-            Column::make('FechaInicio')->title(trans('global.voluntario.start_date'))->className('text-center'),
-            Column::make('FechaFin')->title(trans('global.voluntario.end_date'))->className('text-center'),
+            // Column::make('Universidad')->title(trans('global.voluntario.university'))->className('text-center'),
+            // Column::make('Carrera')->title(trans('global.voluntario.carrera'))->className('text-center'),
+            // Column::make('Unidad')->title(trans('global.voluntario.unity'))->className('text-center'),
+            // Column::make('Departamento')->title(trans('global.voluntario.department'))->className('text-center'),
+            // Column::make('tipoPractica')->title(trans('global.voluntario.tipo_practica'))->className('text-center'),
+            // Column::make('TutorBspi')->title(trans('global.voluntario.tutor_bspi'))->className('text-center'),
+            // Column::make('FechaInicio')->title(trans('global.voluntario.start_date'))->className('text-center'),
+            // Column::make('FechaFin')->title(trans('global.voluntario.end_date'))->className('text-center'),
+            Column::make('mostrar')->title('Mostrar')->className('text-center'),
+            Column::make('cambiar_preiodo')->title('Cambiar Preiodo')->className('text-center'),
             Column::make('edit')->title(trans('global.voluntario.edit'))->className('text-center'),
         ];
     }
@@ -71,8 +73,7 @@ class VoluntariosDataTable extends DataTable
      */
     public function html(): \Yajra\DataTables\Html\Builder
     {
-        return $this->getHtml(12, 'desc');
-        // return null;
+        return $this->getHtml(6, 'desc');
     }
 
     /**
@@ -136,8 +137,14 @@ class VoluntariosDataTable extends DataTable
             ->editColumn('status', static function ($query) {
                 return status($query->status);
             })
+            ->addColumn('cambiar_preiodo', static function ($query) {
+                return edit_redirect('admin.voluntarios.cambio_periodo', optimus()->encode($query->id), 'Cambiar Periodo');
+            })
             ->addColumn('edit', static function ($query) {
-                return status($query->status);
+                return 'En proceso';
+            })
+            ->addColumn('mostrar',static function($query){
+                return show_modal('admin.voluntarios.show', optimus()->encode($query->id), 'Detalle');
             })
             ->escapeColumns([]);
     }

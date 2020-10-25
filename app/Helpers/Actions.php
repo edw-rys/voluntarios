@@ -43,3 +43,26 @@ if (! function_exists('show_modal')) {
         return '<a href="' . route($route, $id) . '" class="btn btn-warning" data-show="true"><i class="far fa-clipboard"></i> ' . $name . '</a>';
     }
 }
+
+if (! function_exists('edit_redirect')) {
+    /**
+     * Create show action
+     *
+     * @param string $route
+     * @param int $id
+     * @param string|array|Translator $name
+     * @return string
+     */
+    function edit_redirect(string $route, int $id, string $name = ''): string
+    {
+        if (! route_exists($route)) {
+            return '';
+        }
+
+        if ($name === '') {
+            $name = trans('global.edit');
+        }
+
+        return '<a href="' . route($route, $id) . '" class="btn btn-success"><i class="far fa-edit"></i> ' . $name . '</a>';
+    }
+}

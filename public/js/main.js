@@ -442,7 +442,6 @@ jQuery.event.special.touchstart = {
      */
     $(document).on('click', '[data-show=true]', function (e) {
         e.preventDefault();
-
         let ajax = [];
         ajax.push({
             url: $(this).attr('href'),
