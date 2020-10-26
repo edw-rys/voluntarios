@@ -48,6 +48,7 @@ class VoluntariosDataTable extends DataTable
         // dd();
         return [
             Column::make('id')->title(trans('global.voluntario.number'))->className('text-center'),
+            Column::make('mostrar')->title('Mostrar')->className('text-center'),
             Column::make('status')->title(trans('global.status'))->className('text-center'),
             Column::make('Nombres')->title(trans('global.voluntario.names'))->className('text-center'),
             Column::make('Apellidos')->title(trans('global.voluntario.last_names'))->className('text-center'),
@@ -60,7 +61,6 @@ class VoluntariosDataTable extends DataTable
             // Column::make('TutorBspi')->title(trans('global.voluntario.tutor_bspi'))->className('text-center'),
             // Column::make('FechaInicio')->title(trans('global.voluntario.start_date'))->className('text-center'),
             // Column::make('FechaFin')->title(trans('global.voluntario.end_date'))->className('text-center'),
-            Column::make('mostrar')->title('Mostrar')->className('text-center'),
             Column::make('cambiar_preiodo')->title('Cambiar Preiodo')->className('text-center'),
             Column::make('edit')->title(trans('global.voluntario.edit'))->className('text-center'),
         ];
@@ -73,7 +73,7 @@ class VoluntariosDataTable extends DataTable
      */
     public function html(): \Yajra\DataTables\Html\Builder
     {
-        return $this->getHtml(6, 'desc');
+        return $this->getHtml(5, 'desc');
     }
 
     /**
@@ -94,13 +94,12 @@ class VoluntariosDataTable extends DataTable
             ->setRowClass(static function ($query) {
                 return checkForInactiveText($query->status);
             })
-           /* ->editColumn('id', static function ($query) {
+            ->editColumn('id', static function ($query) {
                 return optimus()->encode($query->id);
-            })*/
+            })
             ->editColumn('id', static function ($query) {
                 return $query->id;
             })
-
             ->editColumn('Nombres', static function ($query) {
                 return $query->Nombres;
             })
@@ -110,7 +109,7 @@ class VoluntariosDataTable extends DataTable
             ->editColumn('Pasaporte', static function ($query) {
                 return $query->Pasaporte;
             })
-            ->editColumn('Carrera', static function ($query) {
+            /*->editColumn('Carrera', static function ($query) {
                 return $query->Carrera;
             })
             ->editColumn('Universidad', static function ($query) {
@@ -133,7 +132,7 @@ class VoluntariosDataTable extends DataTable
             })
             ->editColumn('tipoPractica', static function ($query) {
                 return $query->tipo_practica ? $query->tipo_practica->Nombre : $query->tipoPractica ;
-            })
+            })*/
             ->editColumn('status', static function ($query) {
                 return status($query->status);
             })
@@ -143,7 +142,7 @@ class VoluntariosDataTable extends DataTable
             ->addColumn('edit', static function ($query) {
                 return 'En proceso';
             })
-            ->addColumn('mostrar',static function($query){
+            ->addColumn('mostrar', static function ($query) {
                 return show_modal('admin.voluntarios.show', optimus()->encode($query->id), 'Detalle');
             })
             ->escapeColumns([]);

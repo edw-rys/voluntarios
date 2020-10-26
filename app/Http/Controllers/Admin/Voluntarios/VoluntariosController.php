@@ -210,8 +210,9 @@ class VoluntariosController extends Controller
 
         // viewExist($this->views->show);
 
-        $item = $this->voluntariosRepository->findDecoded($id, ['*'], [], true);
-
+        $item = $this->voluntariosRepository->
+            findDecoded($id, ['*'], ['genero_detalle', 'pais_detalle', 'ciudad_detalle'], true);
+        // dd($item);
         return $this->voluntariosService->ajax($item, $this->views->show, $this->routes->index);
     }
 }

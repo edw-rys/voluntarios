@@ -20,11 +20,11 @@
                 </tr>
                 <tr>
                     <th>País </th>
-                    <td>{{ $item->pais->Nombre }}</td>
+                    <td>{{ $item->pais_detalle !== null  ? $item->pais_detalle->Nombre : $item->pais }}</td>
                 </tr>
                 <tr>
                     <th>Ciudad</th>
-                    <td>{{ $item->ciudad->Nombre }}</td>
+                    <td>{{ $item->ciudad_detalle !== null ? $item->ciudad_detalle->Nombre : $item->ciudad }}</td>
                 </tr>
                 
             </tbody>

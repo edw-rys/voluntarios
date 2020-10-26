@@ -102,19 +102,19 @@ class Voluntarios extends Model
         return $this->belongsTo(Unidad::class, 'Unidad', 'id');
     }
 
-    public function pais() : BelongsTo
+    public function pais_detalle() : BelongsTo
     {
-        return $this->belongsTo(Pais::class, 'pais', 'id');
+        return $this->belongsTo(Pais::class, 'Pais', 'id');
     }
 
-    public function ciudad() : BelongsTo
+    public function ciudad_detalle() : BelongsTo
     {
-        return $this->belongsTo(Ciudad::class, 'ciudad', 'id');
+        return $this->belongsTo(Ciudad::class, 'Ciudad', 'id');
     }
 
     public function genero_detalle() : HasOne
     {
-        return $this->hasOne(Genero::class, 'genero', 'codigo');
+        return $this->hasOne(Genero::class, 'codigo', 'genero');
     }
 
     public function universidad() : BelongsTo
