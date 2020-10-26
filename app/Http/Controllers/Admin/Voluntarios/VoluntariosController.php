@@ -171,8 +171,19 @@ class VoluntariosController extends Controller
     public function cambiarPeriodo($id)
     {
         // Validr si tiene un periodo activo
-        $voluntario = $this->voluntariosRepository->findDecoded($id);
+        $voluntario = $this->voluntariosRepository->findDecoded($id, ['*'], ['periodos']);
         
+        if($voluntario->periodos->first() === null){
+            if($voluntario->evaluacion === null){
+                abort(401);
+            }
+        }else{
+            if($voluntario->periodos->last()->evaluacion()->first() === null){
+                // SI tiene un periodo activo y no tiene evaluación, se presenta el modal
+                abort(401);
+            }
+        }
+
         viewExist($this->views->change_period);
         if($voluntario === null){
             abort(404);

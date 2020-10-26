@@ -5,7 +5,7 @@
 
     <div class="card-body">
         @foreach ($item as $evaluacion)
-            <form action="{{ route('admin.certificados.generar.certificado', ['id' => $evaluacion->id]) }}" method="get"
+            <form class="m-2" action="{{ route('admin.certificados.generar.certificado', ['id' => $evaluacion->id]) }}" method="get"
                 target="_blank">
                 <input type="hidden" name="tipo" value="{{ $evaluacion->periodo === null ? 'evaluacion' : 'periodo' }}">
                 <input type="hidden" name="pasaporte" value="{{ $evaluacion->Pasaporte }}">

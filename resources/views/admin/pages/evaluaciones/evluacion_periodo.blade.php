@@ -6,7 +6,7 @@
     <div class="card-body">
         {{-- @dump($item) --}}
         @foreach ($item as $evaluacion)
-            <form action="{{ route('admin.certificados.generar.evaluacion', ['id' => $evaluacion->id]) }}" method="get" target="_blank">
+            <form class="m-2" action="{{ route('admin.certificados.generar.evaluacion', ['id' => $evaluacion->id]) }}" method="get" target="_blank">
                 <input type="hidden" name="tipo" value="{{ $evaluacion->periodo === null ? 'evaluacion' : 'periodo' }}">
                 <input type="hidden" name="pasaporte" value="{{ $evaluacion->Pasaporte }}">
                 <button type="submit" class="btn btn-warning">

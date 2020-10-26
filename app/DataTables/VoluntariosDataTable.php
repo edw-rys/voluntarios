@@ -61,7 +61,7 @@ class VoluntariosDataTable extends DataTable
             // Column::make('TutorBspi')->title(trans('global.voluntario.tutor_bspi'))->className('text-center'),
             // Column::make('FechaInicio')->title(trans('global.voluntario.start_date'))->className('text-center'),
             // Column::make('FechaFin')->title(trans('global.voluntario.end_date'))->className('text-center'),
-            Column::make('cambiar_preiodo')->title('Cambiar Preiodo')->className('text-center'),
+            Column::make('cambiar_preiodo')->title('Cambiar Periodo')->className('text-center'),
             Column::make('edit')->title(trans('global.voluntario.edit'))->className('text-center'),
         ];
     }
@@ -137,7 +137,17 @@ class VoluntariosDataTable extends DataTable
                 return status($query->status);
             })
             ->addColumn('cambiar_preiodo', static function ($query) {
-                return edit_redirect('admin.voluntarios.cambio_periodo', optimus()->encode($query->id), 'Cambiar Periodo');
+                if($query->periodos->first() === null){
+                    if($query->evaluacion !== null){
+                    return edit_redirect('admin.voluntarios.cambio_periodo', optimus()->encode($query->id), 'Cambiar Periodo');
+                }
+                    return '';
+                }
+                // SI tiene un periodo activo y no tiene evaluación, se presenta el modal
+                if($query->periodos->last()->evaluacion()->first() !== null){
+                    return edit_redirect('admin.voluntarios.cambio_periodo', optimus()->encode($query->id), 'Cambiar Periodo');
+                }
+                return  '';
             })
             ->addColumn('edit', static function ($query) {
                 return 'En proceso';

@@ -129,7 +129,7 @@ class EvaluacionesDataTable extends DataTable
             })
             ->editColumn('status', static function ($query) {
                 if($query->periodos->first() === null){
-                    if($query->evaluacion !== null){
+                    if($query->evaluacion === null){
                         return status('not_evaluated');
                     }
                     return status('evaluated');
