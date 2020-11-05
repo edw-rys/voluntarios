@@ -1,18 +1,9 @@
 -- DB: GestionVoluntarios
 -- Tabla: Usuarios-> Password (nvarchar(100))
-ALTER TABLE [GestionVoluntarios].[dbo].[tbwbUsuarios] ALTER COLUMN Password nVarchar(100);
 
-
--- ADD table
-CREATE TABLE [GestionVoluntarios].[dbo].[tbwbTipoVoluntario] (
-    id int IDENTITY(1,1) PRIMARY KEY,
-    Nombre varchar(255),
-    status int
-);
+ALTER TABLE [GestionVoluntarios].[dbo].[tbwbUsuarios]  ADD password nVarchar(100) NULL ;
 
 -- Edit table voluntario
--- no ALTER TABLE [GestionVoluntarios].[dbo].[tbwbVoluntario]  ADD tipo_voluntario_id int NULL ;
--- no ALTER TABLE [GestionVoluntarios].[dbo].[tbwbVoluntario]  ADD CONSTRAINT FK_voluntario_tipo_voluntario_id FOREIGN KEY (tipo_voluntario_id) REFERENCES [GestionVoluntarios].[dbo].[tbwbTipoVoluntario] (id);
 CREATE TABLE [GestionVoluntarios].[dbo].[tbwbPeriodoVoluntario] (
     [id] int IDENTITY(1,1) PRIMARY KEY,
     [voluntario_id] int,
@@ -87,3 +78,33 @@ CREATE TABLE [GestionVoluntarios].[dbo].[tbwbHorarioVoluntario] (
 );
 
 ALTER TABLE [GestionVoluntarios].[dbo].[tbwbEvaluacionAlVoluntario]  ADD periodo_id int NULL ;
+
+
+  INSERT INTO [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION] (
+  [empresa]
+      ,[sucursal]
+      ,[modulo]
+      ,[descripcion]
+      ,[imagen]
+      ,[tipo]
+      ,[ejecutable]
+      ,[usuario_ingreso]
+      ,[fecha_ingreso]
+      ,[usuario_modificacion]
+      ,[fecha_modificacion]
+      ,[pcname]
+      ,[status]
+  ) values 
+  ( 1,1,1,'Todos los tutores', '.',1,'all_totor_bspi',1,'2014-04-24 15:21:00',1,'2014-04-24 15:21:00','PROFESIONAL-PC',1 ),
+  (1,1,1,'Todos los departamentos', '.',1,'all_departments',1,'2014-04-24 15:21:00',1,'2014-04-24 15:21:00','PROFESIONAL-PC',1 );
+
+  INSERT INTO [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION_POR_PERFIL](
+  [empresa]
+      ,[sucursal]
+      ,[perfil]
+      ,[modulo]
+      ,[opcion_aplicacion]
+      ,[superior]
+      ,[status] 
+  ) VALUES 
+  (1,1,1,1,31,1,1),(1,1,1,1,32,1,1);

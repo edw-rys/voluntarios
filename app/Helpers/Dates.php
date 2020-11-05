@@ -138,14 +138,47 @@ if (! function_exists('formatDateComplete')) {
      */
     function formatDateComplete($date ): string
     {
-        // dd($date);}
+        // dd($date);
         try {
             $date = Carbon::createFromFormat('d/m/Y', $date);
         } catch (Exception $th) {
-            $date = Carbon::create( $date);
+            try{
+                // m-d-Y
+                $date = Carbon::create( $date);
+            }catch(Exception $e){
+                return 'sin fecha';
+            }
         }
        
 
         return $date->day . ' de '. months()[$date->month] . ' del '. $date->year;
     }
 }
+
+
+
+if (! function_exists('createDate')) {
+    /**
+     * Generate Date Range
+     *
+     * @param $date  => formart d/m/Y
+     * @return Carbon
+     */
+    function createDate($date, $format): Carbon
+    {
+        // dd($date);
+        try {
+            $date = Carbon::createFromFormat($format, $date);
+        } catch (Exception $th) {
+            try{
+                // m-d-Y
+                $date = Carbon::create( $date);
+            }catch(Exception $e){
+                return  Carbon::now();
+            }
+        }
+    
+        return $date;
+    }
+}
+

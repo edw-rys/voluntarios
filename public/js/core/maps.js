@@ -5,9 +5,9 @@ var reverseGeocodedLast;
 var currentReverseGeocodeResponse;
 
 function initialize(map_lat, map_lon, map_zoom) {
-
-    map_lat = typeof map_lat !== 'undefined' ? map_lat : '-2.2137852568859406';
-    map_lon = typeof map_lon !== 'undefined' ? map_lon : '-79.88756408465575';
+    console.log('lon', map_lat, map_lon);
+    map_lat = map_lat ? map_lat : '-2.2137852568859406';
+    map_lon =  map_lon ? map_lon : '-79.88756408465575';
 
     map_zoom = typeof map_zoom !== 'undefined' ? map_zoom : 6;
 
@@ -143,12 +143,6 @@ function addMarkerAtCenter() {
     });
 
 }
-
-$(document).ready(function() {
-
-    initialize();
-
-});
 
 $(document).keypress(function(event) {
 

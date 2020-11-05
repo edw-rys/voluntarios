@@ -15,7 +15,9 @@
                 data-placeholder="{{ trans('global.pleaseSelect') }}" multiple="multiple" onchange="calculaHora()">
                 <option></option>
                 @foreach ($horas as $horario)
-                    <option value="{{ $horario->id }}">{{ $horario->detalle }}</option>
+                    <option value="{{ $horario->id }}"
+                        {{ isset($periodo) && $periodo != null?( isset($periodo->horario_semana) && $periodo->horario_semana!= null ? ( in_array( $horario->id, json_decode($periodo->horario_semana->lunes_data))? 'selected': '')  : '') : '' }}
+                        > {{ $horario->detalle }}</option>
                 @endforeach
             </select>
             <span class="error1" style="display: none;">
@@ -31,7 +33,9 @@
                 data-placeholder="{{ trans('global.pleaseSelect') }}" multiple="multiple" onchange="calculaHora()">
                 <option></option>
                 @foreach ($horas as $horario)
-                    <option value="{{ $horario->id }}">{{ $horario->detalle }}</option>
+                    <option value="{{ $horario->id }}"
+                        {{ isset($periodo) && $periodo != null?( isset($periodo->horario_semana) && $periodo->horario_semana!= null ? ( in_array( $horario->id, json_decode($periodo->horario_semana->martes_data))? 'selected': '')  : '') : '' }}
+                    >{{ $horario->detalle }}</option>
                 @endforeach
             </select>
             <span class="error1" style="display: none;">
@@ -50,7 +54,9 @@
                 data-placeholder="{{ trans('global.pleaseSelect') }}" multiple="multiple" onchange="calculaHora()">
                 <option></option>
                 @foreach ($horas as $horario)
-                    <option value="{{ $horario->id }}">{{ $horario->detalle }}</option>
+                    <option value="{{ $horario->id }}"
+                        {{ isset($periodo) && $periodo != null?( isset($periodo->horario_semana) && $periodo->horario_semana!= null ? ( in_array( $horario->id, json_decode($periodo->horario_semana->miercoles_data))? 'selected': '')  : '') : '' }}
+                    >{{ $horario->detalle }}</option>
                 @endforeach
             </select>
             <span class="error1" style="display: none;">
@@ -66,7 +72,9 @@
                 data-placeholder="{{ trans('global.pleaseSelect') }}" multiple="multiple" onchange="calculaHora()">
                 <option></option>
                 @foreach ($horas as $horario)
-                    <option value="{{ $horario->id }}">{{ $horario->detalle }}</option>
+                    <option value="{{ $horario->id }}"
+                        {{ isset($periodo) && $periodo != null?( isset($periodo->horario_semana) && $periodo->horario_semana!= null ? ( in_array( $horario->id, json_decode($periodo->horario_semana->jueves_data))? 'selected': '')  : '') : '' }}
+                    >{{ $horario->detalle }}</option>
                 @endforeach
             </select>
             <span class="error1" style="display: none;">
@@ -85,7 +93,9 @@
                 data-placeholder="{{ trans('global.pleaseSelect') }}" multiple="multiple" onchange="calculaHora()">
                 <option></option>
                 @foreach ($horas as $horario)
-                    <option value="{{ $horario->id }}">{{ $horario->detalle }}</option>
+                    <option value="{{ $horario->id }}"
+                        {{ isset($periodo) && $periodo != null?( isset($periodo->horario_semana) && $periodo->horario_semana!= null ? ( in_array( $horario->id, json_decode($periodo->horario_semana->viernes_data))? 'selected': '')  : '') : '' }}
+                    >{{ $horario->detalle }}</option>
                 @endforeach
             </select>
             <span class="error1" style="display: none;">
@@ -101,7 +111,9 @@
                 data-placeholder="{{ trans('global.pleaseSelect') }}" multiple="multiple" onchange="calculaHora()">
                 <option></option>
                 @foreach ($horas as $horario)
-                    <option value="{{ $horario->id }}">{{ $horario->detalle }}</option>
+                    <option value="{{ $horario->id }}"
+                        {{ isset($periodo) && $periodo != null?( isset($periodo->horario_semana) && $periodo->horario_semana!= null ? ( in_array( $horario->id, json_decode($periodo->horario_semana->sabado_data))? 'selected': '')  : '') : '' }}
+                    >{{ $horario->detalle }}</option>
                 @endforeach
             </select>
             <span class="error1" style="display: none;">
@@ -111,18 +123,18 @@
     </div>
     <div class="row flex-center-x">
         <div class="col-md-5">
-            <label for="roles flex">
-                <span>Domingo</span>
-                <span>
-                    <span class="btn btn-info btn-xs select-all">Seleccionar todols</span>
-                    <span class="btn btn-info btn-xs deselect-all">Quitar todos</span>
-                </span>
+            <label for="horas_domingo flex">
+                Domingo
+                <span class="btn btn-info btn-xs select-all">Seleccionar todols</span>
+                <span class="btn btn-info btn-xs deselect-all">Quitar todos</span>
             </label>
             <select name="horas_domingo[]" id="horas_domingo" class="form-control select2"
                 data-placeholder="{{ trans('global.pleaseSelect') }}" multiple="multiple" onchange="calculaHora()">
                 <option></option>
                 @foreach ($horas as $horario)
-                    <option value="{{ $horario->id }}">{{ $horario->detalle }}</option>
+                    <option value="{{ $horario->id }}"
+                        {{ isset($periodo) && $periodo != null?( isset($periodo->horario_semana) && $periodo->horario_semana!= null ? ( in_array( $horario->id, json_decode($periodo->horario_semana->domingo_data))? 'selected': '')  : '') : '' }}
+                    >{{ $horario->detalle }}</option>
                 @endforeach
             </select>
             <span class="error1" style="display: none;">
@@ -142,7 +154,7 @@
                         de inicio</label>
                     <div class="form-group m-0 pl-2">
                         <input class="form-control m-0  form-control-sm hs-input" name="FechaInicio" id="FechaInicio"
-                            type="date" onchange="calculaHora()">
+                            type="date" onchange="calculaHora()" value="{{ isset($periodo) && $periodo !== null ? createDate($periodo->fecha_inicio, 'd/m/Y')->format('Y-m-d') :'' }}">
                         <span class="error1" style="display: none;">
                             <i class="error-log fa fa-exclamation-triangle"></i>
                         </span>
@@ -156,7 +168,7 @@
                         de fin</label>
                     <div class="form-group m-0 pl-2">
                         <input class="form-control m-0  form-control-sm hs-input" name="FechaFin" id="FechaFin"
-                            type="date" onchange="calculaHora()">
+                            type="date" onchange="calculaHora()" value="{{ isset($periodo) && $periodo !== null ? createDate($periodo->fecha_fin, 'd/m/Y')->format('Y-m-d') :'' }}">
                         <span class="error1" style="display: none;">
                             <i class="error-log fa fa-exclamation-triangle"></i>
                         </span>
@@ -170,7 +182,7 @@
                     <label for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Horas programadas</label>
                     <div class="form-group m-0 pl-2">
                         <input class="form-control m-0  form-control-sm hs-input" name="HorasProgramada" id="HorasProgramada"
-                            required="required" type="text" placeholder="Horas programadas">
+                            required="required" type="text" placeholder="Horas programadas" value="{{ isset($periodo) && $periodo !== null ? $periodo->horas_programada :'' }}">
                         <span class="error1" style="display: none;">
                             <i class="error-log fa fa-exclamation-triangle"></i>
                         </span>
@@ -180,7 +192,7 @@
                     <label for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Horario</label>
                     <div class="form-group m-0 pl-2">
                         <input class="form-control m-0  form-control-sm hs-input" name="Horario" id="Horario"
-                            required="required" type="text" placeholder="Horario">
+                            required="required" type="text" placeholder="Horario" value="{{ isset($periodo) && $periodo !== null ? $periodo->horario :'' }}">
                         <span class="error1" style="display: none;">
                             <i class="error-log fa fa-exclamation-triangle"></i>
                         </span>

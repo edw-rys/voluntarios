@@ -7,7 +7,6 @@
 */
 
 $(document).ready(function() {
-    console.log('da');
     var current_fs, next_fs, previous_fs;
     var left, opacity, scale;
     var animating;
@@ -40,7 +39,6 @@ $(document).ready(function() {
         //     }
         // });
         // debugger
-        console.log('da');
         var validateWindow = await  validaVentana__();
         console.log(validateWindow);
         if (!validateWindow) {

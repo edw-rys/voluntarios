@@ -14,7 +14,7 @@
                 <option value="0" ></option>
                 @foreach ($universidades as $id => $universidad)
                     <option value="{{ $universidad->id }}"
-                        {{ old('Universidad') === $universidad->id ? 'selected' : '' }}>
+                        {{ isset($periodo) && $periodo!=null ? ($periodo->universidad_id == $universidad->id ? 'selected' :''):''  }}>
                         {{ $universidad->Nombre }}
                     </option>
                 @endforeach
@@ -49,7 +49,7 @@
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Carrera</label>
             <div class="form-group m-0 pl-2">
                 <input class="form-control m-0  form-control-sm hs-input" name="Carrera" id="Carrera" type="text"
-                    required="required" placeholder="Carrera" data-rule-required="true"
+                    required="required" placeholder="Carrera" data-rule-required="true" value="{{ isset($periodo) && $periodo !==null ? $periodo->carrera : '' }}"
                     data-msg-required="Escriba en nombre de la carrera">
                 <span class="error1" style="display: none;">
                     <i class="error-log fa fa-exclamation-triangle"></i>
@@ -64,7 +64,7 @@
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Nivel
                 / Semestre / Año</label>
             <div class="form-group m-0 pl-2">
-                <input class="form-control m-0  form-control-sm hs-input" name="Nivel" id="Nivel" type="text"
+                <input class="form-control m-0  form-control-sm hs-input" name="Nivel" id="Nivel" type="text" value="{{ isset($periodo) && $periodo !==null ? $periodo->nivel : '' }}"
                     required="required" placeholder="Semestre cursando" data-rule-required="true"
                     data-msg-required="Semestre que cursa">
                 <span class="error1" style="display: none;">
@@ -81,7 +81,7 @@
             <label
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Tutor Académico</label>
             <div class="form-group m-0 pl-2">
-                <input class="form-control m-0  form-control-sm hs-input" name="Tutor" id="Tutor" type="text"
+                <input class="form-control m-0  form-control-sm hs-input" name="Tutor" id="Tutor" type="text" value="{{ isset($periodo) && $periodo !==null ? $periodo->tutor : '' }}"
                     required="required" placeholder="Tutor" data-rule-required="true"
                     data-msg-required="Escriba el nombre del Tutor">
                 <span class="error1" style="display: none;">

@@ -127,14 +127,14 @@ class CertificadosController extends Controller
         $periodo = $this->periodoVoluntarioRepository->find($evaluacion->periodo_id, ['*'], [
             'departamento', 'unidad', 'universidad', 'tipo_practica', 'alimentacion'
         ]);
-        $firma_fecha = 'ad';
+        // Nombre de práctica por periodo o por voluntario
         $practica    = $periodo !== null ? $periodo->tipo_practica->descripcion: $evaluacion->voluntario->tipo_practica->descripcion;
         // dd($evaluacion->voluntario);
         $html = view($this->views->pdf->certificado)
                 ->with('periodo', $periodo)
                 ->with('practica', $practica)
                 ->with('voluntario', $evaluacion->voluntario)
-                ->with('firma_fecha', $firma_fecha)
+                // ->with('firma_fecha', $firma_fecha)
                 ->render();
         // echo $html;
                 // dd();
@@ -177,7 +177,7 @@ class CertificadosController extends Controller
             $departamento       = $evaluacion->voluntario->departamento ? $evaluacion->voluntario->departamento->Nombre : 'Desconocido';
             $carrera            = $evaluacion->voluntario->Carrera;
             $unidad             = $evaluacion->voluntario->unidad ? $evaluacion->voluntario->unidad->Nombre : 'Desconocido';
-            $periodo_voluntario = $evaluacion->voluntario->FechaInicio . ' - ' . $evaluacion->voluntario->FechaFin;
+            $periodo_voluntario = $evaluacion->voluntario->FechaInicio . ' - ' . $evaluacion->voluntario->FechaFinCertificado;
             $tutor_info         = $evaluacion->voluntario->TutorBspi;
             $calificacion_global = ($evaluacion->txt1 + $evaluacion->txt2 + $evaluacion->txt3 + $evaluacion->txt4 + $evaluacion->txt5 +
                                     $evaluacion->txt6 + $evaluacion->txt7 + $evaluacion->txt8 + $evaluacion->txt9 + $evaluacion->txt10 +
@@ -185,10 +185,7 @@ class CertificadosController extends Controller
                                     $evaluacion->txt16 + $evaluacion->txt17 + $evaluacion->txt18 + $evaluacion->txt19 + $evaluacion->txt20 +
                                     $evaluacion->txt21 + $evaluacion->txt22) /22;
             $desempenio = $calificacion_global >= 80 ? 'Excelente' : ($calificacion_global >= 70 ? 'Bueno' : ($calificacion_global >= 50 ? 'Regular' : 'Malo' )); 
-
-
         }
-        // dd($evaluacion->voluntario);
         $html = view($this->views->pdf->evaluacion)
                 ->with('periodo_voluntario', $periodo_voluntario)
                 ->with('voluntario', $evaluacion->voluntario)

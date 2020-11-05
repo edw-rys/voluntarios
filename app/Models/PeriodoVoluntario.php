@@ -33,18 +33,28 @@ class PeriodoVoluntario extends Model
         'fecha_inicio',
         'fecha_fin',
         'horas_programada',
-        'dlimentacion_id',
+        'alimentacion_id',
         'tutor_bspi_nombre',
         'horario_voluntario_id',
         'alimentacion_id',
         'horario',
+        'chkActa',
         'tipo_practica_id',
-        'status'
+        'status', 
+        'observacion'
     ]; 
 
-    public function horario() : HasOne
+     /**
+     * Relaciones
+     * @return HasOne
+     */
+    public function voluntario() : HasOne
     {
-        return $this->hasOne(HorarioVoluntario::class, 'periodo_id', 'id');
+        return $this->hasOne(Voluntarios::class, 'id', 'voluntario_id');
+    }
+    public function horario_semana() : HasOne
+    {
+        return $this->hasOne(HorarioVoluntario::class, 'id', 'horario_voluntario_id');
     }
     public function departamento() : BelongsTo
     {
@@ -73,4 +83,5 @@ class PeriodoVoluntario extends Model
     {
         return $this->hasOne(Alimentacion::class, 'id', 'alimentacion_id');
     }
+    
 }

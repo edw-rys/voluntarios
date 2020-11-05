@@ -4,7 +4,7 @@
             placeholder="[calle / dirección / ciudad / provincia]" value="" style="width: 300px" />
     </div>
     <div class="ml-2 mr-2">
-        <button onclick="geocode()" class="btn btn-warning">Buscar</button>
+        <button type="button" onclick="geocode()" class="btn btn-warning">Buscar</button>
     </div>
     <div class="col-md-12">
         <div class="row">
@@ -25,10 +25,10 @@
     <div class="form">
         <ul>
             <li>
-                <input type="hidden" id="txtLongitud" name="latitud">
+                <input type="hidden" id="txtLongitud" name="longitud">
             </li>
             <li>
-                <input type="hidden" id="txtLatitud" name="longitud" >
+                <input type="hidden" id="txtLatitud" name="latitud" >
             </li>
         </ul>
 

@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -58,18 +59,32 @@ class LoginController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        //dd($request->input());
+        // dd($request->input());
+        // dd($request);
        
         // Authentication is valid
-        //$credentials = $request->only('Username', 'Password');
-        //dd(Auth::attempt(['Username' => $request->input('Username'), 'Password' => $request->input('Password'), 'status' => 1]));
         //dd(Auth::attempt($credentials));
-        if ($this->attemptLogin($request)) {
-
-            Auth::shouldUse($this->guard);
-
-            return $this->sendLoginResponse($request);
+        $user = $this->userRepository->where('Username', $request->input('Username'))->first();
+        if($user === null ){
+            return redirect()->route('admin.login.show')
+                ->with('errors', ['Este usuario no existe en nuestros registros']);
         }
+        // dd($request->input(), $user->password_, $user, Hash::check($request->input('password'), $user->password_));
+        if(password_verify($request->input('password'), $user->password_)){
+            Auth::login($user);
+            // dd($user);
+            return redirect()->route('admin.dashboard');
+            // return $this->sendLoginResponse($request);
+        }
+        return redirect()->route('admin.login.show')
+            ->with('errors', ['Este usuario no existe en nuestros registros']);
+
+        // Auth::guard('web')->login('');
+        // if ($this->attemptLogin($request)) {
+
+            // Auth::shouldUse($this->guard);
+
+        // }
 
         return $this->sendFailedLoginResponse($request);
     }
@@ -85,6 +100,8 @@ class LoginController extends Controller
     {
        // dd($this->credentials($request) );
         // bcrypt('contraseña');
+        // dd($this->credentials($request) );
+        // dd($this->credentials($request) );
         return $this->guard()->attempt(
             $this->credentials($request) 
         );
@@ -143,7 +160,7 @@ class LoginController extends Controller
         $request->session()->forget('password_expired_id');
 
         // Logout other devices
-        Auth::logoutOtherDevices($request->get('password'));
+        Auth::logoutOtherDevices($request->get('password_'));
 
         notifyMe('info', trans('global.login_correctly'));
 
@@ -181,7 +198,7 @@ class LoginController extends Controller
      */
     protected function credentials(Request $request): array
     {
-        return $request->only($this->username(), $this->password());
+        return $request->only($this->username(), 'password_');
     }
 
         /**

@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace('Admin')->group( static function (){
     
-    // Route::get('/', 'LoginController@view')->name('login.view');
     Route::middleware('redirect_dash')->get('login', 'LoginController@showLoginForm')->name('login.show');
     Route::middleware('redirect_dash')->post('login', 'LoginController@login')->name('login.post');
     Route::middleware(['SessionCheck'])->group(static function(){
@@ -14,15 +13,8 @@ Route::namespace('Admin')->group( static function (){
         // Required password change
             // Dashboard
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-        // User profile
-        //Route::get('profile', 'ClientController@index')->name('profile');
-        // Invoices
-        // Update Profile
-        //Route::post('profile/update', 'ClientController@update')->name('profile.update');
-
 
         // Voluntarios
-        // Route::get('profile/voluntariado', 'ClientController@update')->name('voluntariado');
         Route::namespace('Voluntarios')->group(function(){
 
             Route::get('evaluaciones_depa', 'VoluntariosController@update')->name('evaluaciones_depa');
@@ -40,10 +32,13 @@ Route::namespace('Admin')->group( static function (){
                 Route::get('', 'VoluntariosController@index')->name('voluntarios.index');
                 Route::get('create', 'VoluntariosController@create')->name('voluntarios.create');
                 Route::get('mostrar/{id}', 'VoluntariosController@show')->name('voluntarios.show');
-                Route::post('store', 'VoluntariosController@store')->name('voluntarios.store');
                 Route::get('aprueba/{id}', 'VoluntariosController@certificadosView')->name('voluntarios.certificados');
                 Route::get('cambio-periodo/{id}', 'VoluntariosController@cambiarPeriodo')->name('voluntarios.cambio_periodo');
+                Route::get('editar/{id}', 'VoluntariosController@edit')->name('voluntarios.editar');
                 Route::post('cambio-periodo/store', 'VoluntariosController@cambiarPeriodoStore')->name('voluntarios.cambio_periodo.store');
+                
+                Route::post('store', 'VoluntariosController@store')->name('voluntarios.store');
+                Route::post('update', 'VoluntariosController@update')->name('voluntarios.update');
                 // Route::resource('voluntarios', 'VoluntariosController');
             });
 

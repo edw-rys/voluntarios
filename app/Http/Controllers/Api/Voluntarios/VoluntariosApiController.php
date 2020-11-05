@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Voluntarios;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\CiudadRepository;
+use App\Repositories\DepartamentoRepository;
 use App\Repositories\EstadoCivilRepository;
 use App\Repositories\FactultadRepository;
 use App\Repositories\GeneroRepository;
@@ -16,6 +17,7 @@ class VoluntariosApiController extends Controller
 {
     private $voluntariosRepository;
     private $estadoCivilRepository;
+    private $departamentoRepository;
     private $ciudadRepository;
     private $generoRepository;
     private $paisRepository;
@@ -32,19 +34,21 @@ class VoluntariosApiController extends Controller
         CiudadRepository $ciudadRepository,
         PaisRepository $paisRepository,
         UserRepository $userRepository,
-        FactultadRepository $factultadRepository
+        FactultadRepository $factultadRepository,
+        DepartamentoRepository $departamentoRepository
     ) {
         $this->userRepository        = $userRepository;
         $this->factultadRepository   = $factultadRepository;
         $this->voluntariosRepository = $voluntariosRepository;
+        $this->departamentoRepository = $departamentoRepository;
         $this->estadoCivilRepository = $estadoCivilRepository;
         $this->generoRepository      = $generoRepository;
         $this->ciudadRepository      = $ciudadRepository;
         $this->paisRepository        = $paisRepository;
 
         $this->permisos = (object) [
-            'departamentos_todos'    => 'Todos los departamentos',
-            'tutores_todos'          => 'Todos los tutores'
+            'departamentos_todos'    => 'all_departments',
+            'tutores_todos'          => 'all_totor_bspi'
         ];
     }
     /**
@@ -97,12 +101,9 @@ class VoluntariosApiController extends Controller
      */
     public function obtenerDepartamentos(Request $request)
     {
-        $departamentos = $this->userRepository->where('status', 1);
-        if(allows_permission($this->permisos->departamentos_todos)){
-            if($request->input('unidad', null) !== null){
-                // $departamentos = $departamentos->where('unidad_bspi', $request->input('universidad'));
-            }
-        }else{
+        // $user = $this->userRepository->where('status', 1);
+        $departamentos = $this->departamentoRepository;
+        if(!allows_permission($this->permisos->departamentos_todos)){
             $departamentos = $departamentos->where('id', auth()->user()->departamento);
         }
         return response()->json($departamentos->get(), 200);

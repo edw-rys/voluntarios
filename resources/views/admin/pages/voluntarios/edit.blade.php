@@ -1,4 +1,4 @@
-﻿@extends('admin.templates.template')
+@extends('admin.templates.template')
 @section('styles_cdn')
     <link rel="stylesheet" href="http://www.bufa.es/wp-content/themes/bufa/css/google-maps-latitud-longitud.css?ver=4.7.3" type="text/css" media="all" />
     <style>
@@ -9,7 +9,7 @@
 @endsection
 @section('content')
     @include('components.alerts.errorBags')
-    <form class="steps" method="POST" action="{{ route('admin.voluntarios.store') }}" accept-charset="UTF-8" onsubmit="return crearVoluntario()" autocomplete="on">
+    <form class="steps" method="POST" action="{{ route('admin.voluntarios.update') }}" accept-charset="UTF-8" onsubmit="return crearVoluntario()" autocomplete="on">
         @csrf
         <ul id="progressbar">
             <li class="active">{{ trans('global.voluntarios.create.maps') }}</li>
@@ -21,18 +21,6 @@
             <li>{{ trans('global.voluntarios.create.schedule') }}</li>
         </ul>
         {{-- Mapas para selecciona la ubicación --}}
-        {{-- <fieldset>
-            @include('admin.pages.voluntarios.components.personal', 
-            [
-                'paises'         => $paises,
-                'generos'        => $generos,
-                'estadosciviles' => $estadosciviles,
-                'pasatiempos'    => $pasatiempos,
-                'universidades'  => $universidades,
-                
-            ])
-        </fieldset> --}}
-        
         {{-- Maps --}}
         <fieldset class="min-fs">
             <h2 class="fs-title">Ubicación</h2>
@@ -43,11 +31,18 @@
         </fieldset>
         {{-- Cédula / pasaporte - Tipo de práctica --}}
         <fieldset class="min-fs">
-            @include('admin.pages.voluntarios.components.identificacion', ['tiposPractica'=> $tiposPractica])
+            @include('admin.pages.voluntarios.components.tipo_practica', 
+                [ 
+                    'tiposPractica'=> $tiposPractica,
+                ]
+            )
         </fieldset>
         {{-- Cédula / pasaporte - Tipo de práctica --}}
         
         <fieldset class="min-fs">
+            <input type="hidden" name="voluntario_id" value="{{ $voluntario->id}}">
+            <input type="hidden" name="periodo_id" value="{{ $periodo->id}}">
+
             @include('admin.pages.voluntarios.components.personal', 
             [
                 'paises'         => $paises,
@@ -55,7 +50,7 @@
                 'estadosciviles' => $estadosciviles,
                 'pasatiempos'    => $pasatiempos,
                 'universidades'  => $universidades,
-                
+                'voluntario'     => $voluntario
             ])
         </fieldset>
 
@@ -82,12 +77,13 @@
             ])
         </fieldset>
 
-
-
+        {{-- ID VOLUNTARIO Y ID PERIODO --}}
+        
         <!-- RETENTION FIELD SET -->
         <fieldset class="fieldset-all">
             @include('admin.pages.voluntarios.components.horario', [
-                'horas'  => $horas
+                'horas'   => $horas,
+                'periodo' => $periodo
             ])
         <input type="button" data-page="5" name="previous" class="previous action-button" value="Anterior" />
         <input id="submit" class="hs-button primary large action-button" type="submit" value="Enviar">
@@ -96,18 +92,24 @@
         <script type="text/javascript" src="{{ asset('js/validates/expreg.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/validates/creacion-voluntario.js') }}"></script>
         <script>
-            var facultad_selected = 0, tutor_selected = 0;
-        </script>
-        @include('admin.pages.voluntarios.components.scripts')
-        <script>
-            var validaVentana__ = validaVentana;
+            var validaVentana__ = validaVentanaEditar;
                 $(document).ready(function() {
                 initialize();
-                cargarCiudades($('#Pais').val(),73);
             });
+            var facultad_selected = {{ empty($periodo->facultad_id) ? 0 : $periodo->facultad_id  }};
+            var tutor_selected = {{ empty($periodo->tutor_bspi_id) ? 0 : $periodo->tutor_bspi_id }};
+            
         </script>
-        <script>
-            cargarCiudades($('#Pais').val(),73);
-        </script>
+        @include('admin.pages.voluntarios.components.scripts')
     </form>
-@endsection
+    {{-- @dump($voluntario) --}}
+    {{-- @dump($estadosciviles) --}}
+    {{-- @dump($periodo) --}}
+    <script>
+        $(document).ready(function() {
+            initialize({{ $voluntario->latitud}}, {{ $voluntario->longitud }});
+            cargarCiudades($('#Pais').val() , {{ $voluntario->Ciudad}});
+        });
+
+    </script>
+    @endsection

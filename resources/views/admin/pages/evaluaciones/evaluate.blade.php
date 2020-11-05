@@ -36,7 +36,7 @@
                     </tr>
                     <tr class="trow_bkc">
                         <th>{{ trans('global.evaluate.show.period') }}</th>
-                        <td>{{ $item->FechaInicio . ' - ' . $item->FechaFin }}</td>
+                        <td>{{ $item->FechaInicio . ' - ' . $item->FechaFinCertificado }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -58,7 +58,7 @@
                                 <tr>
                                     <th style="font-weight: 500">{{ $pregunta->pregunta }}</th>
                                     <td>
-                                        <input style="outline: none" placeholder="[ 0 - 100]" class="input-evaluate-field border border-success" type="number" name="{{ $pregunta->input }}" id="" value="50" required>
+                                        <input style="outline: none" placeholder="[ 0 - 100]" class="input-evaluate-field border border-success" type="number" name="{{ $pregunta->input }}" id="" value="70" required>
                                         {{-- <span class="error_log hidden text-danger">Error</span> --}}
                                     </td>
                                 </tr>

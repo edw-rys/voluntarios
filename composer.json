@@ -26,7 +26,6 @@
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.5",
         "barryvdh/laravel-ide-helper": "^2.8",
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.9.1",

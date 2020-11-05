@@ -226,6 +226,33 @@ async function validaVentana(){
     }
 }
 
+
+/**
+ * Validar cada Ventana
+ */
+async function validaVentanaEditar(){
+    switch ($("#progressbar li.active").length) {
+        // Ventana 1
+        case 1:
+            return true
+        // Ventana 2
+        case 2:
+            // Retorna falso es inválido, true es válido
+            return validarVentanaTipoPractica();
+        // Ventana 3
+        case 3:
+            return validarVentana3();
+        case 4:
+            return validarVentana4();
+        case 5:
+            return validarVentana5();
+        case 6:
+            return validarVentana6();
+        default:
+            break;
+    }
+}
+
 /**
  * Validar cada Ventana
  */
@@ -321,7 +348,21 @@ function requerido(query) {
     return $(query).val();
 }
 
-// Ventana n° 2 sin pasaporte
+// validarVentanaTipoPractica n° 2 sin pasaporte
+async function validarVentanaTipoPractica() {
+    removeWarnings();
+    
+    if(!$tipo_practica.val()){
+        addWarningsInput([$tipo_practica]);
+    }
+    setTimeout(() => {
+        removeWarnings();
+    }, 2000);
+    // Si no existe pasa y si tiene un tipo de práctica pasa
+    return $tipo_practica.val();
+}
+
+// Ventana n° 2 
 async function validarVentana2() {
     removeWarnings();
     var existe = await pasaporte_existe($pasaporte_item.val());

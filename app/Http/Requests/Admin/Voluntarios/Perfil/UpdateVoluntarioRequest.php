@@ -6,7 +6,7 @@ use App\Repositories\VoluntariosRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreVoluntarioRequest extends FormRequest
+class UpdateVoluntarioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class StoreVoluntarioRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;//allows_permission('guardar_voluntario');
+        return true;//allows_permission('editar_voluntario');
     }
 
     /**
@@ -25,14 +25,15 @@ class StoreVoluntarioRequest extends FormRequest
      */
     public function rules()
     {
-        $voluntario = (new VoluntariosRepository())->getModel()->getTable();
+        // $voluntario = (new VoluntariosRepository())->getModel()->getTable();
+        // $myVoluntatio = (new VoluntariosRepository())->findDecoded($this->input('voluntario_id'));
         return [
             // 'CodigoReferencia'          => ,
             'Nombres'                   => ['required', 'string'],  
             'Apellidos'                 => ['required', 'string'],  
             'apellidoMaterno'           => ['required', 'string'],  
             'nombreSegundo'             => ['required', 'string'],  
-            'Pasaporte'                 => ['required', 'min:9', Rule::unique($voluntario, 'Pasaporte')->where('status',1)],
+            // 'Pasaporte'                 => ['required', 'min:9', Rule::unique($voluntario, 'Pasaporte')->where('status',1)->where('Pasaporte', '!=',  $myVoluntatio!=null ? $myVoluntatio->Pasaporte : '0')],
             'FechaNacimiento'           => ['required', 'date'],
             'EstadoCivil'               => ['required', 'numeric'],
             'Pais'                      => ['required', 'numeric'],

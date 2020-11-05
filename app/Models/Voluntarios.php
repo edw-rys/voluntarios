@@ -68,6 +68,7 @@ class Voluntarios extends Model
         'fecha_extension',
         'chkActa',
         'tipoPractica',
+        'FechaFinCertificado'
     ];
 
     /**

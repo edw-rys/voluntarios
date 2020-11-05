@@ -1849,7 +1849,7 @@
          * @return bool|null 
          * @static 
          */ 
-        public static function logoutOtherDevices($password, $attribute = 'password')
+        public static function logoutOtherDevices($password, $attribute = 'password_')
         {
                         /** @var \Illuminate\Auth\SessionGuard $instance */
                         return $instance->logoutOtherDevices($password, $attribute);

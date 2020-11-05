@@ -54,7 +54,7 @@ if (! function_exists('optimus')) {
         try {
             return new Optimus($prime, $inverse, $random);
         } catch (Throwable $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
         }
     }
 }

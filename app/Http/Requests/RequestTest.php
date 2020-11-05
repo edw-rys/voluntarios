@@ -29,7 +29,7 @@ class RequestTest extends FormRequest
      */
     public function rules()
     {
-      dd($this->input());
+    //   dd($this->input());
         return [
             'x'=> 'required'
         ];
@@ -46,7 +46,7 @@ class RequestTest extends FormRequest
     {
         // if ($this->expectsJson()) {
         // }
-        dd($errors);
+        // dd($errors);
         return new JsonResponse($errors, 422);
         // return $this->redirector->to($this->getRedirectUrl())
         //     ->withInput($this->except($this->dontFlash))

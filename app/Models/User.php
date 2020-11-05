@@ -18,7 +18,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string|null $second_name
  * @property string|null $last_name
  * @property string|null $source_name
- * @property string $password
+ * @property string $password_
  * @property string|null $date_birth
  * @property string|null $address
  * @property string|null $postal_code
@@ -72,7 +72,7 @@ class User extends Authenticatable
     protected $fillable = [
         "id",
         "Username",
-        "password",
+        "password_",
         "Nombres",
         "Apellidos",
         "Email",
@@ -82,6 +82,7 @@ class User extends Authenticatable
         "nivel",
         "departamento",
         "telefono",
+        "Passowrd",
         "titulo",
     ];
 
@@ -94,6 +95,14 @@ class User extends Authenticatable
     {
         return $this->Username;
     }
+    /** 
+     * Get the password for the user.
+     * @return string 
+     */
+    public function getAuthPassword()
+    {
+        return $this->password_;
+    }
     
     /**
      * The attributes that should be hidden for arrays.
@@ -101,7 +110,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password_','Password'
     ];
     
 }

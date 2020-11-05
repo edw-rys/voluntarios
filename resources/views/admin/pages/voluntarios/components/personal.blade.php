@@ -9,8 +9,8 @@
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">{{ trans('global.voluntarios.create.names') }}</label>
             <div class="flex">
                 <div class="form-group m-0 pl-2">
-                    <input class="form-control m-0  form-control-sm hs-input" name="Nombres" id="Nombres"
-                        required="required" placeholder="Primer Nombre" value="" placeholder=""
+                    <input class="form-control m-0  form-control-sm hs-input" name="Nombres" id="Nombres" value="{{ isset($voluntario) && $voluntario !== null ? $voluntario->Nombres :'' }}"
+                        required="required" placeholder="Primer Nombre" placeholder=""
                         data-rule-required="true" data-msg-required="Escriba su Primer Nombre">
                     <span class="error1" style="display: none;">
                         <i class="error-log fa fa-exclamation-triangle"></i>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group m-0 pl-2">
                     <input class="form-control  m-0 form-control-sm hs-input" name="nombreSegundo" id="nombreSegundo"
-                        placeholder="Segundo nombre" required="required" value="" placeholder=""
+                        placeholder="Segundo nombre" required="required" value="{{ isset($voluntario) && $voluntario !== null ? $voluntario->nombreSegundo :'' }}" placeholder=""
                         data-rule-required="true" data-msg-required="Escriba su segundo nombre">
                     <span class="error1" style="display: none;">
                         <i class="error-log fa fa-exclamation-triangle"></i>
@@ -34,7 +34,7 @@
             <div class="flex">
                 <div class="form-group m-0 pl-2">
                     <input class="form-control  m-0 form-control-sm hs-input" name="Apellidos" id="Apellidos"
-                        placeholder="Primer Apellido" required="required" value="" placeholder=""
+                        placeholder="Primer Apellido" required="required" value="{{ isset($voluntario) && $voluntario !== null ? $voluntario->Apellidos :'' }}" placeholder=""
                         data-rule-required="true" data-msg-required="Esciba su apellido">
                     <span class="error1" style="display: none;">
                         <i class="error-log fa fa-exclamation-triangle"></i>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group m-0 pl-2">
                     <input class="form-control  m-0 form-control-sm hs-input" name="apellidoMaterno"
-                        id="apellidoMaterno" placeholder="Segundo Apellido" required="required" value="" placeholder=""
+                        id="apellidoMaterno" placeholder="Segundo Apellido" required="required" value="{{ isset($voluntario) && $voluntario !== null ? $voluntario->apellidoMaterno :'' }}" placeholder=""
                         data-rule-required="true" data-msg-required="Esciba sus apellido materno">
                     <span class="error1" style="display: none;">
                         <i class="error-log fa fa-exclamation-triangle"></i>
@@ -56,10 +56,10 @@
 
             <label
                 for="edit-submitted-acquisition-amount-2 total_number_of_donors_in_year_2-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Genero</label>
-            <select name="genero" id="genero" class="form-control select2"
+            <select name="genero" id="genero" class="form-control select2" 
                 data-placeholder="{{ trans('global.pleaseSelect') }}" required>
                 @foreach ($generos as $id => $genero)
-                    <option value="{{ $genero->codigo }}" {{ old('genero') === $genero->codigo ? 'selected' : '' }}>
+                    <option value="{{ $genero->codigo }}" {{ isset($voluntario) && $voluntario !== null ?($voluntario->genero == $genero->codigo ? 'selected':'') :'' }}>
                         {{ $genero->descripcion }}
                     </option>
                 @endforeach
@@ -76,7 +76,7 @@
             <label
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Dirección</label>
             <div class="form-group m-0 pl-2">
-                <input class="form-control m-0  form-control-sm hs-input" name="Direccion" id="Direccion" type="text"
+                <input class="form-control m-0  form-control-sm hs-input" name="Direccion" id="Direccion" type="text" value="{{ isset($voluntario) && $voluntario !== null ? $voluntario->Direccion :'' }}"
                     required="required" placeholder="Dirección de residencia actual"
                     data-rule-required="true" data-msg-required="Escriba la dirección">
                 <span class="error1" style="display: none;">
@@ -90,7 +90,7 @@
             <label
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Correo</label>
             <div class="form-group m-0 pl-2">
-                <input class="form-control m-0  form-control-sm hs-input" name="Correo" id="Correo" required="required" type="email"
+                <input class="form-control m-0  form-control-sm hs-input" name="Correo" id="Correo" required="required" type="email" value="{{ isset($voluntario) && $voluntario !== null ? $voluntario->Correo :'' }}"
                     placeholder="Dirección de correo electrónico" data-rule-required="true" data-msg-required="Escriba la dirección">
                 <span class="error1" style="display: none;">
                     <i class="error-log fa fa-exclamation-triangle"></i>
@@ -103,7 +103,7 @@
             <label
                 for="edit-submitted-acquisition-amount-1 total_number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">F. de nacimiento</label>
             <div class="form-group m-0 pl-2">
-                <input class="form-control m-0  form-control-sm hs-input" name="FechaNacimiento" id="FechaNacimiento" type="date"
+                <input class="form-control m-0  form-control-sm hs-input" name="FechaNacimiento" id="FechaNacimiento" type="date" value="{{ isset($voluntario) && $voluntario !== null ? createDate($voluntario->FechaNacimiento, 'd/m/Y')->format('Y-m-d') :'' }}"
                     placeholder="Fecha de nacimiento" data-rule-required="true"
                     data-msg-required="Seleccione la fecha">
                 <span class="error1" style="display: none;">
@@ -119,10 +119,10 @@
 
             <label
                 for="edit-submitted-acquisition-amount-2 total_number_of_donors_in_year_2-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Estado Civil</label>
-            <select name="EstadoCivil" id="EstadoCivil" class="form-control select2"
+            <select name="EstadoCivil" id="EstadoCivil" class="form-control select2" 
                 data-placeholder="{{ trans('global.pleaseSelect') }}" required>
                 @foreach ($estadosciviles as $id => $civil)
-                    <option value="{{ $civil->id }}" {{ old('EstadoCivil') === $civil->id ? 'selected' : '' }}>
+                    <option value="{{ $civil->id }}" {{ isset($voluntario) && $voluntario !== null ? ($voluntario->EstadoCivil ==  $civil->id ? 'selected' :'' ):($civil->id  == 2?'selected':'') }}>
                         {{ $civil->Nombre }}
                     </option>
                 @endforeach
@@ -141,7 +141,7 @@
             <select name="Pais" id="Pais" class="form-control select2" onchange="cargarCiudades(this.value)"
                 data-placeholder="{{ trans('global.pleaseSelect') }}" required>
                 @foreach ($paises as $id => $pais)
-                    <option value="{{ $pais->id }}" {{ old('Pais') === $pais->id ? 'selected' : '' }}>
+                    <option value="{{ $pais->id }}" {{ isset($voluntario) && $voluntario !== null ? ($voluntario->Pais == $pais->id ?'selected':'' ) : ($pais->id == 8 ?'selected':'') }}>
                         {{ $pais->Nombre }}
                     </option>
                 @endforeach
@@ -157,7 +157,8 @@
 
             <label
                 for="edit-submitted-acquisition-amount-2 total_number_of_donors_in_year_2-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Ciudad</label>
-            <select name="Ciudad" id="Ciudad" class="form-control select2"
+            {{-- {{ isset($voluntario) && $voluntario !== null ? ($voluntario->Ciudad?'selected':'') :'' }} --}}
+            <select name="Ciudad" id="Ciudad" class="form-control select2" 
                 data-placeholder="{{ trans('global.pleaseSelect') }}" required>
 
             </select>
@@ -171,10 +172,10 @@
 
             <label
                 for="edit-submitted-acquisition-amount-2 total_number_of_donors_in_year_2-99a6d115-5e68-4355-a7d0-529207feb0b3_6344">Pasatiempo</label>
-            <select name="CodigoReferencia" id="CodigoReferencia" class="form-control select2"
+            <select name="CodigoReferencia" id="CodigoReferencia" class="form-control select2" 
                 data-placeholder="{{ trans('global.pleaseSelect') }}" required>
                 @foreach ($pasatiempos as $id => $pasatiempo)
-                    <option value="{{ $pasatiempo->id }}" {{ old('CodigoReferencia') === $pasatiempo->id ? 'selected' : '' }}>
+                    <option value="{{ $pasatiempo->id }}" {{ isset($voluntario) && $voluntario !== null ? ($voluntario->CodigoReferencia == $pasatiempo->id  ? 'selected':'' ):'' }}>
                         {{ $pasatiempo->NombrePasatiempo }}
                     </option>
                 @endforeach
@@ -192,7 +193,7 @@
             <div class="flex">
                 <div class="form-group m-0 pl-2">
                     <input class="form-control  m-0 form-control-sm hs-input" name="Telefono" id="Telefono"
-                        placeholder="Teléfono" required="required" value=""
+                        placeholder="Teléfono" required="required" value="{{ isset($voluntario) && $voluntario !== null ? $voluntario->Telefono :'' }}"
                         data-rule-required="true" data-msg-required="Esciba su teléfono">
                     <span class="error1" style="display: none;">
                         <i class="error-log fa fa-exclamation-triangle"></i>
@@ -200,7 +201,7 @@
                 </div>
                 <div class="form-group m-0 pl-2">
                     <input class="form-control  m-0 form-control-sm hs-input" name="celular"
-                        id="celular" placeholder="Celular" required="required" value=""
+                        id="celular" placeholder="Celular" required="required" value="{{ isset($voluntario) && $voluntario !== null ? $voluntario->Celular :'' }}"
                         data-rule-required="true" data-msg-required="Esciba número de celular">
                     <span class="error1" style="display: none;">
                         <i class="error-log fa fa-exclamation-triangle"></i>

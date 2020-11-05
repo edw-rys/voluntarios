@@ -116,7 +116,9 @@ class EvaluacionesController extends Controller
 
         $voluntario = $this->voluntariosRepository
             ->find($id, ['*'], ['universidad'], true);
-            
+        if($voluntario === null){
+            abort(404);
+        }
         $item = $this->evaluacionesRepository
             ->where('CodigoReferencia', $voluntario->id)
             ->with('periodo')

@@ -13,6 +13,8 @@ if (! function_exists('allows_permission')) {
     {
         return (new OpcionAplicacionPerfilRepository)
             ->join('SG_OPCION_APLICACION', 'SG_OPCION_APLICACION.codigo', 'SG_OPCION_APLICACION_POR_PERFIL.opcion_aplicacion')
-            ->where('SG_OPCION_APLICACION.ejecutable' , $permission_name)->first() !== null;
+            ->where('SG_OPCION_APLICACION.ejecutable' , $permission_name)
+            ->where('perfil', auth()->user()->id)
+            ->first() !== null;
     }
 }

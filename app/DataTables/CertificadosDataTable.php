@@ -47,7 +47,7 @@ class CertificadosDataTable extends DataTable
     {
         // dd();
         return [
-            Column::make('id')->title(trans('global.voluntario.number'))->className('text-center'),
+            // Column::make('id')->title(trans('global.voluntario.number'))->className('text-center'),
             Column::make('certificate')->title('Certificcado')->className('text-center'),
             Column::make('status')->title(trans('global.status'))->className('text-center'),
             Column::make('Nombres')->title(trans('global.voluntario.names'))->className('text-center'),
@@ -71,7 +71,7 @@ class CertificadosDataTable extends DataTable
      */
     public function html(): \Yajra\DataTables\Html\Builder
     {
-        return $this->getHtml(12, 'desc');
+        return $this->getHtml(11, 'desc');
         // return null;
     }
 
