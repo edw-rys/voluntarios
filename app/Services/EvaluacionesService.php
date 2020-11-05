@@ -38,13 +38,15 @@ class EvaluacionesService extends BaseService
      */
     public function store(Request $request, $routeTo): RedirectResponse
     {
-
-        $periodo = $this->periodoVoluntarioRepository->where('voluntario_id' , $request->input('CodigoReferencia'))->with('voluntario')->where('status', 1)->get()->last();
-        if($periodo->voluntario !== null){
-            $periodo->voluntario->update([
-                'status'    => 0
-            ]);
+        $vol = (new VoluntariosRepository)->find($request->input('CodigoReferencia'));
+        if($vol === null){
+            notifyMe('warning', trans('global.toasts.no_data'));
+            return redirect()->route($routeTo->index);
         }
+        $vol->update([
+            'status'    => 0
+        ]);
+        $periodo = $this->periodoVoluntarioRepository->where('voluntario_id' , $request->input('CodigoReferencia'))->with('voluntario')->where('status', 1)->get()->last();
         
         $periodo_id = null;
         if($periodo !== null){

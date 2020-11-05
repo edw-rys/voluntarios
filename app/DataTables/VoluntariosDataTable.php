@@ -126,7 +126,10 @@ class VoluntariosDataTable extends DataTable
                 return  '';
             })
             ->addColumn('edit', static function ($query) {
-                return edit_redirect('admin.voluntarios.editar', optimus()->encode($query->id), 'Editar');
+                if($query->status == 1){
+                    return edit_redirect('admin.voluntarios.editar', optimus()->encode($query->id), 'Editar');
+                }
+                return '';
             })
             ->addColumn('mostrar', static function ($query) {
                 return show_modal('admin.voluntarios.show', optimus()->encode($query->id), 'Detalle');
