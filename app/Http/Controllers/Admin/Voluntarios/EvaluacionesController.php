@@ -60,7 +60,11 @@ class EvaluacionesController extends Controller
             'isRemoteEnabled'           => true,
             'enable_remote'             => true
         ];
-
+        // Permisos
+        $this->permisos = (object) [
+            'acceso_evaluaciiones'    => 'acceso_evaluaciiones',
+            'evaluar_voluntarios'     => 'evaluar_voluntarios',
+        ];
     }
 
     /**
@@ -69,6 +73,8 @@ class EvaluacionesController extends Controller
      */
     public function index(EvaluacionesDataTable $dataTable)
     {
+        _canAccess_($this->permisos->acceso_evaluaciiones);
+
         viewExist($this->views->index);
 
         $dataTable->filters = $this->filters;
@@ -85,6 +91,8 @@ class EvaluacionesController extends Controller
      */
     public function evaluateView($id)
     {
+        _canAccess_($this->permisos->evaluar_voluntarios);
+
         viewExist($this->views->evaluate);
 
         $item = $this->voluntariosRepository
@@ -101,17 +109,21 @@ class EvaluacionesController extends Controller
      */
     public function evaluate(EvaluacionRequest $request,$id)
     {
+        _canAccess_($this->permisos->evaluar_voluntarios);
+
         return $this->evaluacionesService->store($request, $this->routes);
     }
     
     /**
-     * Evaluate
+     * Mostar periodos
      *
      * @param $id
      * @return JsonResponse|RedirectResponse
      */
     public function reporteView($id)
     {
+        _canAccess_($this->permisos->acceso_evaluaciiones);
+
         viewExist($this->views->evluacion_periodo);
 
         $voluntario = $this->voluntariosRepository

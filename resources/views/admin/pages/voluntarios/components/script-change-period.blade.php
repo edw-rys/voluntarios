@@ -55,7 +55,7 @@
                     var select = '';
                     if (data && Array.isArray(data)) {
                         for (const facultad of data) {
-                            select += '<option value="' + facultad.id + '">' + facultad.NombreFacultad + '</option>';
+                            select += '<option value="' + facultad.idFacultad + '">' + facultad.NombreFacultad + '</option>';
                         }
                     }
                     document.getElementById('Facultad').innerHTML = select;

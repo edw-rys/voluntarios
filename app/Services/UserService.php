@@ -28,7 +28,7 @@ class UserService extends BaseService{
      * @param $routeTo
      * @return RedirectResponse
      */
-    public function update(Request $request, $routeTo): RedirectResponse
+    /*public function update(Request $request, $routeTo): RedirectResponse
     {
         $item = $this->userRepository->findDecoded($request->get('id'), ['*'], [], true);
 
@@ -52,5 +52,5 @@ class UserService extends BaseService{
         notifyMe('success', trans('global.toasts.updated'));
 
         return $this->redirectTo($request, $routeTo);
-    }
+    }*/
 }

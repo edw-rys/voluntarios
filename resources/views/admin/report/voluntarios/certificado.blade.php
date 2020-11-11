@@ -66,11 +66,12 @@
 
     </style>
     <div style="z-index:3;clip:rect(0px,771px,155px,0px);top:0px;left:0px;width:771px;height:155px;"></div>
-    <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:25;top:27px;left:62px;width:232px;height:99px;"><img
+    <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:25;top:27px;left:62px;width:232px;height:99px;">
+        <img
             src="{{ base_path() }}/public/img/reportes/certificado/rptReporteFinal{14632F67-9520-4ED4-8A68-2107324CDA62}.png"
             border="0" width="232px" height="99px"></div>
     <div style="z-index:3;clip:rect(0px,771px,54px,0px);top:155px;left:0px;width:771px;height:54px;"></div>
-    <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:25;top:169px;left:546px;width:167px;height:19px;"><span
+    <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:25;top:169px;left:546px;width:200px;height:19px;"><span
             class="fc1id3qyyfqfr4-0">{{ formatDateGye() }}</span></div>
     <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:25;top:169px;left:465px;width:78px;height:18px;">
         <table width="78px" border="0" cellpadding="0" cellspacing="0">
@@ -111,12 +112,13 @@
             </td>
         </table>
     </div>
-    <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:25;top:702px;left:75px;width:125px;height:15px;">
+    <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:50;top:702px;left:75px;width:125px;height:15px;">
         <table width="125px" border="0" cellpadding="0" cellspacing="0">
             <td align="left"><span class="fc1id3qyyfqfr4-0">Atentamente,</span></td>
         </table>
     </div>
-    <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:25;top:716px;left:62px;width:291px;height:166px;"><img
+    <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:25;top:716px;left:62px;width:291px;height:166px;">
+        <img
             src="{{ base_path() }}/public/img/reportes/certificado/rptReporteFinal{626FF632-6C6C-4321-B04A-08548C0DAB80}.png"
             border="0" width="291px" height="166px"></div>
     <div style="z-index:3;clip:rect(0px,771px,13px,0px);top:884px;left:0px;width:771px;height:13px;"></div>
@@ -136,10 +138,10 @@
             <td align="right"><span class="fc1id3qyyfqfr4-4">Guayaquil-Ecuador</span></td>
         </table>
     </div>
-    <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:25;top:1044px;left:68px;width:300px;height:50px;"><img
+    <div class="ad1id3qyyfqfr4-0" nowrap="true" style="z-index:25;top:1044px;left:68px;width:300px;height:50px;">
+        <img
             src="{{ base_path() }}/public/img/reportes/certificado/rptReporteFinal{5E6B781A-68CD-44E0-854B-0E3923B35E67}.png"
-            border="0" width="300px" height="50px"></div>
+            border="0" width="400px" height="70px"></div>
 
     <div id="pageNavigator" style="top:1100px;left:0px;font-style:italic;font-weight:100;font-size:smaller">
-        <hr>
     </div>

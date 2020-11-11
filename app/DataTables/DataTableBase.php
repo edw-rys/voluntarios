@@ -200,7 +200,7 @@ trait DataTableBase
         $buttons = [];
         // dd(route_exists($this->route . '.create'));
         // Create item
-        if (route_exists($this->route . '.create') /*&& allows_permission('')*/) {
+        if (route_exists($this->route . '.create') && allows_permission('crear_' .$this->action)) {
             $buttons ['addButton'] = [
                 'text'          => trans('global.datatables_icons.add') . ' ' . trans('global.datatables.add'),
                 'className'     => 'btn-success rounded mr-3',

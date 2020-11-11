@@ -182,3 +182,19 @@ if (! function_exists('createDate')) {
     }
 }
 
+
+
+if (! function_exists('calculoEdad')) {
+    /**
+     * Calculo Edad 
+     *
+     * @param $fecha
+     * @param bool $inverted
+     * @return mixed
+     */
+    function calculoEdad($fecha)
+    {
+        $fecha = createDate($fecha, 'd/m/Y');
+        return $fecha->diffInYears(Carbon::now());
+    }
+}

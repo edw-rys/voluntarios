@@ -108,3 +108,208 @@ ALTER TABLE [GestionVoluntarios].[dbo].[tbwbEvaluacionAlVoluntario]  ADD periodo
       ,[status] 
   ) VALUES 
   (1,1,1,1,31,1,1),(1,1,1,1,32,1,1);
+
+
+ALTER TABLE [GestionVoluntarios].[dbo].[tbwbVoluntario]  ADD dato_viejo int default 1 ;
+ 
+insert into  [GestionVoluntarios].[dbo].[SG_PERFIL] 
+  ( [descripcion]
+      ,[abreviatura]
+      ,[usuario_ingreso]
+      ,[fecha_ingreso]
+      ,[status],[usuario_modificacion] ,[fecha_modificacion],[pcname] ) values 
+  ('Talento Humano', 'RRH', 1, '2020-11-10 00:00:00', 1 ,1, '2020-11-10 00:00:00', 'pc'),
+  ('Jefe de Departamento', 'JDP', 1, '2020-11-10 00:00:00', 1 ,1, '2020-11-10 00:00:00','pc');
+
+
+  
+  insert into  [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION] (
+  [empresa]
+      ,[sucursal]
+      ,[modulo]
+      ,[descripcion]
+      ,[imagen]
+      ,[tipo]
+      ,[ejecutable]
+      ,[usuario_ingreso]
+      ,[fecha_ingreso]
+      ,[status]) values
+      (1,1,1,'Todos los voluntarios' ,'', 4,'all_voluntarios',1 ,'2018-01-30 00:00:00',1)
+
+-- PROD
+   -- Super usuario
+
+insert into [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION_POR_PERFIL] ([empresa]
+      ,[sucursal]
+      ,[perfil]
+      ,[modulo]
+      ,[opcion_aplicacion]
+      ,[superior]
+      ,[status])
+      values(1, 1, 2, 1, 28, 1, 1),
+      (1, 1, 1, 2, 29, 1, 1),
+      (1, 1, 1, 2, 30, 1, 1),
+	  (1, 1, 1, 2, 31, 1, 1),
+	  (1, 1, 1, 2, 32, 1, 1),
+	  (1, 1, 1, 2, 33, 1, 1),
+	  (1, 1, 1, 2, 34, 1, 1),
+	  (1, 1, 1, 2, 35, 1, 1),
+	  (1, 1, 1, 2, 36, 1, 1),
+	  (1, 1, 1, 2, 37, 1, 1),
+	  (1, 1, 1, 2, 38, 1, 1),
+	  (1, 1, 1, 2, 39, 1, 1),
+      (1, 1, 1, 2, 40, 1, 1),
+      (1, 1, 1, 2, 41, 1, 1);
+
+
+-- Admin
+insert into [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION_POR_PERFIL] ([empresa]
+      ,[sucursal]
+      ,[perfil]
+      ,[modulo]
+      ,[opcion_aplicacion]
+      ,[superior]
+      ,[status])
+      values(1, 1, 1, 1, 28, 1, 1),
+      (1, 1, 1, 1, 29, 1, 1),
+      (1, 1, 1, 1, 30, 1, 1),
+	  (1, 1, 1, 1, 31, 1, 1),
+	  (1, 1, 1, 1, 34, 1, 1),
+	  (1, 1, 1, 1, 35, 1, 1),
+	  (1, 1, 1, 1, 36, 1, 1),
+      (1, 1, 1, 1, 40, 1, 1),
+      (1, 1, 1, 1, 41, 1, 1);
+
+-- talento humano
+
+insert into [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION_POR_PERFIL] ([empresa]
+      ,[sucursal]
+      ,[perfil]
+      ,[modulo]
+      ,[opcion_aplicacion]
+      ,[superior]
+      ,[status])
+      values
+	  (1, 1, 4, 1, 31, 1, 1),
+	  (1, 1, 4, 1, 32, 1, 1),
+	  (1, 1, 4, 1, 33, 1, 1),
+	  (1, 1, 4, 1, 36, 1, 1),
+	  (1, 1, 4, 1, 38, 1, 1),
+	  (1, 1, 4, 1, 39, 1, 1),
+      (1, 1, 4, 1, 40, 1, 1);
+
+
+-- Jefe departamento
+insert into [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION_POR_PERFIL] ([empresa]
+      ,[sucursal]
+      ,[perfil]
+      ,[modulo]
+      ,[opcion_aplicacion]
+      ,[superior]
+      ,[status])
+      values
+	  (1, 1, 5, 1, 30, 1, 1),
+	  (1, 1, 5, 1, 31, 1, 1),
+	  (1, 1, 5, 1, 33, 1, 1),
+	  (1, 1, 5, 1, 34, 1, 1),
+	  (1, 1, 5, 1, 35, 1, 1),
+	  (1, 1, 5, 1, 36, 1, 1),
+	  (1, 1, 5, 1, 37, 1, 1),
+	  (1, 1, 5, 1, 38, 1, 1),
+      (1, 1, 5, 1, 40, 1, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- DESA
+
+
+insert into [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION_POR_PERFIL] ([empresa]
+      ,[sucursal]
+      ,[modulo]
+      ,[perfil]
+      ,[opcion_aplicacion]
+      ,[superior]
+      ,[status])
+      values(1, 1, 2, 1, 31, 1, 1),
+      (1, 1, 1, 2, 32, 1, 1),
+      (1, 1, 1, 2, 33, 1, 1),
+	  (1, 1, 1, 2, 34, 1, 1),
+	  (1, 1, 1, 2, 35, 1, 1),
+	  (1, 1, 1, 2, 36, 1, 1),
+	  (1, 1, 1, 2, 37, 1, 1),
+	  (1, 1, 1, 2, 38, 1, 1),
+	  (1, 1, 1, 2, 39, 1, 1),
+	  (1, 1, 1, 2, 40, 1, 1),
+	  (1, 1, 1, 2, 41, 1, 1),
+	  (1, 1, 1, 2, 42, 1, 1),
+      (1, 1, 1, 2, 43, 1, 1),
+      (1, 1, 1, 2, 44, 1, 1);
+
+
+
+-- Admin
+insert into [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION_POR_PERFIL] ([empresa]
+      ,[sucursal]
+      ,[perfil]
+      ,[modulo]
+      ,[opcion_aplicacion]
+      ,[superior]
+      ,[status])
+      values(1, 1, 1, 1, 31, 1, 1),
+      (1, 1, 1, 1, 32, 1, 1),
+      (1, 1, 1, 1, 33, 1, 1),
+	  (1, 1, 1, 1, 34, 1, 1),
+	  (1, 1, 1, 1, 37, 1, 1),
+	  (1, 1, 1, 1, 38, 1, 1),
+	  (1, 1, 1, 1, 39, 1, 1),
+      (1, 1, 1, 1, 43, 1, 1),
+      (1, 1, 1, 1, 44, 1, 1);
+
+-- talento humano
+
+insert into [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION_POR_PERFIL] ([empresa]
+      ,[sucursal]
+      ,[perfil]
+      ,[modulo]
+      ,[opcion_aplicacion]
+      ,[superior]
+      ,[status])
+      values
+	  (1, 1, 10, 1, 34, 1, 1),
+	  (1, 1, 10, 1, 35, 1, 1),
+	  (1, 1, 10, 1, 36, 1, 1),
+	  (1, 1, 10, 1, 39, 1, 1),
+	  (1, 1, 10, 1, 41, 1, 1),
+	  (1, 1, 10, 1, 42, 1, 1),
+      (1, 1, 10, 1, 43, 1, 1);
+
+
+-- Jefe departamento
+insert into [GestionVoluntarios].[dbo].[SG_OPCION_APLICACION_POR_PERFIL] ([empresa]
+      ,[sucursal]
+      ,[perfil]
+      ,[modulo]
+      ,[opcion_aplicacion]
+      ,[superior]
+      ,[status])
+      values
+	  (1, 1, 11, 1, 33, 1, 1),
+	  (1, 1, 11, 1, 34, 1, 1),
+	  (1, 1, 11, 1, 36, 1, 1),
+	  (1, 1, 11, 1, 37, 1, 1),
+	  (1, 1, 11, 1, 38, 1, 1),
+	  (1, 1, 11, 1, 39, 1, 1),
+	  (1, 1, 11, 1, 40, 1, 1),
+	  (1, 1, 11, 1, 41, 1, 1),
+      (1, 1, 11, 1, 43, 1, 1);

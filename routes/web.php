@@ -45,3 +45,12 @@ Route::get('sss',function () {
         //dd($user);
     }
 })->name('sss');
+
+Route::get('per','Api\Voluntarios\VoluntariosApiController@obtenerDepartamentos')->name('per');
+
+
+
+Route::get('f',function () {
+    // Encrypt password
+    allows_permission('crear_voluntarios');
+})->name('f');

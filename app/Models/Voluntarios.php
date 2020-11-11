@@ -122,6 +122,10 @@ class Voluntarios extends Model
     {
         return $this->belongsTo(Universidad::class, 'Universidad', 'id');
     }
+    public function alimentacion() : HasOne
+    {
+        return $this->hasOne(Alimentacion::class, 'id', 'Alimentacion');
+    }
 
     public function evaluacion() : HasOne
     {
@@ -144,4 +148,10 @@ class Voluntarios extends Model
     {
         return $this->hasMany(PeriodoVoluntario::class, 'voluntario_id', 'id');
     }
+
+    public function tutor_bspi() : HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'idtutor');
+    }
+
 }

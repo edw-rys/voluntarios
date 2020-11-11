@@ -1,6 +1,8 @@
 @extends('admin.templates.template')
 @section('styles_cdn')
-    <link rel="stylesheet" href="http://www.bufa.es/wp-content/themes/bufa/css/google-maps-latitud-longitud.css?ver=4.7.3" type="text/css" media="all" />
+    {{-- <link rel="stylesheet" href="http://www.bufa.es/wp-content/themes/bufa/css/google-maps-latitud-longitud.css?ver=4.7.3" type="text/css" media="all" /> --}}
+    <link rel="stylesheet" href="{{ asset('css/mapstyle.css') }}">
+
     <style>
         .select2-selection__choice{
             background: rgb(0, 129, 90) !important;

@@ -3,7 +3,20 @@
     <ul class="nav nav-pills nav-sidebar flex-column" style="height: 100vh" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
-        <li class="nav-item">
+
+        @foreach (config('app_voluntarios.menus') as $menu)
+            @if ( allows_permission($menu->permisos) || $menu->permisos=='dashboard' )
+                <li class="nav-item">
+                    <a href="{{ route($menu->route) }}" class="nav-link {{ $route_name == $menu->route_name ? 'active' :'' }}">
+                        <i class="{{ $menu->icon }}"></i>
+                        <p class="f-s-9em">
+                            {{ trans($menu->lang) }}
+                        </p>
+                    </a>
+                </li>
+            @endif
+        @endforeach   
+        {{-- <li class="nav-item">
             <a href="{{ route('admin.dashboard') }}" class="nav-link {{ $route_name == 'admin.dashboard' ? 'active' :'' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p class="f-s-9em">
@@ -42,15 +55,8 @@
                     {{ trans('global.menu.certificates') }}
                 </p>
             </a>
-        </li>
-        {{-- <li class="nav-item">
-            <a href="{{ route('admin.evaluaciones_depa') }}" class="nav-link {{ $route_name == 'admin.evaluaciones_depa' ? 'active' :'' }}">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p class="f-s-9em">
-                    {{ trans('global.menu.evaluaciones_depa') }}
-                </p>
-            </a>
         </li> --}}
+       
         <li class="nav-header border-t-menu">
             <button class="btn btn-warning" onclick="logout()">
                 <i class="fas fa-sign-out-alt"></i>

@@ -61,6 +61,7 @@ return [
         'created'                   => 'La información fue creada correctamente.',
         'updated'                   => 'La información fue actualizada correctamente.',
         'deleted'                   => 'La información fue eliminada correctamente.',
+        'edited'                    => 'Editado.',
     ],
     'login_correctly'                      => 'Inicio de sesión correcto!',
 
@@ -70,6 +71,7 @@ return [
         'last_names'        => 'Apellidos',
         'identification_number' => 'Pasaporte',
         'university'        => 'Universidad',
+        'facultad'          => 'Facultad',
         'unity'             => 'Unidad',
         'department'        => 'Departamento',
         'tutor_bspi'        => 'Tutor BSPI',

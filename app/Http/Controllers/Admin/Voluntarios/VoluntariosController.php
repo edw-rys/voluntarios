@@ -103,8 +103,14 @@ class VoluntariosController extends Controller
         ];
 
         $this->permisos = (object) [
-            'departamentos_todos'    => 'all_departments',
-            'tutores_todos'          => 'all_totor_bspi'
+            'departamentos_todos'   => 'all_departments',
+            'tutores_todos'         => 'all_totor_bspi',
+            'acceso_certificados'   => 'acceso_certificados',
+            'acceso_voluntarios'    => 'acceso_voluntarios',
+            'crear_voluntarios'     => 'crear_voluntarios',
+            'editar_voluntarios'    => 'editar_voluntarios',
+            'cambio_periodo'        => 'cambio_periodo',
+            'mostrar_voluntarios'   => 'mostrar_voluntarios',
         ];
     }
 
@@ -114,7 +120,8 @@ class VoluntariosController extends Controller
      */
     public function index(VoluntariosDataTable $dataTable)
     {
-        // notifyMe('warning', trans('global.toasts.no_data'));
+        _canAccess_($this->permisos->acceso_voluntarios);
+
         viewExist($this->views->index);
 
         $dataTable->filters = $this->filters;
@@ -130,7 +137,10 @@ class VoluntariosController extends Controller
      */
     public function create()
     {
+        _canAccess_($this->permisos->crear_voluntarios);
+
         viewExist($this->views->create);
+
         return view($this->views->create)->with([
             'cancel'         => route($this->routes->index),
             'tiposPractica'  => $this->tipoPracticaRepository->where('status', 1)->get(),
@@ -151,8 +161,8 @@ class VoluntariosController extends Controller
      */
     public function store(StoreVoluntarioRequest $request)
     {
-        // dd($request->input('chkActa') === 'on' ? 1 : 0);
-        // dd($request->input());
+        _canAccess_($this->permisos->crear_voluntarios);
+
         return $this->voluntariosService->store($request, $this->routes);
     }
     /**
@@ -161,11 +171,18 @@ class VoluntariosController extends Controller
      */
     public function certificadosView($id)
     {
+        // Denegar vista en caso de no tener permisos
+        _canAccess_($this->permisos->acceso_certificados);
+
         viewExist($this->views->certificados);
 
         $voluntario = $this->voluntariosRepository
             ->find($id, ['*'], ['universidad'], true);
         
+        if($voluntario === null){
+            abort(404);
+        }
+    
         $item = $this->evaluacionesRepository
             ->where('CodigoReferencia', $voluntario->id)
             ->with('periodo')
@@ -183,13 +200,17 @@ class VoluntariosController extends Controller
      */
     public function cambiarPeriodo($id)
     {
-        // Validr si tiene un periodo activo
+        _canAccess_($this->permisos->cambio_periodo);
+
+        // Validar si tiene un periodo activo
         $voluntario = $this->voluntariosRepository->findDecoded($id, ['*'], ['periodos']);
         
         viewExist($this->views->change_period);
         if($voluntario === null){
             abort(404);
         }
+
+        abortNotChangePeriod($voluntario);
 
         return view($this->views->change_period)->with([
             'cancel'         => route($this->routes->index),
@@ -209,6 +230,7 @@ class VoluntariosController extends Controller
 
     public function cambiarPeriodoStore(CambioPeriodoRequest $request)
     {
+        _canAccess_($this->permisos->cambio_periodo);
         // Validr si tiene un periodo activo
         return $this->voluntariosService->cambioPeriodo($request, $this->routes);
     }
@@ -222,7 +244,9 @@ class VoluntariosController extends Controller
     public function show($id)
     {
 
-        // viewExist($this->views->show);
+        _canAccess_($this->permisos->mostrar_voluntarios);
+
+        viewExist($this->views->show);
 
         $item = $this->voluntariosRepository->
             findDecoded($id, ['*'], ['genero_detalle', 'pais_detalle', 'ciudad_detalle','periodos'], true);
@@ -236,6 +260,7 @@ class VoluntariosController extends Controller
      */
     public function edit($id)
     {
+        _canAccess_($this->permisos->editar_voluntarios);
         // Find user
         $voluntario = $this->voluntariosRepository->findDecoded($id);
         if($voluntario === null){
@@ -247,6 +272,7 @@ class VoluntariosController extends Controller
             ->with('horario_semana')
             ->get()
             ->last();
+        // dd($periodo->horario_semana);
         if($periodo === null){
             $periodo = (object) [
                 'id'                    => 0,
@@ -304,7 +330,8 @@ class VoluntariosController extends Controller
 
     public function update(UpdateVoluntarioRequest $request)
     {
-        // dd($request->input());
+        _canAccess_($this->permisos->editar_voluntarios);
+
         return $this->voluntariosService->update($request, $this->routes);
     }
 }

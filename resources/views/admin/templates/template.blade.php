@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}">
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/iconkit.min.css') }}"> --}}
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="{{ asset('js/plugins/moment.js') }}"></script>

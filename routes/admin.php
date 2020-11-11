@@ -45,7 +45,9 @@ Route::namespace('Admin')->group( static function (){
             Route::group(['prefix' => 'certificados'], function(){
                 Route::get('', 'CertificadosController@index')->name('certificados.index');
                 Route::get('generar/evaluacion/{id}', 'CertificadosController@generarEvaluacion')->name('certificados.generar.evaluacion');
+                Route::get('generar/ficha/{id}/{periodo_id}', 'CertificadosController@generarFicha')->name('certificados.generar.ficha');
                 Route::get('aprueba/{id}', 'CertificadosController@generaCertificadoAprobacion')->name('certificados.generar.certificado');
+                // Route::get('confidencialidad/{id}', 'CertificadosController@generaConfidencialidad')->name('certificados.generar.confidencialidad');
 
                 // Route::get('create', 'VoluntariosController@create')->name('certificados.create');
             });

@@ -71,6 +71,11 @@ class PeriodoVoluntario extends Model
         return $this->belongsTo(Universidad::class, 'universidad_id', 'id');
     }
 
+    public function tutor_bspi() : HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'tutor_bspi_id');
+    }
+
     public function evaluacion() : HasOne
     {
         return $this->hasOne(Evaluaciones::class, 'periodo_id', 'id');

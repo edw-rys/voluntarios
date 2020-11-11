@@ -24,7 +24,7 @@ class CertificadosController extends Controller
     private $voluntariosRepository;
     private $evaluacionesRepository;
     private $periodoVoluntarioRepository;
-
+    private $permisos;
     /**
      * CertificadosController constructor.
      * @param VoluntariosCertificadosRepository $voluntariosRepository
@@ -41,8 +41,10 @@ class CertificadosController extends Controller
             'index'     => 'admin.pages.evaluaciones.index',
             'evaluate'  => 'admin.pages.evaluaciones.evaluate',
             'pdf'       => (object) [
-                'evaluacion'    => 'admin.report.voluntarios.evaluacion',
-                'certificado'   => 'admin.report.voluntarios.certificado',
+                'evaluacion'        => 'admin.report.voluntarios.evaluacion',
+                'certificado'       => 'admin.report.voluntarios.certificado',
+                'confidencialidad'  => 'admin.report.voluntarios.confidencialidad',
+                'ficha'             => 'admin.report.voluntarios.ficha',
             ]
         ];
         $this->routes       = (object) [
@@ -72,6 +74,13 @@ class CertificadosController extends Controller
             'isRemoteEnabled'           => true,
             'enable_remote'             => true
         ];
+        // Permisos
+        $this->permisos = (object)[
+            'acceso_certificados'   => 'acceso_certificados',
+            'generar_certificados'  => 'generar_certificados',
+            'generar_evaluaciones'  => 'Generar_evaluaciones',
+            'generar_ficha'         => 'generar_ficha',
+        ];
     }
     
     /**
@@ -80,6 +89,7 @@ class CertificadosController extends Controller
      */
     public function index(CertificadosDataTable $dataTable)
     {
+        _canAccess_($this->permisos->acceso_certificados);
         // notifyMe('warning', trans('global.toasts.no_data'));
         viewExist($this->views->index);
 
@@ -96,17 +106,13 @@ class CertificadosController extends Controller
      */
     public function generarEvaluacion(Request $request, $id)
     {
-        switch ($request->input('tipo')) {
-            case 'evaluacion':
-                return $this->certificadoEvaluacionGenerar($id);
-                break;
-            case 'periodo':
-                return $this->certificadoEvaluacionGenerar($id);
-                break;
-            default:
-                abort(404);
-                break;
+        // Denegar acceso en caso de no tener permisos
+        _canAccess_($this->permisos->generar_evaluaciones);
+
+        if($request->input('tipo') == 'evaluacion'  ||  $request->input('tipo') == 'periodo'){
+            return $this->certificadoEvaluacionGenerar($id);
         }
+        abort(404);
     }
     /**
      * @param Request $request
@@ -114,7 +120,9 @@ class CertificadosController extends Controller
      */
     public function generaCertificadoAprobacion (Request $request, $id)
     {
-        // dd(Carbon::now()->month);
+        // Denegar acceso en caso de no tener permisos
+        _canAccess_($this->permisos->generar_certificados);
+
         $evaluacion = $this->evaluacionesRepository->find($id, ['*'], [
             'voluntario', 'periodo', 'voluntario.departamento', 'voluntario.unidad', 'voluntario.universidad', 'voluntario.tipo_practica'
         ]);
@@ -204,8 +212,12 @@ class CertificadosController extends Controller
         // echo $html;
     }
 
-
-    public function generarPdf($html, $nombre)
+    /**
+     * Genera pdf  (cualquier pdf)
+     * @param $html
+     * @param $nombre
+     */
+    public function generarPdf($html, $nombre, $attachment = 0)
     {
         $options = new Options();
         $options->set($this->options_dompdf);
@@ -219,7 +231,48 @@ class CertificadosController extends Controller
         // Render the HTML as PDF
         $domPDF->render();
 
-        $domPDF->stream( $nombre. time() . '.pdf', ['Attachment' => 0, 'compress' => true]);
+        $domPDF->stream( $nombre. time() . '.pdf', ['Attachment' => $attachment, 'compress' => true]);
     }
-    
+    /**
+     * Generar carta de confidencialidad
+     * @param $voluntario
+     * @param $periodo
+     */
+    public function generaConfidencialidad($voluntario, $periodo)
+    {
+        $html = view($this->views->pdf->confidencialidad)
+            ->with('voluntario', $voluntario)
+            ->with('periodo', $periodo);
+        // $this->options_dompdf['dpi'] = 170;
+        $this->options_dompdf['defaultPaperSize'] = "ra4";
+        // echo $html ;
+        // dd();
+        $this->generarPdf($html , time().$voluntario->Pasaporte, 0);
+        // redirect()->route('admin.dashboard');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id -> id del voluntario
+     * @param $periodo_id -> id del periodo o 0 en caso de no tener periodo
+     */
+    public function generarFicha(Request $request, $id, $periodo_id)
+    {
+        _canAccess_($this->permisos->generar_ficha);
+        
+        $voluntario = (new VoluntariosRepository)->obtenerVoluntarioPediodoActivo($id, true, $periodo_id);
+        
+        if($voluntario === null){
+            abort(404);
+        }
+        
+        viewExist($this->views->pdf->ficha);
+        $this->options_dompdf['dpi'] = 100;
+
+        $html = view($this->views->pdf->ficha)
+            ->with('voluntario' , $voluntario)
+            ->with('periodo'    , $voluntario->periodo);
+        // echo $html;
+        $this->generarPdf($html , time().$voluntario->Pasaporte, 0);
+    }
 }

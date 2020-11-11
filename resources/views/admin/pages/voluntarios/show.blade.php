@@ -19,6 +19,10 @@
                     <td>{{ $item->genero_detalle->descripcion }}</td>
                 </tr>
                 <tr>
+                    <th>Edad </th>
+                    <td>{{ calculoEdad($item->FechaNacimiento) }}</td>
+                </tr>
+                <tr>
                     <th>País </th>
                     <td>{{ $item->pais_detalle !== null  ? $item->pais_detalle->Nombre : $item->pais }}</td>
                 </tr>
@@ -28,10 +32,12 @@
                 </tr>
             </tbody>
         </table>
-        <table style="width: 900px" border="1">
+        <table style="width: 900px; margin-bottom:20px" border="1">
             <thead>
                 <tr>
+                    <th class="text-center">Ficha</th>
                     <th class="text-center">{{ trans('global.voluntario.university') }}</th>
+                    <th class="text-center">{{ trans('global.voluntario.facultad') }}</th>
                     <th class="text-center">{{ trans('global.voluntario.carrera') }}</th>
                     <th class="text-center">{{ trans('global.voluntario.unity') }}</th>
                     <th class="text-center">{{ trans('global.voluntario.department') }}</th>
@@ -42,9 +48,11 @@
                 </tr>
             </thead>
             <tbody>
-                @if (isset($item->universidad) && $item->universidad !== null)
+                @if (isset($item->dato_viejo) && $item->dato_viejo == 1)
                     <tr>
+                        <th class="text-center"><a class="btn btn-warning btn-sm" target="_blank" href="{{ route('admin.certificados.generar.ficha', ['id'=> optimus()->encode($item->id), 'periodo_id'=> 0]) }}">Ficha</a></th>
                         <td class="text-center" style="min-width: 200px">{{ $item->universidad !== null ? $item->universidad->Nombre : ''}}</td>
+                        <td class="text-center" style="min-width: 200px">{{ _facultad($item->Universidad, $item->Facultad)}}</td>
                         <td class="text-center" style="min-width: 200px">{{ $item->Carrera }}</td>
                         <td class="text-center" style="min-width: 200px">{{ $item->unidad !== null ? $item->unidad->Nombre : ''}}</td>
                         <td class="text-center" style="min-width: 200px">{{ $item->departamento !== null ? $item->departamento->Nombre : ''}}</td>
@@ -58,7 +66,9 @@
                 @if (isset($item->periodos) && count($item->periodos)>0)
                     @foreach ($item->periodos as $periodo)
                         <tr>
+                            <th class="text-center"><a class="btn btn-warning btn-sm" target="_blank" href="{{ route('admin.certificados.generar.ficha', ['id'=> optimus()->encode($item->id), 'periodo_id'=> $periodo->id]) }}">Ficha</a></th>
                             <td class="text-center" style="min-width: 200px">{{ $periodo->universidad !== null ? $periodo->universidad->Nombre : ''}}</td>
+                            <td class="text-center" style="min-width: 200px">{{ _facultad($periodo->universidad_id, $periodo->facultad_id)}}</td>
                             <td class="text-center" style="min-width: 200px">{{ $periodo->carrera }}</td>
                             <td class="text-center" style="min-width: 200px">{{ $periodo->unidad !== null ? $periodo->unidad->Nombre : ''}}</td>
                             <td class="text-center" style="min-width: 200px">{{ $periodo->departamento !== null ? $periodo->departamento->Nombre : ''}}</td>

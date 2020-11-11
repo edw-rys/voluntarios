@@ -48,11 +48,12 @@ class VoluntariosApiController extends Controller
 
         $this->permisos = (object) [
             'departamentos_todos'    => 'all_departments',
-            'tutores_todos'          => 'all_totor_bspi'
+            'tutores_todos'          => 'all_tutor_bspi'
         ];
     }
     /**
-     * @param $pasaporte
+     * Veriticar si el pasaporte ya está registrado en la DB, retorna respuesta en formato json
+     * @param $request
      */
     public function existPasaporte(Request $request)
     {
@@ -63,21 +64,24 @@ class VoluntariosApiController extends Controller
     }
 
     /**
-     * Ciudades
+     * Obtener Ciudades en formato json
+     * @param Request $request 
      */
     public function ciudades(Request $request)
     {
         return response()->json($this->ciudadRepository->where('status', 1)->where('pais', $request->input('pais'))->get(), 200);
     }
     /**
-     * Ciudades
+     * ObtenerCiudades en formato json
+     * @param Request $request 
      */
     public function paises()
     {
         return response()->json($this->paisRepository->where('status', 1)->get(), 200);
     }
     /**
-     * Ciudades
+     * Obtener Ciudades en formato json
+     * @param Request $request 
      */
     public function obtenerCiudades(Request $request)
     {
@@ -87,7 +91,8 @@ class VoluntariosApiController extends Controller
         return response()->json($this->ciudadRepository->where('Pais', $request->input('pais'))->where('status', 1)->get(), 200);
     }
     /**
-     * Facultad
+     * Obtener Facultad en formato json
+     * @param Request $request 
      */
     public function obtenerFacultades(Request $request)
     {
@@ -97,7 +102,8 @@ class VoluntariosApiController extends Controller
         return response()->json($this->factultadRepository->where('idUniversidad', $request->input('universidad'))->get(), 200);
     }
     /**
-     * Facultad
+     * Obtener Departamentos en formato json
+     * @param Request $request 
      */
     public function obtenerDepartamentos(Request $request)
     {
@@ -109,7 +115,8 @@ class VoluntariosApiController extends Controller
         return response()->json($departamentos->get(), 200);
     }
     /**
-     * Tutor
+     * Obtener Tutor en formato json
+     * @param Request $request 
      */
     public function obtenerTutores(Request $request)
     {
@@ -120,7 +127,6 @@ class VoluntariosApiController extends Controller
                 $tutores = $tutores->where('departamento', $request->input('departamento'));
             }
         }else{
-            // dd(auth()->user());
             $tutores = $tutores->where('id', auth()->user()->id);
         }
         return response()->json($tutores->get(), 200);
