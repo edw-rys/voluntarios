@@ -2,16 +2,28 @@
 {{-- @include('admin.partials.datatable') --}}
 @section('styles_cdn')
     <style>
-        canvas{
+       .chartWrapper {
+          position: relative;
+        }
 
-        width:1000px !important;
-        /* height:600px !important; */
+        .chartWrapper > canvas {
+          position: absolute;
+          left: 0;
+          top: 0;
+          pointer-events: none;
+        }
 
+        .chartAreaWrapper {
+          width: 100%;
+          overflow-x: scroll;
         }
     </style>
 @endsection
 
 @section('content')
+
+   
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -75,38 +87,25 @@
 
         </div><!-- /.container-fluid -->
     </section>
-    <section class="content" style="margin: 50px auto;">
-        <h1 class="text-center">Título</h1>
-        <div class="dashboard-container">
+    <section class="" style="margin: 50px auto;">
+        <h1 class="text-center">Diagramas</h1>
+        <div class="">
+            <div style="margin: 20px 50px; ">
+            
             @foreach (config('app_voluntarios.modos_graficos') as $tipo_grafico)
                 @foreach (config('app_voluntarios.graficos')  as $item)
-                    <div class="card-1">
-                        <h4 class="chart-lbl">
-                            {{ $item->titulo }}
-                        </h4>
-                        <div class="divider">
+                    <h3 class="text-center">{{ $item->titulo }}</h3>
+                    <div class="chartWrapper">
+                        <div class="chartAreaWrapper">
+                        <div class="chartAreaWrapper2">
+                          <canvas id="{{ $item->id }}-{{ $tipo_grafico->nombre }}" height="300" width="1200"></canvas>
                         </div>
-                        <div class="content-center">
-                            <div class="{{ $tipo_grafico->class_parent }}">
-                                <canvas class="{{ $tipo_grafico->class_canvas }}" id="{{ $item->id }}-{{ $tipo_grafico->nombre }}">
-                                </canvas>
-                            </div>
                         </div>
+                        <canvas id="{{ $item->id }}-{{ $tipo_grafico->nombre }}axis-Test" height="300" width="0"></canvas>
                     </div>
-                @endforeach
+                @endforeach 
             @endforeach
-
-            {{-- <div class="card-7">
-                <h4 class="chart-lbl">
-                    Mixed Chart
-                </h4>
-                <div class="divider">
-                </div>
-                <div class="mixed-chart-container">
-                    <canvas class="mixed-chart" id="mixed">
-                    </canvas>
-                </div>
-            </div> --}}
+            </div>
         </div>
     </section>
     <div class="container">

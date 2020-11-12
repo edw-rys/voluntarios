@@ -793,7 +793,7 @@
             </table>
         </div>
         <div class="ad1id3qzk9mig0-0" nowrap="true" style="z-index:25;top:85px;left:312px;width:155px;height:117px;"><img
-                src="rptNuevoPasante{790E0274-E472-4940-A521-C07C8CA74A59}.png" border="0" width="155px" height="117px">
+            src="data:image;base64,{{ $imagen != null? $imagen->imagen : '' }}" border="0" width="155px" height="117px">
         </div>
     </BODY>
     

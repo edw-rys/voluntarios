@@ -73,9 +73,9 @@ class VoluntariosRepository
             ->with('tutor_bspi')
             ->with('pasatiempo');
         if($decoded){
-            $voluntario = $this->findDecoded($id);
+            $voluntario = $this->findDecoded($id, ['*']);
         }else{
-            $voluntario = $this->find($id);
+            $voluntario = $this->find($id, ['*']);
         }
         if($voluntario === null){
             return null;

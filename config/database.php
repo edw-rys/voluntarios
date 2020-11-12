@@ -90,7 +90,18 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
-
+        'db_imagen_vol' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_PROD_BIGDATA_SQL_IMG', 'localhost'),
+            //'port' => env('DB_PORT_PROD_BIGDATA_SQL', '4413'),
+            'database' => env('DB_DATABASE_PROD_BIGDATA_SQL_IMG', 'forge'),
+            'username' => env('DB_USERNAME_PROD_BIGDATA_SQL_IMG', 'forge'),
+            'password' => env('DB_PASSWORD_PROD_BIGDATA_SQL_IMG', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+        ],
     ],
 
     /*

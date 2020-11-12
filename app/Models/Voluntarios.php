@@ -154,4 +154,9 @@ class Voluntarios extends Model
         return $this->hasOne(User::class, 'id', 'idtutor');
     }
 
+     public function imagen() : HasOne
+    {
+        return $this->hasOne(ImagenVoluntario::class, 'id', 'voluntario_id')->where('status', 1);
+    }
+
 }

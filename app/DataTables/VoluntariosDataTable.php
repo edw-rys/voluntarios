@@ -60,16 +60,7 @@ class VoluntariosDataTable extends DataTable
             array_push($columnas,Column::make('cambiar_preiodo')->title('Cambiar Periodo')->className('text-center'));
         }
         // dd();
-        return [
-            // Column::make('id')->title(trans('global.voluntario.number'))->className('text-center'),
-            Column::make('mostrar')->title('Mostrar')->className('text-center'),
-            Column::make('status')->title(trans('global.status'))->className('text-center'),
-            Column::make('Nombres')->title(trans('global.voluntario.names'))->className('text-center'),
-            Column::make('Apellidos')->title(trans('global.voluntario.last_names'))->className('text-center'),
-            Column::make('Pasaporte')->title(trans('global.voluntario.identification_number'))->className('text-center'),
-            Column::make('cambiar_preiodo')->title('Cambiar Periodo')->className('text-center'),
-            Column::make('edit')->title(trans('global.voluntario.edit'))->className('text-center'),
-        ];
+        return $columnas ;
     }
 
     /**

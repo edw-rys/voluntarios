@@ -44,10 +44,8 @@ class EvaluacionesDataTable extends DataTable
      */
     protected function getColumns(): array
     {
-        // dd();
-        return [
-            // Column::make('id')->title(trans('global.voluntario.number'))->className('text-center'),
-            Column::make('actions')->title(trans('global.actions'))->className('text-center'),
+        $columnas = [
+
             Column::make('evaluacion_pdf')->title('Evaluacion Final')->className('text-center'),
             Column::make('status')->title(trans('global.status'))->className('text-center'),
             Column::make('Nombres')->title(trans('global.voluntario.names'))->className('text-center'),
@@ -59,6 +57,11 @@ class EvaluacionesDataTable extends DataTable
             Column::make('Departamento')->title(trans('global.voluntario.department'))->className('text-center'),
             Column::make('TutorBspi')->title(trans('global.voluntario.tutor_bspi'))->className('text-center'),
         ];
+         if(allows_permission('editar_voluntarios')){
+
+            array_push($columnas, Column::make('actions')->title(trans('global.actions'))->className('text-center'));
+        }
+        return $columnas;
     }
 
     /**

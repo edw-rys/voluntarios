@@ -6,6 +6,7 @@ use App\DataTables\CertificadosDataTable;
 use App\DataTables\FormFilters\FormFilter;
 use App\Http\Controllers\Controller;
 use App\Repositories\EvaluacionesRepository;
+use App\Repositories\ImagenVoluntarioRepository;
 use App\Repositories\PeriodoVoluntarioRepository;
 use App\Repositories\VoluntariosCertificadosRepository;
 use App\Repositories\VoluntariosRepository;
@@ -265,13 +266,16 @@ class CertificadosController extends Controller
         if($voluntario === null){
             abort(404);
         }
+
+        $imagen = (new ImagenVoluntarioRepository)->where('voluntario_id', $voluntario->id)->where('status', 1)->get()->last();
         
         viewExist($this->views->pdf->ficha);
         $this->options_dompdf['dpi'] = 100;
 
         $html = view($this->views->pdf->ficha)
             ->with('voluntario' , $voluntario)
-            ->with('periodo'    , $voluntario->periodo);
+            ->with('periodo'    , $voluntario->periodo)
+            ->with('imagen', $imagen);
         // echo $html;
         $this->generarPdf($html , time().$voluntario->Pasaporte, 0);
     }

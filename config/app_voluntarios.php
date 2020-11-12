@@ -128,14 +128,19 @@ return [
     ],
     'modos_graficos'            => [
         (object)[
-            'class_canvas'      => 'doughnut-chart',
-            'nombre'            => 'doughnut',
-            'class_parent'      => 'doughnut-chart-container'
+            'class_canvas'      => 'bar-chart',
+            'nombre'            => 'bar',
+            'class_parent'      => 'bar-chart-container'
         ],
-        (object)[
-            'class_canvas'      => 'mixed-chart',
-            'nombre'            => 'mixed',
-            'class_parent'      => 'mixed-chart-container'
-        ],
+        // (object)[
+        //     'class_canvas'      => 'doughnut-chart',
+        //     'nombre'            => 'doughnut',
+        //     'class_parent'      => 'doughnut-chart-container'
+        // ],
+        // (object)[
+        //     'class_canvas'      => 'mixed-chart',
+        //     'nombre'            => 'mixed',
+        //     'class_parent'      => 'mixed-chart-container'
+        // ],
     ]
 ];

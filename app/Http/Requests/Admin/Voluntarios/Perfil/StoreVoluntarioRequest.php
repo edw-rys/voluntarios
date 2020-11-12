@@ -32,6 +32,7 @@ class StoreVoluntarioRequest extends FormRequest
             'Apellidos'                 => ['required', 'string'],  
             'apellidoMaterno'           => ['required', 'string'],  
             'nombreSegundo'             => ['required', 'string'],  
+            'imagen'                    => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:4048',
             'Pasaporte'                 => ['required', 'min:9', Rule::unique($voluntario, 'Pasaporte')->where('status',1)],
             'FechaNacimiento'           => ['required', 'date'],
             'EstadoCivil'               => ['required', 'numeric'],

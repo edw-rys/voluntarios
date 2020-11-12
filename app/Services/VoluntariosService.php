@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Http\Controllers\Admin\Voluntarios\CertificadosController;
 use App\Repositories\EvaluacionesRepository;
 use App\Repositories\HorarioVoluntarioRepository;
+use App\Repositories\ImagenVoluntarioRepository;
 use App\Repositories\PeriodoVoluntarioRepository;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
@@ -45,7 +46,6 @@ class VoluntariosService extends BaseService{
      */
     public function store(Request $request, $routeTo)
     {
-        
         $request->merge([
             'Edad'          => Carbon::create($request->input('FechaNacimiento'))->diffInYears(Carbon::now()),
             'TutorBspi'     => $this->getTitleTutor($request->input('idtutor')),
@@ -64,12 +64,34 @@ class VoluntariosService extends BaseService{
         
         $periodo = $this->createPeriod($request, $voluntario->id);
 
+
+        // Guardar imagen
+        $this->guardaImagen($request, $voluntario);
+        
         // redirect()->
         return (new CertificadosController(new VoluntariosCertificadosRepository, new EvaluacionesRepository, new PeriodoVoluntarioRepository))
             ->generaConfidencialidad($voluntario, $periodo);
         notifyMe('success', trans('global.toasts.created'));
 
         return $this->redirectTo($request, $routeTo);
+    }
+
+    public function guardaImagen($request, $voluntario)
+    {
+        if($request->file('imagen') != null && $voluntario!= null){
+            $imagen = base64_encode(file_get_contents($request->file('imagen')));
+            $repository = new ImagenVoluntarioRepository;
+            $repository->where('voluntario_id', $voluntario->id )->update([
+                'status' => 0
+            ]);
+            $repository->create([
+                'voluntario_id' => $voluntario->id,
+                'imagen'        => $imagen,
+                'created_by'    => auth()->user()->id,
+                'created_at'    => Carbon::now(),
+                'status'        => 1
+            ]);
+        }
     }
 
 
@@ -186,8 +208,8 @@ class VoluntariosService extends BaseService{
             }
 
         }
+        $this->guardaImagen($request, $voluntario);
 
-        // dd();
         notifyMe('success', trans('global.toasts.edited'));
 
         return $this->redirectTo($request, $routeTo);

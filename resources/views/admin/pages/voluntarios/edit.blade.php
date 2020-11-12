@@ -11,7 +11,7 @@
 @endsection
 @section('content')
     @include('components.alerts.errorBags')
-    <form class="steps" method="POST" action="{{ route('admin.voluntarios.update') }}" accept-charset="UTF-8" onsubmit="return crearVoluntario()" autocomplete="on">
+    <form class="steps" method="POST" action="{{ route('admin.voluntarios.update') }}" accept-charset="UTF-8" onsubmit="return crearVoluntario()" autocomplete="on"  enctype="multipart/form-data">
         @csrf
         <ul id="progressbar">
             <li class="active">{{ trans('global.voluntarios.create.maps') }}</li>

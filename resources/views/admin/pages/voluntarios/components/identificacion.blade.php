@@ -34,6 +34,14 @@
     </span>
 </div>
 
+<!-- imagen -->
+<div class="input-group mb-3 mt-3">
+
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="imagen" aria-describedby="inputGroupFileAddon01" name="imagen">
+    <label class="custom-file-label" for="imagen">Buscar imágen</label>
+  </div>
+</div>
 @include('admin.pages.voluntarios.components.buttons-next-prev',[
     'page'  => 2
 ])

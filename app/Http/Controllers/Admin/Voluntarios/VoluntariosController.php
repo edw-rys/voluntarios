@@ -162,6 +162,9 @@ class VoluntariosController extends Controller
     public function store(StoreVoluntarioRequest $request)
     {
         _canAccess_($this->permisos->crear_voluntarios);
+        
+        // echo '<img src="data:image;base64,'. $imagen.'">';
+        // dd($imagen, $request->file('imagen'), getB64Image($imagen));
 
         return $this->voluntariosService->store($request, $this->routes);
     }
@@ -266,6 +269,7 @@ class VoluntariosController extends Controller
         if($voluntario === null){
             abort(404);
         }
+        
         // Buscar periodo
         $periodo = $this->periodoVoluntarioRepository
             ->where('voluntario_id', $voluntario->id)
