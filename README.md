@@ -103,5 +103,5 @@ __Listar__
 
 __EVALUACIONES__
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/show_evaluacionesS.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/show_evaluaciones.png)
 
