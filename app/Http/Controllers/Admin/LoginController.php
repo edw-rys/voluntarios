@@ -70,14 +70,14 @@ class LoginController extends Controller
                 ->with('errors', ['Este usuario no existe en nuestros registros']);
         }
         // dd($request->input(), $user->password_, $user, Hash::check($request->input('password'), $user->password_));
-        if(password_verify($request->input('password'), $user->password_)){
+        if(password_verify($request->input('password'), $user->password)){
             Auth::login($user);
             // dd($user);
             return redirect()->route('admin.dashboard');
             // return $this->sendLoginResponse($request);
         }
         return redirect()->route('admin.login.show')
-            ->with('errors', ['Este usuario no existe en nuestros registros']);
+            ->with('errors', ['Este usuario no existe en nuestros registros.']);
 
         // Auth::guard('web')->login('');
         // if ($this->attemptLogin($request)) {

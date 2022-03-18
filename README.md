@@ -1,61 +1,107 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Aplicación Voluntarios - Gestión documental
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+_El siguiente proyecto se trata de una aplicación web, los módulos implementados son los siguientes:_
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Pre-requisitos 📋
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```
+Cualquier navegador navegador actual (Chrome, Mozilla, Edge).
+Un servidor local para conectarse con php. 
+Motor de base de datos MySql.
+Puede usar xampp server, wampp server o el de preferencia.
+```
+## :earth_africa: Navegadores Soportados
 
-## Learning Laravel
+* Chrome/Chromium 76+
+* Edge 40+
+* Firefox 60+
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Ejecutando las pruebas ⚙️
+**Módulo de voluntarios** 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+_1. Registo_\
+_2. Edición_\
+_3. Calificar e imprimir calificaciones_\
+_4. Cambiar Periodos_\
+_5. Imprimir Certificados_
 
-## Laravel Sponsors
+### Proyecto funcional ⌨️
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+_Ubique los archivos del proyecto en la carpeta que especifica la plataforma que le habilita su servidor en el caso de desarrollo._\
+_Xampp -> C:xampp/htdocs/_\
+_Configuración del proyecto "PHP"_\
+_Wampp -> C:wamp/www/_\
+_Configurar el archivo .env 
 
-### Premium Partners
+## Construido con 🛠️
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+* [Larael](https://laravel.com/docs/8.x) - Framework de php
 
-## Contributing
+* [PHP](http://php.net/manual/es/index.php) - Lenguaje de programación del lado del servidor
+* [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript) - Lenguaje de programación del lado del cliente
+* [HTML 5](https://developer.mozilla.org/es/docs/HTML/HTML5) - Lenguaje de enmarcado
+* [SASS](https://sass-lang.com/) - Preprocesador de css
+* [CSS 3](https://developer.mozilla.org/es/docs/Archive/CSS3) - Lenguaje de hojas de estilos
+* [MySql](https://www.mysql.com/) - Motor de base de datos
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* [momentjs](https://momentjs.com/docs/) - Librería de javascript para el manejo de fechas.
+* [toastr](https://github.com/CodeSeven/toastr) - Librería de javascript para el manejo de mensajes de alerta personalizadas.
+* [toastr](https://github.com/firebase/php-jwt) - Librería de php para el uso de codificación y descodificaci+on de token.
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Contribuyendo 🖇️
 
-## Security Vulnerabilities
+## Autores ✒️
+_Actualización del proyecto_
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* **Edward Reyes** - *Actualizó el proyecto aplicando librerías de js y php, actualización de peticiones ajax a fetch.* - [edw-rys](https://github.com/edw-rys)
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Screenshot ⌨️
+
+__Dashboard__
+
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/dashboard.png)
+
+
+__Voluntarios__
+
+__Registro__
+
+
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_1.png)
+
+
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_2.png)
+
+
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_3.png)
+
+
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_4.png)
+
+
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_5.png)
+
+
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_6.png)
+
+
+__Mostrar__
+
+
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/show_voluntario.png)
+
+
+__Listar__
+
+
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/show_table_voluntarios.png)
+
+
+__EVALUACIONES__
+
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/show_evaluacionesS.png)
+

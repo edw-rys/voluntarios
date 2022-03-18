@@ -82,7 +82,7 @@ class User extends Authenticatable
         "nivel",
         "departamento",
         "telefono",
-        "Passowrd",
+        "password",
         "titulo",
     ];
 

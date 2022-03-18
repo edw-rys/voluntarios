@@ -21,36 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
 });
-Route::get('init',function () {
-    // Encrypt password
-    $users = User::all();
-    foreach ($users as $key => $user) {
-        //echo($user->Username . ' - '.$user->Password. '<br>');
-        $pass =  $user->Password;
-        // dd($pass);
-        $user->password_ = bcrypt($pass);
-        $user->save();
-        echo $user->Username . ' '. $pass.'<br>';
-        //dd($user);
-    }
-})->name('usuarios');
-
-Route::get('sss',function () {
-    // Encrypt password
-    $voluntarios = Voluntarios::all();
-    foreach ($voluntarios as $key => $voluntario) {
-        //echo($user->Username . ' - '.$user->Password. '<br>');
-        $voluntario->FechaFinCertificado =  $voluntario->FechaFin;
-        $voluntario->save();
-        //dd($user);
-    }
-})->name('sss');
 
 Route::get('per','Api\Voluntarios\VoluntariosApiController@obtenerDepartamentos')->name('per');
 
-
-
-Route::get('f',function () {
-    // Encrypt password
-    allows_permission('crear_voluntarios');
-})->name('f');
