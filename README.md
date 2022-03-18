@@ -63,7 +63,7 @@ _Actualización del proyecto_
 
 __Dashboard__
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/dashboard.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/dashboard.png)
 
 
 __Voluntarios__
@@ -71,37 +71,37 @@ __Voluntarios__
 __Registro__
 
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_1.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/registro_1.png)
 
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_2.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/registro_2.png)
 
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_3.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/registro_3.png)
 
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_4.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/registro_4.png)
 
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_5.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/registro_5.png)
 
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/registro_6.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/registro_6.png)
 
 
 __Mostrar__
 
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/show_voluntario.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/show_voluntario.png)
 
 
 __Listar__
 
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/show_table_voluntarios.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/show_table_voluntarios.png)
 
 
 __EVALUACIONES__
 
-![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/img/readme/show_evaluacionesS.png)
+![alt text](https://raw.githubusercontent.com/edw-rys/voluntarios/master/public/img/readme/show_evaluacionesS.png)
 
