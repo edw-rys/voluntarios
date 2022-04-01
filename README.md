@@ -4,7 +4,7 @@ _El siguiente proyecto se trata de una aplicación web, los módulos implementad
 
 **Módulo de voluntarios** 
 
-_1. Registo_\
+_1. Registro_\
 _2. Edición_\
 _3. Calificar e imprimir calificaciones_\
 _4. Cambiar Periodos_\
